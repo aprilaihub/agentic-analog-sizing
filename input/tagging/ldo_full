@@ -1,0 +1,81 @@
+// Library name: LDO_FULL
+// Cell name: LDO_basic_variables
+// View name: schematic
+V5 (VREF2 GND) vsource dc=0.6 type=dc
+V1 (VDD GND) vsource dc=1.8 type=dc
+V0 (GND 0) vsource dc=0 type=dc
+I4 (VOUT GND) isource dc=1m type=dc
+I1 (VDD vbn) isource dc=10u type=dc
+C2 (VOUT VFB) capacitor c=3p
+C3 (VOUT GND) capacitor c=10u
+R0 (VOUT VFB) resistor r=400K
+R1 (VFB GND) resistor r=500K
+// Flattened folded_cascode_two_stage instance I6
+    I6_M39 (I6__net016 VREF I6__net046 0) nch l=L5 w=W5*1 m=2 nf=1
+    I6_M38 (I6__net014 VFB I6__net046 0) nch l=L5 w=W5*1 m=2 nf=1
+    I6_M37 (I6__vop1 vbn I6__vfb_p 0) nch l=L2 w=W2*1 m=N2 nf=1
+    I6_M36 (I6__von1 vbn I6__vfb_n 0) nch l=L2 w=W2*1 m=N2 nf=1
+    I6_M35 (I6__net046 I6__vbn2 0 0) nch l=L1 w=W1*1 m=2*N1 nf=1
+    I6_M34 (I6__vfb_p I6__vcmfb 0 0) nch l=L1 w=W1*1 m=N2 nf=1
+    I6_M33 (I6__vfb_n I6__vcmfb 0 0) nch l=L1 w=W1*1 m=N2 nf=1
+    I6_M50 (Pass_GATE net1 0 0) nch l=L1 w=W1*1 m=N9 nf=1
+    I6_M43 (I6__net044 I6__net044 0 0) nch l=L1 w=W1*1 m=N8 nf=1
+    I6_M29 (vbn vbn I6__vbn2 0) nch l=L2 w=W2*1 m=1 nf=1
+    I6_M11 (I6__vbn2 I6__vbn2 0 0) nch l=L1 w=W1*1 m=1 nf=1
+    I6_M9 (I6__net057 I6__vbn2 0 0) nch l=L1 w=W1*1 m=1 nf=1
+    I6_M26 (I6__net055 I6__vbn2 0 0) nch l=L1 w=W1*1 m=1 nf=1
+    I6_M30 (I6__vbp2 vbn I6__net057 0) nch l=L2 w=W2*1 m=1 nf=1
+    I6_M8 (net1 net1 0 0) nch l=L1 w=W1*1 m=N9 nf=1
+    I6_M31 (I6__vbp1 vbn I6__net055 0) nch l=L2 w=W2*1 m=1 nf=1
+    I6_M44 (I6__net041 I6__net041 0 0) nch l=L1 w=W1*1 m=N8 nf=1
+    I6_M42 (I6__net014 I6__vbp2 VDD VDD) pch l=L4 w=W4*1 m=N2+N1 nf=1
+    I6_M41 (I6__net016 I6__vbp2 VDD VDD) pch l=L4 w=W4*1 m=N2+N1 nf=1
+    I6_M40 (I6__von1 I6__vbp1 I6__net014 VDD) pch l=L3 w=W3*1 m=N2 nf=1
+    I6_M3 (I6__vop1 I6__vbp1 I6__net016 VDD) pch l=L3 w=W3*1 m=N2 nf=1
+    I6_M2 (Pass_GATE I6__von1 VDD VDD) pch l=L7 w=W7*1 m=1 nf=1
+    I6_M0 (net1 I6__vop1 VDD VDD) pch l=L7 w=W7*1 m=1 nf=1
+    I6_M45 (I6__net041 I6__vcmo I6__net54 VDD) pch l=L6 w=W6*1 m=1 nf=1
+    I6_M10 (I6__vbp2 I6__vbp2 VDD VDD) pch l=L4 w=W4*1 m=1 nf=1
+    I6_M28 (I6__vbp1 I6__vbp1 I6__ncasc\<0\> VDD) pch l=L3 w=W3*1 m=1 nf=1
+    I6_M48 (I6__net54 I6__vbp2 VDD VDD) pch l=L4 w=W4*1 m=2*N8 nf=1
+    I6_M27\<6\> (I6__ncasc\<6\> I6__vbp1 VDD VDD) pch l=L3 w=W3*1 m=1 nf=1
+    I6_M27\<5\> (I6__ncasc\<5\> I6__vbp1 I6__ncasc\<6\> VDD) pch l=L3 w=W3*1 m=1 nf=1 
+    I6_M27\<4\> (I6__ncasc\<4\> I6__vbp1 I6__ncasc\<5\> VDD) pch l=L3 w=W3*1 m=1 nf=1 
+    I6_M27\<3\> (I6__ncasc\<3\> I6__vbp1 I6__ncasc\<4\> VDD) pch l=L3 w=W3*1 m=1 nf=1 
+    I6_M27\<2\> (I6__ncasc\<2\> I6__vbp1 I6__ncasc\<3\> VDD) pch l=L3 w=W3*1 m=1 nf=1 
+    I6_M27\<1\> (I6__ncasc\<1\> I6__vbp1 I6__ncasc\<2\> VDD) pch l=L3 w=W3*1 m=1 nf=1 
+    I6_M27\<0\> (I6__ncasc\<0\> I6__vbp1 I6__ncasc\<1\> VDD) pch l=L3 w=W3*1 m=1 nf=1 
+    I6_M47 (I6__net044 VREF2 I6__net54 VDD) pch l=L6 w=W6*1 m=1 nf=1
+    I6_IPRB1 (I6__net041 I6__vcmfb) iprobe
+    I6_C0 (I6__vop_fb I6__vfb_n) capacitor c=MCAP
+    I6_C1 (I6__von_fb I6__vfb_p) capacitor c=MCAP
+    I6_R3 (Pass_GATE I6__vcmo) resistor r=100K
+    I6_R4 (I6__vcmo net1) resistor r=100K
+    I6_prb_comp (net1 Pass_GATE I6__von_fb I6__vop_fb) diffstbprobe
+M8 (VOUT Pass_GATE VDD VDD) pch l=L_MPT w=W_MPT*NF_MPT m=1 nf=NF_MPT 
+// Flattened bgr_core instance I2
+    I2_M13 (I2__net7 I2__net5 I2__net8 0) nch l=Ln5 w=Wn5*1 m=1 nf=1
+    I2_M12 (I2__net5 I2__net5 I2__net6 0) nch l=Ln5 w=Wn5*1 m=1 nf=1
+    I2_M8 (I2__net10 I2__net10 I2__net1 0) nch l=Ln9 w=Wn9*1 m=1 nf=1
+    I2_M17 (I2__net2 I2__net2 I2__net3 0) nch l=Ln9 w=Wn9*1 m=1 nf=1
+    I2_M6 (I2__net1 I2__net10 GND 0) nch l=Ln10 w=Wn10*1 m=1 nf=1
+    I2_M5 (I2__net6 I2__net6 GND 0) nch l=Ln6 w=Wn6*1 m=1 nf=1
+    I2_M4 (I2__net8 I2__net6 I2__net9 0) nch l=Ln7 w=Wn7*1 m=1 nf=1
+    I2_M18 (I2__net3 I2__net2 I2__net1 0) nch l=Ln10 w=Wn10*1 m=1 nf=1
+    I2_M32 (VREF VREF I2__net3 0) nch l=Ln10 w=Wn10*1 m=1 nf=1
+    I2_M21 (I2__net14 I2__net7 I2__net15 0) nch l=Ln4 w=Wn4*1 m=1 nf=1
+    I2_M22 (I2__net4 I2__net5 I2__net15 0) nch l=Ln4 w=Wn4*1 m=1 nf=1
+    I2_M0 (I2__net9 VREF GND 0) nch l=Ln8 w=Wn8*1 m=1 nf=1
+    I2_M16 (I2__net4 I2__net11 GND 0) nch l=Ln1 w=Wn1*1 m=1 nf=1
+    I2_M23 (I2__net15 I2__net6 GND 0) nch l=Ln3 w=Wn3*1 m=1 nf=1
+    I2_M14 (I2__net11 VREF GND 0) nch l=Ln2 w=Wn2*1 m=1 nf=1
+    I2_M19 (I2__net5 I2__net4 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+    I2_M31 (I2__net2 I2__net4 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+    I2_M29 (I2__net10 I2__net4 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+    I2_M28 (I2__net7 I2__net4 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+    I2_M27 (VREF I2__net4 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+    I2_M24 (I2__net12 I2__net12 VDD VDD) pch l=Lp1 w=Wp1*1 m=1 nf=1
+    I2_M20 (I2__net14 I2__net14 VDD VDD) pch l=Lp2 w=Wp2*1 m=1 nf=1
+    I2_M30 (I2__net4 I2__net14 VDD VDD) pch l=Lp2 w=Wp2*1 m=1 nf=1
+    I2_M25 (I2__net13 I2__net13 I2__net12 VDD) pch l=Lp1 w=Wp1*1 m=1 nf=1
+    I2_M26 (I2__net11 VREF I2__net13 VDD) pch l=Lp1 w=Wp1*1 m=1 nf=1

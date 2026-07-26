@@ -1,0 +1,61 @@
+%%{init: {'flowchart': {'nodeSpacing': 48, 'rankSpacing': 58, 'curve': 'basis'}}}%%
+flowchart LR
+    START([START]) --> LOAD["load_input<br/>Record input paths and initial state"]
+
+    subgraph INIT["Initialization"]
+        direction TB
+        LOAD --> SIM_INIT["simulate_init<br/><br/>Real mode:<br/>seed runtime KB from fixed baseline<br/>extract specs and run initialization planner/workers<br/>simulate initial candidates and select anchor<br/><br/>Mock mode:<br/>seed runtime KB and run deterministic adapter<br/><br/>Append initial simulation record"]
+    end
+
+    SIM_INIT --> SELECT{"select_unsat_perf<br/>Evaluate predicted_perfs<br/>(or current_perfs after simulation)"}
+
+    SELECT -- "runtime / max_iter / stagnation limit" --> TERMINATE
+    SELECT -- "all specs met<br/>and continue_after_specs = false" --> TERMINATE
+    SELECT -- "unsatisfied specs<br/>or feasible objective phase" --> PLANNER
+
+    subgraph LOOP["Planner-Worker Refinement Loop"]
+        direction TB
+        PLANNER["planner_dispatch (LLM)<br/>Choose target metric and functional role<br/>Apply recovery action when needed"]
+        WORKER["worker_propose (LLM)<br/>Propose role-local design-variable updates<br/>and complete performance prediction"]
+        APPLY["apply_update<br/>Enforce role scope guard<br/>Update predicted_perfs and stagnation<br/>Increment planner_worker_iter"]
+        CHECK{"check_completion<br/>Re-evaluate predicted specs and guards"}
+
+        PLANNER --> WORKER --> APPLY --> CHECK
+    end
+
+    CHECK -- "runtime / max_iter / stagnation limit" --> TERMINATE
+    CHECK -- "continue planning<br/>force_simulation_commit = false" --> SELECT
+    CHECK -- "commit when predicted specs are met<br/>or planner_worker_iter reaches limit" --> COMMIT
+
+    COMMIT["simulate_commit<br/>Run real or mock simulator<br/>Append simulation record<br/>Update role-performance run summary<br/>Update best-known anchor when improved<br/>Reset planner_worker_iter"]
+    COMMIT --> SELECT
+
+    TERMINATE["terminate<br/>Set final reason<br/>Write runtime summary<br/>Remove temporary run-role summary"] --> END([END])
+
+    NOTE["No online KB update<br/>Runtime KB is seeded once during initialization"]
+    NOTE -.-> SIM_INIT
+
+    subgraph GUARDS["Termination reasons"]
+        direction TB
+        G1[time_limit_reached]
+        G2[max_iter_reached]
+        G3[stagnation_reached]
+        G4[all_specs_met]
+    end
+    TERMINATE -.-> GUARDS
+
+    classDef boundary fill:#eceff1,stroke:#455a64,stroke-width:2px,color:#263238;
+    classDef init fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,color:#0d47a1;
+    classDef action fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#1b5e20;
+    classDef decision fill:#fff8e1,stroke:#f9a825,stroke-width:2px,color:#bf360c;
+    classDef endNode fill:#ffebee,stroke:#c62828,stroke-width:2px,color:#8e0000;
+    classDef note fill:#f3e5f5,stroke:#7b1fa2,stroke-width:1.5px,color:#4a148c;
+    classDef guard fill:#e8eaf6,stroke:#3949ab,stroke-width:1.5px,color:#1a237e;
+
+    class START,END boundary;
+    class LOAD,SIM_INIT init;
+    class PLANNER,WORKER,APPLY,COMMIT action;
+    class SELECT,CHECK decision;
+    class TERMINATE endNode;
+    class NOTE note;
+    class G1,G2,G3,G4 guard;

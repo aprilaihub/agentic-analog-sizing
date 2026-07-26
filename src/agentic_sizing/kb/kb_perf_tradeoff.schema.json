@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://analog-ic-agentic/agentic-sizing/kb-perf-tradeoff.schema.json",
+  "title": "Agentic Sizing KB Perf Tradeoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["facts"],
+  "properties": {
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "subject",
+          "relation",
+          "object",
+          "direction",
+          "confidence",
+          "evidence_count",
+          "evidence_iters",
+          "topology"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["perf_perf_tradeoff"]
+          },
+          "subject": {
+            "type": "string",
+            "minLength": 1
+          },
+          "relation": {
+            "type": "string",
+            "enum": ["trades_off_with"]
+          },
+          "object": {
+            "type": "string",
+            "minLength": 1
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "unspecified"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 1.0
+          },
+          "evidence_count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "evidence_iters": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "topology": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

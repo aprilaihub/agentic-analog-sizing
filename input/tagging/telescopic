@@ -1,0 +1,21 @@
+// Library name: ada
+// Cell name: telescopic
+// View name: schematic
+subckt telescopic vdd vin vip vo
+    M2 (net1 vin net6 0) nch_lvt_mac l=l2 w=w2
+    M1 (net2 vip net6 0) nch_lvt_mac l=l2 w=w2
+    M7 (vo vb2 net1 0) nch_lvt_mac l=l3 w=w3
+    M6 (net5 vb2 net2 0) nch_lvt_mac l=l3 w=w3
+    M5b (net6 net3 0 0) nch_lvt_mac l=l1 w=w1
+    M5 (net3 net3 0 0) nch_lvt_mac l=l1 w=w1
+    M67 (vb2 vb2 net6 0) nch_lvt_mac l=l6 w=w6
+    I1 (vdd net3) isource dc=Idc type=dc
+    I2 (vb3 0) isource dc=Idc3 type=dc
+    I3 (vdd vb2) isource dc=Idc2 type=dc
+    M3 (net014 net5 vdd vdd) pch_lvt_mac l=l5 w=w5
+    M4 (net4 net5 vdd vdd) pch_lvt_mac l=l5 w=w5
+    M8 (net5 vb3 net014 vdd) pch_lvt_mac l=l4 w=w4
+    M9 (vo vb3 net4 vdd) pch_lvt_mac l=l4 w=w4
+    M89 (vb3 vb3 vdd vdd) pch_lvt_mac l=l7 w=w7
+ends telescopic
+// End of subcircuit definition.

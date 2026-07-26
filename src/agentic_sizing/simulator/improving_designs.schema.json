@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://analog-ic-agentic/src/agentic_sizing/simulator/improving_designs.schema.json",
+  "title": "Simulator Improving Designs Trace",
+  "description": "Best-trace history of improving designs exported from simulator/optimizer loop.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "iter",
+      "parameters",
+      "performance",
+      "validation",
+      "objective",
+      "violations"
+    ],
+    "properties": {
+      "iter": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "Iteration index in the optimization trajectory."
+      },
+      "parameters": {
+        "type": "array",
+        "minItems": 1,
+        "description": "Design variable values in settings.des_vars order.",
+        "items": {
+          "type": "number"
+        }
+      },
+      "performance": {
+        "type": "array",
+        "minItems": 1,
+        "description": "Performance vector in settings.responses.assembler order.",
+        "items": {
+          "type": "number"
+        }
+      },
+      "validation": {
+        "type": "number",
+        "description": "Combined score (objective + violations in current ESSAB flow)."
+      },
+      "objective": {
+        "type": "number",
+        "description": "Objective scalar used by the optimizer."
+      },
+      "violations": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Aggregated constraint violation score."
+      }
+    }
+  }
+}

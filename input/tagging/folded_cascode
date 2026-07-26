@@ -1,0 +1,24 @@
+// Library name: ada
+// Cell name: folded_cascode
+// View name: schematic
+subckt folded_cascode vdd vin vip vo
+    M2 (net11 vin net1 0) nch_lvt_mac l=l5 w=w5 multi=N1
+    M1 (net2 vip net1 0) nch_lvt_mac l=l5 w=w5 multi=N1
+    M11 (vo net3 net17 0) nch_lvt_mac l=l2 w=w2 multi=N2 
+    M10 (net4 net3 net14 0) nch_lvt_mac l=l2 w=w2 multi=N2
+    M5b (net1 net8 0 0) nch_lvt_mac l=l6 w=w6
+    M7 (net17 net4 0 0) nch_lvt_mac l=l1 w=w1 multi=N2
+    M1011 (net3 net3 0 0) nch_lvt_mac l=l2 w=w2 
+    M5 (net8 net8 0 0) nch_lvt_mac l=l6 w=w6
+    M6 (net14 net4 0 0) nch_lvt_mac l=l1 w=w1 multi=N2 
+    I2 (vb2 0) isource dc=Idc2
+    I3 (vdd net8) isource dc=Idc
+    I1 (net5 net3) isource dc=Idc3
+    M3 (net2 vb2 vdd vdd) pch_lvt_mac l=l4 w=w4 multi=N3 
+    M4 (net11 vb2 vdd vdd) pch_lvt_mac l=l4 w=w4 multi=N3
+    M8 (net4 net5 net2 vdd) pch_lvt_mac l=l3 w=w3 multi=N2
+    M9 (vo net5 net11 vdd) pch_lvt_mac l=l3 w=w3 multi=N2 
+    M89 (net5 net5 vdd vdd) pch_lvt_mac l=l3 w=w3
+    M34 (vb2 vb2 vdd vdd) pch_lvt_mac l=l4 w=w4
+ends folded_cascode
+// End of subcircuit definition.

@@ -1,0 +1,302 @@
+{
+  "ocn_script": {
+    "assembler": [
+      "${CADENCE_PROJECT_DIR}",
+      0,
+      0,
+      0,
+      "ada_tb",
+      "test",
+      "maestro"
+    ]
+  },
+  "des_vars": {
+    "l1": [
+      1.8e-07,
+      5e-06,
+      0
+    ],
+    "l2": [
+      1.8e-07,
+      5e-06,
+      0
+    ],
+    "l3": [
+      1.8e-07,
+      5e-06,
+      0
+    ],
+    "l4": [
+      1.8e-07,
+      5e-06,
+      0
+    ],
+    "l5": [
+      1.8e-07,
+      5e-06,
+      0
+    ],
+    "l6": [
+      1.8e-07,
+      5e-06,
+      0
+    ],
+    "l7": [
+      1.8e-07,
+      5e-06,
+      0
+    ],
+    "w1": [
+      2.2e-07,
+      0.0001,
+      0
+    ],
+    "w2": [
+      2.2e-07,
+      0.0001,
+      0
+    ],
+    "w3": [
+      2.2e-07,
+      0.0001,
+      0
+    ],
+    "w4": [
+      2.2e-07,
+      0.0001,
+      0
+    ],
+    "w5": [
+      2.2e-07,
+      0.0001,
+      0
+    ],
+    "w6": [
+      2.2e-07,
+      0.0001,
+      0
+    ],
+    "w7": [
+      2.2e-07,
+      0.0001,
+      0
+    ],
+    "Idc": [
+      1e-06,
+      1e-05,
+      0
+    ],
+    "Idc2": [
+      1e-06,
+      1e-05,
+      0
+    ],
+    "Idc3": [
+      1e-06,
+      1e-05,
+      0
+    ]
+  },
+  "dependent_vars": [],
+  "responses": {
+    "assembler": [
+      "power",
+      "cmrr",
+      "adm",
+      "output_swing",
+      "pm",
+      "rms_noise_out",
+      "lg_ugb",
+      "psrr",
+      "slew_rate_rise",
+      "slew_rate_fall",
+      "region_m1",
+      "region_m3",
+      "region_m5",
+      "region_m6",
+      "region_m8",
+      "region_m67",
+      "region_m89",
+      "gm1",
+      "gm3",
+      "gm5",
+      "gm6",
+      "gm8",
+      "gm67",
+      "gm89"
+    ]
+  },
+  "outputs": {
+    "power": [
+      0.0001,
+      "target",
+      1.0,
+      "*value"
+    ],
+    "cmrr": [
+      90.0,
+      "min",
+      0.00111,
+      "*value"
+    ],
+    "adm": [
+      60.0,
+      "min",
+      0.0015,
+      "*value"
+    ],
+    "output_swing": [
+      0.8,
+      "min",
+      0.125,
+      "*value"
+    ],
+    "pm": [
+      60.0,
+      "min",
+      0.002,
+      "*value"
+    ],
+    "rms_noise_out": [
+      0.0001,
+      "max",
+      1000.0,
+      "*value"
+    ],
+    "lg_ugb": [
+      2000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "psrr": [
+      60.0,
+      "min",
+      0.0015,
+      "*value"
+    ],
+    "slew_rate_rise": [
+      2000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "slew_rate_fall": [
+      2000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "region_m1": [
+      3.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m3": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m5": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m6": [
+      3.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m8": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m67": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m89": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "gm1": [
+      0.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "gm3": [
+      0.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "gm5": [
+      0.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "gm6": [
+      0.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "gm8": [
+      0.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "gm67": [
+      0.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "gm89": [
+      0.0,
+      "target",
+      0.0,
+      "*value"
+    ]
+  },
+  "options": {
+    "corner_opt": 0,
+    "parallel": 1,
+    "parallel_max": 1
+  },
+  "algorithm": {
+    "NP": 85,
+    "itermax": 400,
+    "F": 0.8,
+    "strategy": 1,
+    "CR": 0.5
+  },
+  "objective": {
+    "name": "power",
+    "minormax": "min"
+  },
+  "constraints": null,
+  "llm": {
+    "enabled": true,
+    "api_key": null,
+    "model": "deepseek-chat",
+    "base_url": "https://api.deepseek.com",
+    "frequency": 1,
+    "temperature": 0.5,
+    "max_tokens": 8000
+  },
+  "intentions": []
+}

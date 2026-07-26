@@ -1,0 +1,251 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-02-21T18:51:49.740783+00:00"
+  },
+  "input": {
+    "netlist_path": "./reference/tagging/5t_ota",
+    "subckt_name": "ada_5T_ota_schematic",
+    "device_count": 7
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M1",
+          "M2",
+          "M3",
+          "M4"
+        ],
+        "description": "Core OTA transconductance and active load/output stage."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "I1",
+          "M0",
+          "M0b"
+        ],
+        "description": "Generates and distributes tail-bias current."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M1",
+              "M2"
+            ],
+            "evidence": "M1 and M2 share source node net1 and receive vip/vin at their gates.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "M1",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M2",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [
+              "active_load"
+            ],
+            "devices": [
+              "M3",
+              "M4"
+            ],
+            "evidence": "M3 is diode-connected and biases M4 as a PMOS current mirror active load.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              },
+              {
+                "device": "M4",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M3"
+            ],
+            "evidence": "M3 has gate and drain shorted at net5.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source",
+              "output"
+            ],
+            "devices": [
+              "M2",
+              "M4"
+            ],
+            "evidence": "The vo node is driven by an NMOS pull-down and PMOS pull-up, forming the output gain stage.",
+            "confidence": 0.72,
+            "variables": [
+              {
+                "device": "M2",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M4",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M0",
+              "M0b"
+            ],
+            "evidence": "M0 is diode-connected and sets the mirror bias for M0b.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M0",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              },
+              {
+                "device": "M0b",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M0"
+            ],
+            "evidence": "M0 has gate and drain tied at net2.",
+            "confidence": 0.96,
+            "variables": [
+              {
+                "device": "M0",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Tail current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "tail"
+            ],
+            "devices": [
+              "M0b"
+            ],
+            "evidence": "M0b sinks current from the differential-pair tail node net1 to ground.",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "M0b",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I1"
+            ],
+            "evidence": "I1 injects the reference bias current Idc into net2.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "I1",
+                "design_variables": [
+                  "Idc"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

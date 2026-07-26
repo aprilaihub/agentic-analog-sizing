@@ -1,0 +1,212 @@
+{
+  "ocn_script": {
+    "assembler": [
+      "${CADENCE_PROJECT_DIR}",
+      0,
+      0,
+      0,
+      "ada_tb",
+      "test",
+      "maestro"
+    ]
+  },
+  "des_vars": {
+    "L1": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "L2": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "L3": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "L4": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "L5": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "L6": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "L7": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "W1": [
+      2.4e-07,
+      0.00015,
+      0
+    ],
+    "W2": [
+      2.4e-07,
+      0.00015,
+      0
+    ],
+    "W3": [
+      2.4e-07,
+      0.00015,
+      0
+    ],
+    "W4": [
+      2.4e-07,
+      0.00015,
+      0
+    ],
+    "W5": [
+      2.4e-07,
+      0.00015,
+      0
+    ],
+    "W6": [
+      2.4e-07,
+      0.00015,
+      0
+    ],
+    "W7": [
+      2.4e-07,
+      0.00015,
+      0
+    ],
+    "N1": [
+      1,
+      20,
+      1
+    ],
+    "N2": [
+      1,
+      20,
+      1
+    ],
+    "N8": [
+      1,
+      20,
+      1
+    ],
+    "N9": [
+      1,
+      20,
+      1
+    ],
+    "MCAP": [
+      1e-13,
+      2e-12,
+      0
+    ]
+  },
+  "dependent_vars": [],
+  "responses": {
+    "assembler": [
+      "power",
+      "cmrr",
+      "adm",
+      "psrr",
+      "output_swing",
+      "pm",
+      "rms_noise_out",
+      "rise_time",
+      "slew",
+      "lg_ugb",
+      "cmpm"
+    ]
+  },
+  "outputs": {
+    "power": [
+      0.01,
+      "target",
+      1000.0,
+      "*value"
+    ],
+    "cmrr": [
+      100.0,
+      "min",
+      3.75,
+      "*value"
+    ],
+    "adm": [
+      90.0,
+      "min",
+      3.75,
+      "*value"
+    ],
+    "psrr": [
+      100.0,
+      "min",
+      3.75,
+      "*value"
+    ],
+    "output_swing": [
+      2.4,
+      "min",
+      107.0,
+      "*value"
+    ],
+    "pm": [
+      60.0,
+      "min",
+      3.75,
+      "*value"
+    ],
+    "rms_noise_out": [
+      0.000335,
+      "max",
+      600000.0,
+      "*value"
+    ],
+    "rise_time": [
+      3e-08,
+      "max",
+      5000000000.0,
+      "*value"
+    ],
+    "slew": [
+      -0.3,
+      "max",
+      500.0,
+      "*value"
+    ],
+    "lg_ugb": [
+      30000000.0,
+      "min",
+      5.1724e-06,
+      "*value"
+    ],
+    "cmpm": [
+      50.0,
+      "min",
+      3.75,
+      "*value"
+    ]
+  },
+  "options": {
+    "corner_opt": 0,
+    "parallel": 1,
+    "parallel_max": 1
+  },
+  "algorithm": {
+    "NP": 95,
+    "itermax": 200,
+    "F": 0.8,
+    "strategy": 1,
+    "CR": 0.5
+  },
+  "objective": {
+    "name": "power",
+    "minormax": "min"
+  },
+  "constraints": null,
+  "intentions": []
+}

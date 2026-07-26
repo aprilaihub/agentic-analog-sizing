@@ -1,0 +1,13 @@
+// Library name: ada
+// Cell name: 5T_ota
+// View name: schematic
+subckt ada_5T_ota_schematic vbn vdd vin vip vo
+    M2 (vo vin net1 0) nch_lvt_mac l=l2 w=w2
+    M1 (net5 vip net1 0) nch_lvt_mac l=l2 w=w2
+    M0 (net2 net2 0 0) nch_lvt_mac l=l1 w=w1
+    M0b (net1 net2 0 0) nch_lvt_mac l=l1 w=w1
+    I1 (vbn net2) isource dc=Idc 
+    M3 (net5 net5 vdd vdd) pch_lvt_mac l=l3 w=w3
+    M4 (vo net5 vdd vdd) pch_lvt_mac l=l3 w=w3
+ends ada_5T_ota_schematic
+// End of subcircuit definition.

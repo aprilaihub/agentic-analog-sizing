@@ -1,0 +1,79 @@
+# OTA Project ADA YAML file
+# Author: Miguel Gandara <miguel.gandara@gmail.com>
+
+# 1. OCEAN Script
+# Value is the path to the corresponding maestro cellview
+ocn_script:
+    assembler: ["${CADENCE_PROJECT_DIR}", 0, 0, 0, 2018_comparator_shared_cad, test, maestro_opt ]
+
+# 2. Design Variables
+# Design variables are shared among all testbenches
+# First column is min, second is max, third is initial value (optional)
+des_vars:
+    l1: [ .18e-6, 1e-6 ]
+    l2: [ .18e-6, 1e-6 ]
+    l3: [ .18e-6, 1e-6 ]
+    l4: [ .18e-6, 1e-6 ]
+    l5: [ .18e-6, 1e-6 ]
+    l6: [ .18e-6, 1e-6 ]
+    w1: [ .22e-6, 10e-6 ]
+    w2: [ .22e-6, 10e-6 ]
+    w3: [ .22e-6, 10e-6 ]
+    w4: [ .22e-6, 10e-6 ]
+    w5: [ .22e-6, 10e-6 ]
+    w6: [ .22e-6, 10e-6 ]
+    Cl_finger: [ 10, 288, 1]
+
+# dependent vars
+# these are variables that are dependent on values of the design variables. They will not be subject
+# to random generation and mutation. The key is a function with the signature:
+# var_value = calc_var(pop)
+dependent_vars:
+
+# 3. Responses
+# Each key corresponds to a different testbench;
+# Each value is a sequence of responses to the corresponding testbench
+responses:
+    assembler: [power, delay, reset, reset_val, set_val, area, pos_res_int, neg_res_int, pos_res_out, neg_res_out, input_ref_noise, fom]
+
+# 4. Outputs
+# All the outputs
+# constraints is combined in this section
+outputs:
+    fom:             [ 3e-9, target,   1, '*value']
+    power:           [ 48e-6,   max, 0.625, '*value']
+    delay:           [ 6e-9,    max, 5e3, '*value']
+    reset:           [ 1e-9,    max, 3e4, '*value']
+    reset_val:       [ 20e-6,   max, 1.5, '*value']
+    set_val:         [ 20e-6,   max, 1.5, '*value']
+    area:            [ 2.6e-11, max, 1.15e6, '*value']
+    pos_res_int:     [ 15e-6,   max, 2, '*value']
+    neg_res_int:     [ 15e-6,   max, 2, '*value']
+    pos_res_out:     [ 15e-6,   max, 2, '*value']
+    neg_res_out:     [ 15e-6,   max, 2, '*value']
+    input_ref_noise: [ 52e-6,   max, 0.58, '*value']
+
+# 6. Options
+options:
+    corner_opt: 0
+    parallel: 1
+    parallel_max: 1
+
+# 6. Algorithm Parameters
+# 7. Objective and Constraints
+objective:
+    name: fom
+    minormax: min
+
+constraints:
+
+llm:
+  enabled: True
+  api_key: null  # Read OPENAI_API_KEY from the environment
+  model: "deepseek-chat"
+  base_url: "https://api.deepseek.com"
+  frequency: 1  # Use LLM every 5 iterations
+  temperature: 0.5
+  max_tokens: 5000
+
+intentions:

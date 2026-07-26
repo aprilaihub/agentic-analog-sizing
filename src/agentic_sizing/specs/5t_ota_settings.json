@@ -1,0 +1,147 @@
+{
+    "ocn_script": {
+        "assembler": [
+            "${CADENCE_PROJECT_DIR}",
+            0,
+            0,
+            0,
+            "ada_tb",
+            "test",
+            "maestro"
+        ]
+    },
+    "des_vars": {
+        "l1": [
+            6e-08,
+            5e-06,
+            0
+        ],
+        "l2": [
+            6e-08,
+            5e-06,
+            0
+        ],
+        "l3": [
+            6e-08,
+            5e-06,
+            0
+        ],
+        "w1": [
+            1.2e-07,
+            0.0001,
+            0
+        ],
+        "w2": [
+            1.2e-07,
+            0.0001,
+            0
+        ],
+        "w3": [
+            1.2e-07,
+            0.0001,
+            0
+        ],
+        "Idc": [
+            1e-06,
+            1e-05,
+            0
+        ]
+    },
+    "dependent_vars": [],
+    "responses": {
+        "assembler": [
+            "power",
+            "cmrr",
+            "adm",
+            "output_swing",
+            "pm",
+            "rms_noise_out",
+            "lg_ugb",
+            "psrr",
+            "slew_rate_rise",
+            "slew_rate_fall"
+        ]
+    },
+    "outputs": {
+        "power": [
+            4e-06,
+            "target",
+            1.0,
+            "*value"
+        ],
+        "cmrr": [
+            80.0,
+            "min",
+            0.00125,
+            "*value"
+        ],
+        "adm": [
+            30.0,
+            "min",
+            0.003,
+            "*value"
+        ],
+        "output_swing": [
+            0.8,
+            "min",
+            0.125,
+            "*value"
+        ],
+        "pm": [
+            60.0,
+            "min",
+            0.002,
+            "*value"
+        ],
+        "rms_noise_out": [
+            0.0003,
+            "max",
+            330.0,
+            "*value"
+        ],
+        "lg_ugb": [
+            2000000.0,
+            "min",
+            5e-08,
+            "*value"
+        ],
+        "psrr": [
+            30.0,
+            "min",
+            0.003,
+            "*value"
+        ],
+        "slew_rate_rise": [
+            2000000.0,
+            "min",
+            5e-08,
+            "*value"
+        ],
+        "slew_rate_fall": [
+            2000000.0,
+            "min",
+            5e-08,
+            "*value"
+        ]
+    },
+    "options": {
+        "corner_opt": 0,
+        "parallel": 1,
+        "parallel_max": 1
+    },
+    "objective": {
+        "name": "power",
+        "minormax": "min"
+    },
+    "constraints": null,
+    "llm": {
+        "enabled": true,
+        "api_key": null,
+        "model": "deepseek-chat",
+        "base_url": "https://api.deepseek.com",
+        "frequency": 1,
+        "temperature": 0.5,
+        "max_tokens": 5000
+    },
+    "intentions": []
+}

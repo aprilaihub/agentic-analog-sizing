@@ -1,0 +1,163 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://analog-ic-agentic/src/agentic_sizing/specs/opt_settings.schema.json",
+  "title": "ESSAB Optimization Settings Contract",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "ocn_script",
+    "des_vars",
+    "dependent_vars",
+    "responses",
+    "outputs",
+    "options",
+    "objective",
+    "constraints",
+    "intentions"
+  ],
+  "properties": {
+    "ocn_script": {
+      "type": "object",
+      "required": ["assembler"],
+      "properties": {
+        "assembler": {
+          "type": "array",
+          "minItems": 7,
+          "prefixItems": [
+            {
+              "type": "string",
+              "description": "project_dir"
+            },
+            {
+              "type": ["integer", "number", "boolean"],
+              "description": "reserved or legacy control flag"
+            },
+            {
+              "type": ["integer", "number", "boolean"],
+              "description": "flag_mc"
+            },
+            {
+              "type": ["integer", "number", "boolean"],
+              "description": "reserved"
+            },
+            {
+              "type": "string",
+              "description": "library"
+            },
+            {
+              "type": "string",
+              "description": "cell"
+            },
+            {
+              "type": "string",
+              "description": "view"
+            }
+          ],
+          "items": {
+            "type": ["string", "integer", "number", "boolean", "null"]
+          }
+        }
+      }
+    },
+    "des_vars": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "description": "[min, max] or [min, max, is_int]",
+        "oneOf": [
+          {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "prefixItems": [
+              { "type": "number" },
+              { "type": "number" }
+            ]
+          },
+          {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "prefixItems": [
+              { "type": "number" },
+              { "type": "number" },
+              { "type": "integer", "enum": [0, 1] }
+            ]
+          }
+        ]
+      }
+    },
+    "dependent_vars": {
+      "type": ["array", "null"],
+      "items": { "type": "string" }
+    },
+    "responses": {
+      "type": "object",
+      "required": ["assembler"],
+      "properties": {
+        "assembler": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 4,
+        "maxItems": 4,
+        "prefixItems": [
+          { "type": "number", "description": "threshold" },
+          {
+            "type": "string",
+            "enum": ["min", "max", "target"],
+            "description": "method"
+          },
+          { "type": "number", "description": "weight" },
+          { "type": "string", "description": "calc_expr" }
+        ]
+      }
+    },
+    "options": {
+      "type": "object",
+      "required": ["corner_opt", "parallel", "parallel_max"],
+      "properties": {
+        "corner_opt": { "type": ["integer", "boolean"] },
+        "parallel": { "type": ["integer", "boolean"] },
+        "parallel_max": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "required": ["name", "minormax"],
+      "properties": {
+        "name": { "type": "string" },
+        "minormax": { "type": "string", "enum": ["min", "max"] }
+      }
+    },
+    "constraints": {
+      "type": ["null", "array", "object"]
+    },
+    "llm": {
+      "type": ["object", "null"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "api_key": { "type": "string" },
+        "model": { "type": "string" },
+        "base_url": { "type": "string" },
+        "frequency": { "type": "integer", "minimum": 1 },
+        "temperature": { "type": "number" },
+        "max_tokens": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "intentions": {
+      "type": ["array", "null"],
+      "items": {
+        "type": ["string", "object", "number", "integer", "boolean", "null"]
+      }
+    }
+  }
+}

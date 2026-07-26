@@ -1,0 +1,28 @@
+// Library name: bgr
+// Cell name: bgr_cell
+// View name: schematic
+M19 (net12 net16 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+M31 (net24 net16 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+M29 (net20 net16 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+M28 (net033 net16 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+M20 (net011 net011 VDD VDD) pch l=Lp2 w=Wp2*1 m=1 nf=1
+M25 (net05 net05 net06 VDD) pch l=Lp1 w=Wp1*1 m=1 nf=1
+M30 (net16 net011 VDD VDD) pch l=Lp2 w=Wp2*1 m=1 nf=1
+M26 (net032 VREF net05 VDD) pch l=Lp1 w=Wp1*1 m=1 nf=1
+M24 (net06 net06 VDD VDD) pch l=Lp1 w=Wp1*1 m=1 nf=1
+M27 (VREF net16 VDD VDD) pch l=Lp3 w=Wp3*1 m=1 nf=1
+M23 (net012 net11 GND 0) nch l=Ln3 w=Wn3*1 m=1 nf=1
+M16 (net16 net032 GND 0) nch l=Ln1 w=Wn1*1 m=1 nf=1
+M14 (net032 VREF GND 0) nch l=Ln2 w=Wn2*1 m=1 nf=1
+M13 (net033 net12 net44 0) nch l=Ln5 w=Wn5*1 m=1 nf=1
+M12 (net12 net12 net11 0) nch l=Ln5 w=Wn5*1 m=1 nf=1
+M8 (net20 net20 net21 0) nch l=Ln9 w=Wn9*1 m=1 nf=1
+M17 (net24 net24 net25 0) nch l=Ln9 w=Wn9*1 m=1 nf=1
+M6 (net21 net20 GND 0) nch l=Ln10 w=Wn10*1 m=1 nf=1
+M5 (net11 net11 GND 0) nch l=Ln6 w=Wn6*1 m=1 nf=1
+M4 (net44 net11 net45 0) nch l=Ln7 w=Wn7*1 m=1 nf=1
+M18 (net25 net24 net21 0) nch l=Ln10 w=Wn10*1 m=1 nf=1
+M32 (VREF VREF net25 0) nch l=Ln10 w=Wn10*1 m=1 nf=1
+M0 (net45 VREF GND 0) nch l=Ln8 w=Wn8*1 m=1 nf=1
+M21 (net011 net033 net012 0) nch l=Ln4 w=Wn4*1 m=1 nf=1
+M22 (net16 net12 net012 0) nch l=Ln4 w=Wn4*1 m=1 nf=1

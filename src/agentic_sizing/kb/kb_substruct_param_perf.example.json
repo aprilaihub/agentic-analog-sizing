@@ -1,0 +1,92 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential Pair",
+      "parameter": "l2",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 12,
+      "evidence_iters": [1, 29, 40, 61, 88, 90, 102, 125],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential Pair",
+      "parameter": "w2",
+      "metric": "output_swing",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 14,
+      "evidence_iters": [1, 29, 40, 61, 88, 90, 102, 125],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current Mirror",
+      "parameter": "l1",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 9,
+      "evidence_iters": [1, 29, 61, 88, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current Mirror",
+      "parameter": "w1",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 11,
+      "evidence_iters": [1, 29, 61, 88, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current Mirror (active load)",
+      "parameter": "l3",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 13,
+      "evidence_iters": [1, 29, 40, 61, 88, 90, 102, 125],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current Mirror (active load)",
+      "parameter": "w3",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 13,
+      "evidence_iters": [1, 29, 40, 61, 88, 90, 102, 125],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current Source",
+      "parameter": "Idc",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.9,
+      "evidence_count": 13,
+      "evidence_iters": [1, 29, 40, 61, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current Source",
+      "parameter": "Idc",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 11,
+      "evidence_iters": [1, 29, 40, 61, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    }
+  ]
+}

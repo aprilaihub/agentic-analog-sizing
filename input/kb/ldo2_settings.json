@@ -1,0 +1,227 @@
+{
+  "ocn_script": {
+    "assembler": [
+      "${CADENCE_PROJECT_DIR}",
+      0,
+      0,
+      0,
+      "LDO2",
+      "LDO_tb",
+      "maestro"
+    ]
+  },
+  "des_vars": {
+    "L_MPT": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "ln1": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "ln2": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "ln3": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "ln4": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "ln5": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "ln6": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "lp1": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "lp2": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "lp4": [
+      1.8e-07,
+      2e-05,
+      0
+    ],
+    "W_MPT": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wn1": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wn2": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wn3": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wn4": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wn5": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wn6": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wp1": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wp2": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "wp4": [
+      2.2e-07,
+      0.0002,
+      0
+    ],
+    "nf1": [
+      1,
+      20,
+      1
+    ],
+    "nf2": [
+      1,
+      20,
+      1
+    ],
+    "nf3": [
+      1,
+      20,
+      1
+    ],
+    "nf4": [
+      1,
+      20,
+      1
+    ],
+    "nf5": [
+      1,
+      20,
+      1
+    ],
+    "RD": [
+      100000.0,
+      1000000.0,
+      0
+    ],
+    "RD2": [
+      100000.0,
+      1000000.0,
+      0
+    ]
+  },
+  "dependent_vars": [],
+  "responses": {
+    "assembler": [
+      "power",
+      "vout_min",
+      "vout_max",
+      "load_regulation",
+      "line_regulation",
+      "psrr"
+    ]
+  },
+  "outputs": {
+    "power": [
+      0.0001,
+      "target",
+      1.0,
+      "*value"
+    ],
+    "vout_min": [
+      1.15,
+      "min",
+      0.83,
+      "*value"
+    ],
+    "vout_max": [
+      1.25,
+      "max",
+      0.71,
+      "*value"
+    ],
+    "load_regulation": [
+      0.2,
+      "max",
+      5.0,
+      "*value"
+    ],
+    "line_regulation": [
+      0.2,
+      "max",
+      5.0,
+      "*value"
+    ],
+    "psrr": [
+      50.0,
+      "min",
+      0.02,
+      "*value"
+    ]
+  },
+  "state_outputs": [],
+  "options": {
+    "corner_opt": 0,
+    "parallel": 1,
+    "parallel_max": 1
+  },
+  "algorithm": {
+    "NP": 135,
+    "itermax": 1000,
+    "F": 0.8,
+    "strategy": 1,
+    "CR": 0.5
+  },
+  "objective": {
+    "name": "power",
+    "minormax": "min"
+  },
+  "constraints": null,
+  "llm": {
+    "enabled": true,
+    "api_key": null,
+    "model": "deepseek-chat",
+    "base_url": "https://api.deepseek.com",
+    "frequency": 1,
+    "temperature": 0.5,
+    "max_tokens": 5000
+  },
+  "intentions": []
+}

@@ -1,0 +1,82 @@
+# OTA Project ADA YAML file
+# Author: Miguel Gandara <miguel.gandara@gmail.com>
+
+# 1. OCEAN Script
+# Value is the path to the corresponding maestro cellview
+ocn_script:
+    assembler: ["${CADENCE_PROJECT_DIR}", 0, 0, 0, bgr, bgr_cell, maestro ]
+
+# 2. Design Variables
+# Design variables are shared among all testbenches
+# First column is min, second is max, third is initial value (optional)
+des_vars:
+    Ln1: [ .18e-6, 20e-6 ]
+    Ln2: [ .18e-6, 20e-6 ]
+    Ln3: [ .18e-6, 20e-6 ]
+    Ln4: [ .18e-6, 20e-6 ]
+    Ln5: [ .18e-6, 20e-6 ]
+    Ln6: [ .18e-6, 20e-6 ]
+    Ln7: [ .18e-6, 20e-6 ]
+    Ln8: [ 10e-6, 20e-6 ]
+    Ln9: [ .18e-6, 20e-6 ]
+    Ln10: [ .18e-6, 20e-6 ]
+    Lp1: [ .18e-6, 20e-6 ]
+    Lp2: [ .18e-6, 20e-6 ]
+    Lp3: [ .18e-6, 20e-6 ]
+    Wn1: [ .22e-6, 100e-6 ]
+    Wn2: [ .22e-6, 100e-6 ]
+    Wn3: [ .22e-6, 100e-6 ]
+    Wn4: [ .22e-6, 100e-6 ]
+    Wn5: [ .22e-6, 100e-6 ]
+    Wn6: [ .22e-6, 100e-6 ]
+    Wn7: [ .22e-6, 100e-6 ]
+    Wn8: [ .22e-6, 1e-6 ]
+    Wn9: [ .22e-6, 100e-6 ]
+    Wn10: [ .22e-6, 100e-6 ]
+    Wp1: [ .22e-6, 100e-6 ]
+    Wp2: [ .22e-6, 100e-6 ]
+    Wp3: [ .22e-6, 100e-6 ]
+
+# 3. Responses
+# Each key corresponds to a different testbench;
+# Each value is a sequence of responses to the corresponding testbench
+responses:
+    assembler: [power, Vref, Vref2, psr, TC]
+
+# 4. Outputs
+# All the outputs
+# constraints is combined in this section
+outputs:
+    power:             [ 10e-6, target,   1, '*value']
+    Vref:              [ 0.5,  min,   1000, '*value']
+    Vref2:             [ 1.3,  max,   1000, '*value']
+    psr:               [ -40,  max, 0.004, '*value']
+    TC:                [ 25,   max, 0.004, '*value']
+    # region_m16:        [ 0,    target,   0, '*value']
+    # region_m24:        [ 3,    target,   0, '*value']
+    # region_m25:        [ 3,    target,   0, '*value']
+    # region_m26:        [ 3,    target,   0, '*value']
+    # region_m14:        [ 1,    target,   0, '*value']
+    # region_m20:        [ 3,    target,   0, '*value']
+    # region_m21:        [ 3,    target,   0, '*value']
+    # region_m23:        [ 3,    target,   0, '*value']
+    # region_m19:        [ 3,    target,   0, '*value']
+    # region_m12:        [ 3,    target,   0, '*value']
+    # region_m5:         [ 3,    target,   0, '*value']
+    # region_m0:         [ 1,    target,   0, '*value']
+    # region_m8:         [ 3,    target,   0, '*value']
+    # region_m6:         [ 3,    target,   0, '*value']
+    # region_m17:        [ 3,    target,   0, '*value']
+    # region_m18:        [ 3,    target,   0, '*value']
+    # region_m32:        [ 3,    target,   0, '*value']
+
+# 6. Options
+options:
+    corner_opt: 0
+    parallel: 1
+    parallel_max: 1
+
+# 7. Objective
+objective:
+    name: power
+    minormax: min

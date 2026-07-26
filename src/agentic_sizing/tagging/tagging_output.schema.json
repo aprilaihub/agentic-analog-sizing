@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://analog-ic-agentic/agentic-sizing/tagging-output.schema.json",
+  "title": "Agentic Sizing Tagging Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tool",
+    "input",
+    "stage1",
+    "stage2",
+    "validation"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "provider",
+        "model",
+        "generated_at_utc"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generated_at_utc": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "netlist_path",
+        "subckt_name",
+        "device_count"
+      ],
+      "properties": {
+        "netlist_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "subckt_name": {
+          "type": "string"
+        },
+        "device_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "stage1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "functional_roles"
+      ],
+      "properties": {
+        "functional_roles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "devices",
+              "description"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "devices": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "stage2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "roles"
+      ],
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "substructures"
+            ],
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "substructures": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "type",
+                    "base_type",
+                    "modifiers",
+                    "devices",
+                    "evidence",
+                    "confidence",
+                    "variables"
+                  ],
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "Differential pair",
+                        "Current source",
+                        "Tail current source",
+                        "Reference current source",
+                        "Bias current source",
+                        "Cascode current source",
+                        "Current mirror",
+                        "Cascode current mirror",
+                        "Gain stage",
+                        "Cascode",
+                        "Folded cascode",
+                        "Common-source stage",
+                        "Common-gate stage",
+                        "Source follower",
+                        "Resistor divider",
+                        "Miller compensation",
+                        "Capacitive feedback network",
+                        "Cross-coupled pair",
+                        "Diode-connected device"
+                      ]
+                    },
+                    "base_type": {
+                      "type": "string",
+                      "enum": [
+                        "differential_pair",
+                        "current_source",
+                        "current_mirror",
+                        "gain_stage",
+                        "source_follower",
+                        "resistor_divider",
+                        "miller_compensation",
+                        "capacitive_feedback_network",
+                        "cross_coupled_pair",
+                        "diode_connected_device"
+                      ]
+                    },
+                    "modifiers": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "active_load",
+                          "bias",
+                          "cascode",
+                          "common_gate",
+                          "common_source",
+                          "folded",
+                          "output",
+                          "reference",
+                          "tail",
+                          "testbench"
+                        ]
+                      }
+                    },
+                    "devices": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    },
+                    "evidence": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "confidence": {
+                      "type": "number",
+                      "minimum": 0.0,
+                      "maximum": 1.0
+                    },
+                    "variables": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "device",
+                          "design_variables"
+                        ],
+                        "properties": {
+                          "device": {
+                            "type": "string",
+                            "minLength": 1
+                          },
+                          "design_variables": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "minLength": 1
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage1_unique_assignment_ok",
+        "stage2_role_membership_ok",
+        "all_devices_known",
+        "duplicate_devices",
+        "unknown_devices",
+        "unassigned_devices"
+      ],
+      "properties": {
+        "stage1_unique_assignment_ok": {
+          "type": "boolean"
+        },
+        "stage2_role_membership_ok": {
+          "type": "boolean"
+        },
+        "all_devices_known": {
+          "type": "boolean"
+        },
+        "duplicate_devices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unknown_devices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "unassigned_devices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

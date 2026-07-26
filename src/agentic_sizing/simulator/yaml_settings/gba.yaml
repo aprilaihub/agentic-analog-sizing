@@ -1,0 +1,115 @@
+# OTA Project ADA YAML file
+# Author: Miguel Gandara <miguel.gandara@gmail.com>
+
+# 1. OCEAN Script
+# Value is the path to the corresponding maestro cellview
+ocn_script:
+    assembler: ["${CADENCE_PROJECT_DIR}", 0, 0, 0, Gain_boosting_ota_2, Main_opa_tb, maestro ]
+
+# 2. Design Variables
+# Design variables are shared among all testbenches
+# First column is min, second is max, third is initial value (optional)
+des_vars:
+    l1: [ .18e-6, 2e-6 ]
+    l2: [ .18e-6, 2e-6 ]
+    l3: [ .18e-6, 2e-6 ]
+    l4: [ .18e-6, 2e-6 ]
+    l5: [ .18e-6, 2e-6 ]
+    l6: [ .18e-6, 2e-6 ]
+    l7: [ .18e-6, 12e-6 ]
+    l8: [ .18e-6, 2e-6 ]
+    l9: [ .18e-6, 12e-6 ]
+    l10: [ .18e-6, 2e-6 ]
+    l11: [ .18e-6, 2e-6 ]
+    l12: [ .18e-6, 2e-6 ]
+    l13: [ .18e-6, 2e-6 ]
+    w1: [ 1e-6, 50e-6 ]
+    w2: [ 1e-6, 50e-6 ]
+    w3: [ 1e-6, 200e-6 ]
+    w4: [ 1e-6, 200e-6 ]
+    w5: [ 1e-6, 50e-6 ]
+    w6: [ 1e-6, 50e-6 ]
+    w7: [ 1e-6, 50e-6 ]
+    w8: [ 1e-6, 50e-6 ]
+    w9: [ 1e-6, 50e-6 ]
+    w10: [ 1e-6, 50e-6 ]
+    w11: [ 1e-6, 50e-6 ]
+    Cc: [ 100e-15, 10e-12 ]
+    Cf: [ 50e-15, 2e-12 ]
+    N1: [ 1, 10, 1 ]
+    N2: [ 1, 10, 1 ]
+    N3: [ 1, 10, 1 ]
+    N4: [ 1, 10, 1 ]
+    N5: [ 1, 10, 1 ]
+    N6: [ 1, 10, 1 ]
+    N7: [ 1, 10, 1 ]
+    N8: [ 1, 10, 1 ]
+    N9: [ 1, 10, 1 ]
+    # VPC: [ 0, 1.8 ]
+    # VNC: [ 0, 1.8 ]
+
+# dependent vars
+# these are variables that are dependent on values of the design variables. They will not be subject
+# to random generation and mutation. The key is a function with the signature:
+# var_value = calc_var(pop)
+dependent_vars:
+
+# 3. Responses
+# Each key corresponds to a different testbench;
+# Each value is a sequence of responses to the corresponding testbench
+responses:
+    assembler: [power, adm, lg_ugb, pm, slew_rate_rise, slew_rate_fall]
+
+# 4. Outputs
+# All the outputs
+# constraints is combined in this section
+outputs:
+    power:             [ 1e-3, target,   1, '*value']
+    adm:               [ 100,  min, 50e-4, '*value']
+    lg_ugb:            [ 10e6, min, 50e-9, '*value']
+    pm:                [ 60,   min, 0.008, '*value']
+    slew_rate_rise:    [ 10e6,   min, 0.05e-6, '*value']
+    slew_rate_fall:    [ 10e6,   min, 0.05e-6, '*value']
+
+# 5. MARL state features (returned from simulator CSV rows)
+# These must be parameter names present in simulation result CSV.
+state_outputs: [gm0, gm1, gm2, gm3, gm4, gm5, gm6, gm7, gm8, gm9, gm10, gm11, gm12, gm13, gm14, gm15, gm16, gm17, gm18, gm19, gm20, gm21, gm22, gm23, gm24, gm25, gm26, gm27, gm28, gm29, gm30, vdsat0, vdsat1, vdsat2, vdsat3, vdsat4, vdsat5, vdsat6, vdsat7, vdsat8, vdsat9, vdsat10, vdsat11, vdsat12, vdsat13, vdsat14, vdsat15, vdsat16, vdsat17, vdsat18, vdsat19, vdsat20, vdsat21, vdsat22, vdsat23, vdsat24, vdsat25, vdsat26, vdsat27, vdsat28, vdsat29, vdsat30]
+
+# Optional: per-agent local observation assignment by state feature name.
+# If omitted, code will split state_outputs evenly across agents.
+agent_state_map:
+    "0": [gm0, gm1, gm2, gm3, gm4, gm5, gm6, gm7, gm8, gm9, gm10, gm11, gm12, gm13, gm14, gm15, gm16, vdsat0, vdsat1, vdsat2, vdsat3, vdsat4, vdsat5, vdsat6, vdsat7, vdsat8, vdsat9, vdsat10, vdsat11, vdsat12, vdsat13, vdsat14, vdsat15, vdsat16]
+    "1": [gm17, gm18, gm19, gm20, gm21, gm22, gm23, vdsat17, vdsat18, vdsat19, vdsat20, vdsat21, vdsat22, vdsat23]
+    "2": [gm24, gm25, gm26, gm27, gm28, gm29, gm30, vdsat24, vdsat25, vdsat26, vdsat27, vdsat28, vdsat29, vdsat30]
+
+# Optional: per-agent design-variable control assignment by variable name.
+# If omitted, code will split des_vars evenly across agents.
+agent_action_map:
+    "0": [l1, l2, l5, l6, l7, l8, l9, l10, l11, l12, l13, w1, w2, w5, w6, w7, w8, w9, w10, w11, Cc, Cf, N1, N2, N3]
+    "1": [l3, w3]
+    "2": [l4, w4]
+
+# 6. Options
+options:
+    corner_opt: 0
+    parallel: 1
+    parallel_max: 1
+
+# 6. Algorithm Parameters
+# 7. Objective and Constraints
+objective:
+    name: power
+    minormax: min
+
+constraints:
+
+llm:
+  enabled: True
+  api_key: null  # Read OPENAI_API_KEY from the environment
+  model: "deepseek-chat"
+  base_url: "https://api.deepseek.com"
+  frequency: 1  # Use LLM every 5 iterations
+  temperature: 0.5
+  max_tokens: 5000
+
+intentions:

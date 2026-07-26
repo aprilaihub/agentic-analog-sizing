@@ -1,0 +1,17 @@
+// Library name: ada
+// Cell name: current_mirror
+// View name: schematic
+subckt current_mirror vdd vin vip vo
+    M6 (net6 net6 0 0) nch_lvt_mac l=l4 w=w4
+    M7 (vo net6 0 0) nch_lvt_mac l=l4 w=w4
+    M2 (net3 vip net1 0) nch_lvt_mac l=l2 w=w2
+    M1 (net5 vin net1 0) nch_lvt_mac l=l2 w=w2
+    M5 (net2 net2 0 0) nch_lvt_mac l=l1 w=w1
+    M5b (net1 net2 0 0) nch_lvt_mac l=l1 w=w1
+    I1 (vdd net2) isource dc=Idc
+    M3 (net5 net5 vdd vdd) pch_lvt_mac l=l3 w=w3
+    M4 (net3 net3 vdd vdd) pch_lvt_mac l=l3 w=w3
+    KM3 (net6 net5 vdd vdd) pch_lvt_mac l=l3 w=w3 multi=N3
+    KM4 (vo net3 vdd vdd) pch_lvt_mac l=l3 w=w3 multi=N3 
+ends current_mirror
+// End of subcircuit definition.

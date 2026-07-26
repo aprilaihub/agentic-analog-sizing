@@ -1,0 +1,272 @@
+{
+  "ocn_script": {
+    "assembler": [
+      "${CADENCE_PROJECT_DIR}",
+      0,
+      0,
+      0,
+      "ada_tb",
+      "test",
+      "maestro"
+    ]
+  },
+  "des_vars": {
+    "l1": [
+      6e-08,
+      5e-06,
+      0
+    ],
+    "l2": [
+      6e-08,
+      5e-06,
+      0
+    ],
+    "l3": [
+      6e-08,
+      5e-06,
+      0
+    ],
+    "l4": [
+      6e-08,
+      5e-06,
+      0
+    ],
+    "l5": [
+      6e-08,
+      5e-06,
+      0
+    ],
+    "l6": [
+      6e-08,
+      5e-06,
+      0
+    ],
+    "w1": [
+      1.2e-07,
+      0.0001,
+      0
+    ],
+    "w2": [
+      1.2e-07,
+      0.0001,
+      0
+    ],
+    "w3": [
+      1.2e-07,
+      0.0001,
+      0
+    ],
+    "w4": [
+      1.2e-07,
+      0.0001,
+      0
+    ],
+    "w5": [
+      1.2e-07,
+      0.0001,
+      0
+    ],
+    "w6": [
+      1.2e-07,
+      0.0001,
+      0
+    ],
+    "N1": [
+      1,
+      10,
+      1
+    ],
+    "N2": [
+      1,
+      10,
+      1
+    ],
+    "N3": [
+      1,
+      10,
+      1
+    ],
+    "Idc": [
+      1e-06,
+      1e-05,
+      0
+    ],
+    "Idc2": [
+      1e-06,
+      1e-05,
+      0
+    ],
+    "Idc3": [
+      1e-06,
+      1e-05,
+      0
+    ]
+  },
+  "dependent_vars": [],
+  "responses": {
+    "assembler": [
+      "power",
+      "cmrr",
+      "adm",
+      "output_swing",
+      "pm",
+      "rms_noise_out",
+      "lg_ugb",
+      "psrr",
+      "slew_rate_rise",
+      "slew_rate_fall",
+      "region_m1",
+      "region_m3",
+      "region_m5",
+      "region_m6",
+      "region_m8",
+      "region_m10",
+      "region_m34",
+      "region_m89",
+      "region_m1011"
+    ]
+  },
+  "outputs": {
+    "power": [
+      0.0001,
+      "target",
+      1.0,
+      "*value"
+    ],
+    "cmrr": [
+      90.0,
+      "min",
+      0.00111,
+      "*value"
+    ],
+    "adm": [
+      40.0,
+      "min",
+      0.0015,
+      "*value"
+    ],
+    "output_swing": [
+      0.8,
+      "min",
+      0.125,
+      "*value"
+    ],
+    "pm": [
+      60.0,
+      "min",
+      0.002,
+      "*value"
+    ],
+    "rms_noise_out": [
+      0.0002,
+      "max",
+      1428.0,
+      "*value"
+    ],
+    "lg_ugb": [
+      2000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "psrr": [
+      60.0,
+      "min",
+      0.0015,
+      "*value"
+    ],
+    "slew_rate_rise": [
+      2000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "slew_rate_fall": [
+      2000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "region_m1": [
+      3.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m3": [
+      1.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m5": [
+      3.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m6": [
+      3.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m8": [
+      3.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m10": [
+      3.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m34": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m89": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ],
+    "region_m1011": [
+      2.0,
+      "target",
+      0.0,
+      "*value"
+    ]
+  },
+  "options": {
+    "corner_opt": 0,
+    "parallel": 1,
+    "parallel_max": 1
+  },
+  "algorithm": {
+    "NP": 90,
+    "itermax": 400,
+    "F": 0.8,
+    "strategy": 1,
+    "CR": 0.5
+  },
+  "objective": {
+    "name": "power",
+    "minormax": "min"
+  },
+  "constraints": null,
+  "llm": {
+    "enabled": true,
+    "api_key": null,
+    "model": "deepseek-chat",
+    "base_url": "https://api.deepseek.com",
+    "frequency": 1,
+    "temperature": 0.5,
+    "max_tokens": 5000
+  },
+  "intentions": []
+}

@@ -1,0 +1,98 @@
+# OTA Project ADA YAML file
+# Author: Miguel Gandara <miguel.gandara@gmail.com>
+
+# 1. OCEAN Script
+# Value is the path to the corresponding maestro cellview
+ocn_script:
+    assembler: ["${CADENCE_PROJECT_DIR}", 0, 0, 0, ada_tb, test, maestro ]
+
+# 2. Design Variables
+# Design variables are shared among all testbenches
+# First column is min, second is max, third is initial value (optional)
+des_vars:
+    L1: [ 180e-9, 2e-6 ]
+    L2: [ 180e-9, 2e-6 ]
+    L3: [ 180e-9, 2e-6 ]
+    L4: [ 180e-9, 2e-6 ]
+    L5: [ 180e-9, 2e-6 ]
+    L6: [ 180e-9, 2e-6 ]
+    L7: [ 180e-9, 2e-6 ]
+    W1: [ .24e-6, 150e-6 ]
+    W2: [ .24e-6, 150e-6 ]
+    W3: [ .24e-6, 150e-6 ]
+    W4: [ .24e-6, 150e-6 ]
+    W5: [ .24e-6, 150e-6 ]
+    W6: [ .24e-6, 150e-6 ]
+    W7: [ .24e-6, 150e-6 ]
+    N1: [ 1, 20, 1]
+    N2: [ 1, 20, 1]
+    N8: [ 1, 20, 1]
+    N9: [ 1, 20, 1]
+    MCAP: [ 100e-15, 2e-12]
+#    Cf: [ 100e-15, 10e-12]
+
+
+# dependent vars
+# these are variables that are dependent on values of the design variables. They will not be subject
+# to random generation and mutation. The key is a function with the signature:
+# var_value = calc_var(pop)
+dependent_vars:
+
+# 3. Responses
+# Each key corresponds to a different testbench;
+# Each value is a sequence of responses to the corresponding testbench
+responses:
+    assembler: [power, cmrr, adm, psrr, output_swing, pm, rms_noise_out, rise_time, slew, lg_ugb, cmpm]
+#m43_vsat_marg, m44_vsat_marg, m45_vsat_marg, m47_vsat_marg, m48_vsat_marg, m29_vsat_marg, m11_vsat_marg, m9_vsat_marg, m10_vsat_marg, m30_vsat_marg, m26_vsat_marg, m31_vsat_marg, m8_vsat_marg, m42_vsat_marg, m35_vsat_marg, m2_vsat_marg, m3_vsat_marg, m34_vsat_marg, m37_vsat_marg, m39_vsat_marg, 
+
+# 4. Outputs
+# All the outputs
+outputs:
+    power:         [ 10e-3, target, 1000, '*value']
+    cmrr:          [ 100, min, 3.75, '*value']
+    adm:           [ 90, min, 3.75, '*value']
+    psrr:          [ 100, min, 3.75, '*value']
+    output_swing:  [ 2.4, min, 107, '*value']
+    # m43_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m44_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m45_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m47_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m48_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m29_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m11_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m9_vsat_marg:  [ 50e-3, min, 3000, '*value']
+    # m10_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m30_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m26_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m31_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m8_vsat_marg:  [ 50e-3, min, 3000, '*value']
+    # m42_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m35_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m2_vsat_marg:  [ 50e-3, min, 3000, '*value']
+    # m3_vsat_marg:  [ 50e-3, min, 3000, '*value']
+    # m34_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m37_vsat_marg: [ 50e-3, min, 3000, '*value']
+    # m39_vsat_marg: [ 50e-3, min, 3000, '*value']
+    pm:            [ 60, min, 3.75, '*value']
+    rms_noise_out: [ 335e-6, max, 6e5, '*value']
+    rise_time:     [ 30e-9, max, 5e9, '*value']
+#    static_error_rise: [ 0.1, max, 200000, '*value']
+    slew:          [ -300e-3, max, 500, '*value']
+    lg_ugb:        [ 30e6, min, 5.1724e-06, '*value']
+    cmpm:          [ 50, min, 3.75, '*value']
+
+# 6. Options
+options:
+    corner_opt: 0
+    parallel: 1
+    parallel_max: 1
+
+# 6. Algorithm Parameters
+# 7. Objective and Constraints
+objective:
+    name: power
+    minormax: min
+
+constraints:
+
+intentions:

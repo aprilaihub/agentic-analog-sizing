@@ -1,0 +1,83 @@
+// Library name: Gain_boosting_ota_2
+// Cell name: Main_opa
+// View name: schematic
+subckt Main_opa VNC VPC Vb1 Vcm Vdd Vin Vip Von Vop Vss
+    C0 (Vo1\- Vss) capacitor c=Cc
+    C1 (Vo1\+ Vss) capacitor c=Cc
+    C2 (Vo2\+ Vss) capacitor c=Cc
+    C3 (Vo2\- Vss) capacitor c=Cc
+    M173 (net0143 net21 Vdd Vdd) pch l=l2 w=w2*1 m=N4+N5 nf=1
+    M172 (net0146 net21 Vdd Vdd) pch l=l2 w=w2*1 m=N4+N5 nf=1
+    M2 (net9 Vb2 net1 Vdd) pch l=l13 w=w11*1 m=2*N1 nf=1
+    M166 (Vo1\+ Vb2 net0143 Vdd) pch l=l13 w=w11*1 m=N5 nf=1
+    M165 (Vo1\- Vb2 net0146 Vdd) pch l=l13 w=w11*1 m=N5 nf=1
+    M16 (Vo2\- Vb2 net2 Vdd) pch l=l13 w=w11*1 m=N8 nf=1
+    M17 (Vo2\+ Vb2 net7 Vdd) pch l=l13 w=w11*1 m=N8 nf=1
+    M18 (net13 Vb2 net089 Vdd) pch l=l13 w=w11*1 m=N7 nf=1
+    M77 (net18 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N9 nf=1
+    M64 (net21 net21 Vdd Vdd) pch l=l2 w=w2*1 m=N6 nf=1
+    M76 (net19 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N9 nf=1
+    M75 (net14 Vb3 net19 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M191 (net7 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N8 nf=1
+    M190 (net2 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N8 nf=1
+    M189 (net089 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N7 nf=1
+    M187 (net0145 Vi2\+ net13 Vdd) pch l=l4 w=w4*1 m=1 nf=1
+    M186 (net0148 Vi2\- net13 Vdd) pch l=l4 w=w4*1 m=1 nf=1
+    M74 (Vss Vo2\- net19 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M73 (Vss Vo2\+ net18 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M72 (net14 Vb3 net18 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M60 (net039 Vcm net049 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M59 (Vss Von net049 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M56 (Vss Vop net087 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M201 (Vi2\- Vin net9 Vdd) pch l=l6 w=w6*1 m=4 nf=1
+    M53 (net087 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N3 nf=1
+    M54 (net049 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N3 nf=1
+    M55 (net039 Vcm net087 Vdd) pch l=l10 w=w8*1 m=1 nf=1
+    M47 (Vb2 Vb2 Vdd Vdd) pch l=l7 w=w11*1 m=1 nf=1
+    M27 (net022 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=1 nf=1
+    M26 (Vb3 Vb2 net022 net022) pch l=l13 w=w11*1 m=1 nf=1
+    M22 (net018 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=1 nf=1
+    M21 (net067 Vb2 net018 net018) pch l=l13 w=w11*1 m=1 nf=1
+    M14 (net013 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=1 nf=1
+    M13 (net041 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=1 nf=1
+    M12 (Vb4 Vb2 net013 net013) pch l=l13 w=w11*1 m=1 nf=1
+    M11 (Vb1 Vb2 net041 net041) pch l=l13 w=w11*1 m=1 nf=1
+    M10 (Vi1\- Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N2 nf=1
+    M9 (Vi1\+ Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=N2 nf=1
+    M8 (Vop Vo1\+ Vi1\- Vdd) pch l=l12 w=w10*1 m=N2 nf=1
+    M7 (Von Vo1\- Vi1\+ Vdd) pch l=l12 w=w10*1 m=N2 nf=1
+    M200 (Vi2\+ Vip net9 Vdd) pch l=l6 w=w6*1 m=4 nf=1
+    M46 (net1 Vb1 Vdd Vdd) pch l=l2 w=w2*1 m=2*N1 nf=1
+    M3 (net8 Vb3 net3 Vss) nch l=l1 w=w1*1 m=2*N4 nf=1
+    M4 (Vo1\+ Vb3 net10 Vss) nch l=l1 w=w1*1 m=N5 nf=1
+    M15 (Vo1\- Vb3 net6 Vss) nch l=l1 w=w1*1 m=N5 nf=1
+    M1 (net0146 Vi1\- net8 Vss) nch l=l3 w=w3*1 m=1 nf=1
+    M0 (net0143 Vi1\+ net8 Vss) nch l=l3 w=w3*1 m=1 nf=1
+    M62 (net17 Vb4 Vss Vss) nch l=l5 w=w5*1 m=N6 nf=1
+    M63 (net15 Vb4 Vss Vss) nch l=l5 w=w5*1 m=N6 nf=1
+    M28 (net3 Vb4 Vss Vss) nch l=l5 w=w5*1 m=2*N4 nf=1
+    M44 (Vdd Vo1\- net17 Vss) nch l=l10 w=w8*1 m=1 nf=1
+    M20 (net6 Vb4 Vss Vss) nch l=l5 w=w5*1 m=N5 nf=1
+    M23 (net10 Vb4 Vss Vss) nch l=l5 w=w5*1 m=N5 nf=1
+    M45 (net21 Vb2 net15 Vss) nch l=l10 w=w8*1 m=1 nf=1
+    M58 (net21 Vb2 net17 Vss) nch l=l10 w=w8*1 m=1 nf=1
+    M61 (Vdd Vo1\+ net15 Vss) nch l=l10 w=w8*1 m=1 nf=1
+    M78 (net14 net14 Vss Vss) nch l=l5 w=w5*1 m=N9 nf=1
+    M159 (Vo2\- Vb3 net0145 Vss) nch l=l1 w=w1*1 m=N8 nf=1
+    M158 (Vo2\+ Vb3 net0148 Vss) nch l=l1 w=w1*1 m=N8 nf=1
+    M153 (net0145 net14 Vss Vss) nch l=l5 w=w5*2 m=N7+N8 nf=1
+    M152 (net0148 net14 Vss Vss) nch l=l5 w=w5*2 m=N7+N8 nf=1
+    M57 (net039 net039 Vss Vss) nch l=l8 w=w7*1 m=N3 nf=1
+    M50 (Vb2 Vb3 net066 Vss) nch l=l1 w=w1*1 m=1 nf=1
+    M51 (net066 Vb4 Vss Vss) nch l=l5 w=w5*1 m=1 nf=1
+    M52 (Vb3 Vb3 Vss Vss) nch l=l9 w=w1*1 m=1 nf=1
+    M41 (net067 Vb3 net068 Vss) nch l=l1 w=w1*1 m=1 nf=1
+    M40 (Vb4 Vb3 net069 Vss) nch l=l1 w=w1*1 m=1 nf=1
+    M39 (net068 Vb4 Vss Vss) nch l=l5 w=w5*1 m=1 nf=1
+    M37 (net069 Vb4 Vss Vss) nch l=l5 w=w5*1 m=1 nf=1
+    M6 (Von Vo2\- Vi2\+ Vss) nch l=l11 w=w9*1 m=N2 nf=1
+    M5 (Vop Vo2\+ Vi2\- Vss) nch l=l11 w=w9*1 m=N2 nf=1
+    M48 (Vi2\+ net039 Vss Vss) nch l=l8 w=w7*1 m=N1+N2 nf=1
+    M49 (Vi2\- net039 Vss Vss) nch l=l8 w=w7*1 m=N1+N2 nf=1
+ends Main_opa
+// End of subcircuit definition.

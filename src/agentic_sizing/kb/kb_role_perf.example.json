@@ -1,0 +1,44 @@
+{
+  "facts": [
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path (input transconductor + active load)",
+      "metric": "output_swing",
+      "influence": "significant",
+      "confidence": 0.7,
+      "evidence_count": 14,
+      "evidence_iters": [1, 29, 40, 61, 88, 90, 102, 125],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path (input transconductor + active load)",
+      "metric": "rms_noise_out",
+      "influence": "significant",
+      "confidence": 0.7,
+      "evidence_count": 12,
+      "evidence_iters": [1, 29, 61, 88, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias / reference generation (tail current bias)",
+      "metric": "power",
+      "influence": "dominant",
+      "confidence": 0.9,
+      "evidence_count": 13,
+      "evidence_iters": [1, 29, 40, 61, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias / reference generation (tail current bias)",
+      "metric": "slew_rate_rise",
+      "influence": "significant",
+      "confidence": 0.7,
+      "evidence_count": 11,
+      "evidence_iters": [1, 29, 40, 61, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    }
+  ]
+}

@@ -1,0 +1,437 @@
+{
+  "ocn_script": {
+    "assembler": [
+      "${CADENCE_PROJECT_DIR}",
+      0,
+      0,
+      0,
+      "Gain_boosting_ota_2",
+      "Main_opa_tb",
+      "maestro"
+    ]
+  },
+  "des_vars": {
+    "l1": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l2": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l3": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l4": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l5": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l6": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l7": [
+      1.8e-07,
+      1.2e-05,
+      0
+    ],
+    "l8": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l9": [
+      1.8e-07,
+      1.2e-05,
+      0
+    ],
+    "l10": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l11": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l12": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "l13": [
+      1.8e-07,
+      2e-06,
+      0
+    ],
+    "w1": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w2": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w3": [
+      1e-06,
+      0.0002,
+      0
+    ],
+    "w4": [
+      1e-06,
+      0.0002,
+      0
+    ],
+    "w5": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w6": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w7": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w8": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w9": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w10": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "w11": [
+      1e-06,
+      5e-05,
+      0
+    ],
+    "Cc": [
+      1e-13,
+      1e-11,
+      0
+    ],
+    "Cf": [
+      5e-14,
+      2e-12,
+      0
+    ],
+    "N1": [
+      1,
+      10,
+      1
+    ],
+    "N2": [
+      1,
+      10,
+      1
+    ],
+    "N3": [
+      1,
+      10,
+      1
+    ],
+    "N4": [
+      1,
+      10,
+      1
+    ],
+    "N5": [
+      1,
+      10,
+      1
+    ],
+    "N6": [
+      1,
+      10,
+      1
+    ],
+    "N7": [
+      1,
+      10,
+      1
+    ],
+    "N8": [
+      1,
+      10,
+      1
+    ],
+    "N9": [
+      1,
+      10,
+      1
+    ]
+  },
+  "dependent_vars": [],
+  "responses": {
+    "assembler": [
+      "power",
+      "adm",
+      "lg_ugb",
+      "pm",
+      "slew_rate_rise",
+      "slew_rate_fall"
+    ]
+  },
+  "outputs": {
+    "power": [
+      0.001,
+      "target",
+      1.0,
+      "*value"
+    ],
+    "adm": [
+      100.0,
+      "min",
+      0.005,
+      "*value"
+    ],
+    "lg_ugb": [
+      10000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "pm": [
+      60.0,
+      "min",
+      0.008,
+      "*value"
+    ],
+    "slew_rate_rise": [
+      10000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ],
+    "slew_rate_fall": [
+      10000000.0,
+      "min",
+      5e-08,
+      "*value"
+    ]
+  },
+  "state_outputs": [
+    "gm0",
+    "gm1",
+    "gm2",
+    "gm3",
+    "gm4",
+    "gm5",
+    "gm6",
+    "gm7",
+    "gm8",
+    "gm9",
+    "gm10",
+    "gm11",
+    "gm12",
+    "gm13",
+    "gm14",
+    "gm15",
+    "gm16",
+    "gm17",
+    "gm18",
+    "gm19",
+    "gm20",
+    "gm21",
+    "gm22",
+    "gm23",
+    "gm24",
+    "gm25",
+    "gm26",
+    "gm27",
+    "gm28",
+    "gm29",
+    "gm30",
+    "vdsat0",
+    "vdsat1",
+    "vdsat2",
+    "vdsat3",
+    "vdsat4",
+    "vdsat5",
+    "vdsat6",
+    "vdsat7",
+    "vdsat8",
+    "vdsat9",
+    "vdsat10",
+    "vdsat11",
+    "vdsat12",
+    "vdsat13",
+    "vdsat14",
+    "vdsat15",
+    "vdsat16",
+    "vdsat17",
+    "vdsat18",
+    "vdsat19",
+    "vdsat20",
+    "vdsat21",
+    "vdsat22",
+    "vdsat23",
+    "vdsat24",
+    "vdsat25",
+    "vdsat26",
+    "vdsat27",
+    "vdsat28",
+    "vdsat29",
+    "vdsat30"
+  ],
+  "agent_state_map": {
+    "0": [
+      "gm0",
+      "gm1",
+      "gm2",
+      "gm3",
+      "gm4",
+      "gm5",
+      "gm6",
+      "gm7",
+      "gm8",
+      "gm9",
+      "gm10",
+      "gm11",
+      "gm12",
+      "gm13",
+      "gm14",
+      "gm15",
+      "gm16",
+      "vdsat0",
+      "vdsat1",
+      "vdsat2",
+      "vdsat3",
+      "vdsat4",
+      "vdsat5",
+      "vdsat6",
+      "vdsat7",
+      "vdsat8",
+      "vdsat9",
+      "vdsat10",
+      "vdsat11",
+      "vdsat12",
+      "vdsat13",
+      "vdsat14",
+      "vdsat15",
+      "vdsat16"
+    ],
+    "1": [
+      "gm17",
+      "gm18",
+      "gm19",
+      "gm20",
+      "gm21",
+      "gm22",
+      "gm23",
+      "vdsat17",
+      "vdsat18",
+      "vdsat19",
+      "vdsat20",
+      "vdsat21",
+      "vdsat22",
+      "vdsat23"
+    ],
+    "2": [
+      "gm24",
+      "gm25",
+      "gm26",
+      "gm27",
+      "gm28",
+      "gm29",
+      "gm30",
+      "vdsat24",
+      "vdsat25",
+      "vdsat26",
+      "vdsat27",
+      "vdsat28",
+      "vdsat29",
+      "vdsat30"
+    ]
+  },
+  "agent_action_map": {
+    "0": [
+      "l1",
+      "l2",
+      "l5",
+      "l6",
+      "l7",
+      "l8",
+      "l9",
+      "l10",
+      "l11",
+      "l12",
+      "l13",
+      "w1",
+      "w2",
+      "w5",
+      "w6",
+      "w7",
+      "w8",
+      "w9",
+      "w10",
+      "w11",
+      "Cc",
+      "Cf",
+      "N1",
+      "N2",
+      "N3"
+    ],
+    "1": [
+      "l3",
+      "w3"
+    ],
+    "2": [
+      "l4",
+      "w4"
+    ]
+  },
+  "options": {
+    "corner_opt": 0,
+    "parallel": 1,
+    "parallel_max": 1
+  },
+  "algorithm": {
+    "NP": 35,
+    "itermax": 2000,
+    "F": 0.8,
+    "strategy": 1,
+    "CR": 0.5
+  },
+  "objective": {
+    "name": "power",
+    "minormax": "min"
+  },
+  "constraints": null,
+  "llm": {
+    "enabled": true,
+    "api_key": null,
+    "model": "deepseek-chat",
+    "base_url": "https://api.deepseek.com",
+    "frequency": 1,
+    "temperature": 0.5,
+    "max_tokens": 5000
+  },
+  "intentions": []
+}

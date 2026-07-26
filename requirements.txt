@@ -1,0 +1,4 @@
+langgraph>=0.2.0,<0.4
+numpy>=1.26,<3
+PyYAML>=6,<7
+openai>=1,<3

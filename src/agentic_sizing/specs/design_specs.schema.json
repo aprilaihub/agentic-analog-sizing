@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://analog-ic-agentic/src/agentic_sizing/specs/design_specs.schema.json",
+  "title": "Agentic Design Specs Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "topology",
+    "objective",
+    "design_variables",
+    "performance_specs"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "topology": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric", "sense"],
+      "properties": {
+        "metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sense": {
+          "type": "string",
+          "enum": ["min", "max"]
+        }
+      }
+    },
+    "design_variables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "min", "max", "is_integer"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          },
+          "is_integer": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "performance_specs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "index",
+          "method",
+          "rule",
+          "threshold",
+          "weight",
+          "calc_expr",
+          "is_objective"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "index": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "method": {
+            "type": "string",
+            "enum": ["min", "max", "target"]
+          },
+          "rule": {
+            "type": "string",
+            "enum": [">=", "<=", "target"]
+          },
+          "threshold": {
+            "type": "number"
+          },
+          "weight": {
+            "type": "number"
+          },
+          "calc_expr": {
+            "type": "string",
+            "minLength": 1
+          },
+          "is_objective": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}

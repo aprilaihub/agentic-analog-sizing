@@ -1,0 +1,39 @@
+// Library name: folded_cascode
+// Cell name: Folded_cascode_two_stage
+// View name: schematic
+subckt Folded_cascode_two_stage vbn vdd vin vip von vop vref
+    M39 (net016 vin net046 0) nch l=L5 w=W5 m=2
+    M38 (net014 vip net046 0) nch l=L5 w=W5 m=2
+    M37 (vop1 vbn vfb_p 0) nch l=L2 w=W2 m=N2
+    M36 (von1 vbn vfb_n 0) nch l=L2 w=W2 m=N2
+    M35 (net046 vbn2 0 0) nch l=L1 w=W1 m=2*N1
+    M34 (vfb_p vcmfb 0 0) nch l=L1 w=W1 m=N2
+    M33 (vfb_n vcmfb 0 0) nch l=L1 w=W1 m=N2
+    M50 (vop vbn2 0 0) nch l=L1 w=W1 m=N9
+    M43 (net044 net044 0 0) nch l=L1 w=W1
+    M29 (vbn vbn vbn2 0) nch l=L2 w=W2
+    M11 (vbn2 vbn2 0 0) nch l=L1 w=W1
+    M9 (net057 vbn2 0 0) nch l=L1 w=W1
+    M26 (net055 vbn2 0 0) nch l=L1 w=W1
+    M30 (vbp2 vbn net057 0) nch l=L2 w=W2
+    M8 (von vbn2 0 0) nch l=L1 w=W1 m=N9
+    M31 (vbp1 vbn net055 0) nch l=L2 w=W2
+    M44 (vcmfb vcmfb 0 0) nch l=L1 w=W1 m=N8
+    M42 (net014 vbp2 vdd vdd) pch l=L4 w=W4 m=N2+N1
+    M41 (net016 vbp2 vdd vdd) pch l=L4 w=W4 m=N2+N1
+    M40 (von1 vbp1 net014 vdd) pch l=L3 w=W3 m=N2
+    M3 (vop1 vbp1 net016 vdd) pch l=L3 w=W3 m=N2
+    M2 (vop von1 vdd vdd) pch l=L7 w=W7
+    M0 (von vop1 vdd vdd) pch l=L7 w=W7
+    M45 (vcmfb vcmo net54 vdd) pch l=L6 w=W6
+    M10 (vbp2 vbp2 vdd vdd) pch l=L4 w=W4
+    M28 (vbp1 vbp1 ncasc vdd) pch l=L3 w=W3
+    M48 (net54 vbp2 vdd vdd) pch l=L4 w=W4*1 m=2*N8
+    M27 (ncasc vbp1 vdd vdd) pch l=L3 w=W3
+    M47 (net044 vref net54 vdd) pch l=L6 w=W6
+    C0 (vop vfb_n) capacitor c=MCAP
+    C1 (von vfb_p) capacitor c=MCAP
+    R3 (vop vcmo) resistor r=100K
+    R4 (vcmo von) resistor r=100K
+ends Folded_cascode_two_stage
+// End of subcircuit definition.

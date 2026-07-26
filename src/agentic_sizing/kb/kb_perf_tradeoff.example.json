@@ -1,0 +1,37 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 11,
+      "evidence_iters": [1, 29, 40, 61, 88, 90, 102, 125],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "rms_noise_out",
+      "relation": "trades_off_with",
+      "object": "adm",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 10,
+      "evidence_iters": [1, 29, 40, 61, 88, 102, 125, 155],
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "output_swing",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.6,
+      "evidence_count": 8,
+      "evidence_iters": [29, 40, 61, 88, 90, 102, 125, 155],
+      "topology": "5t_ota"
+    }
+  ]
+}

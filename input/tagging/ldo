@@ -1,0 +1,32 @@
+// Library name: LDO
+// Cell name: LDO_basic_variables
+// View name: schematic_psrr
+I0 (net3 GND) isource dc=2u type=dc
+I1 (VDD net4) isource dc=2u type=dc
+C2 (VOUT VFB) capacitor c=3p
+C1 (net2 VOUT) capacitor c=0.6p
+C0 (net2 net13) capacitor c=0.6p
+R0 (VOUT VFB) resistor r=RD2
+R1 (VFB GND) resistor r=RD
+M21 (net4 VB2 GND GND) nch l=ln5 w=wn5*1 m=1 nf=1
+M16 (net14 VB4 net18 0) nch l=ln6 w=wn6*1 m=1 nf=1
+M15 (net35 net13 net18 0) nch l=ln6 w=wn6*1 m=1 nf=1
+M9 (net7 VFB net2 0) nch l=ln1 w=wn1*nf1 m=1 nf=nf1
+M0 (net7 VREF net1 0) nch l=ln1 w=wn1*nf1 m=1 nf=nf1
+M19 (Pass_GATE net10 GND GND) nch l=ln3 w=wn3*nf3 m=1 nf=nf3
+M18 (net21 net2 GND GND) nch l=ln3 w=wn3*nf3 m=1 nf=nf3
+M17 (net18 VB2 GND GND) nch l=ln5 w=wn5*1 m=1 nf=1
+M14 (net13 net2 GND GND) nch l=ln4 w=wn4*1 m=1 nf=1
+M13 (net10 net10 GND GND) nch l=ln3 w=wn3*1 m=1 nf=1
+M12 (net10 net2 GND GND) nch l=ln3 w=wn3*1 m=1 nf=1
+M11 (net2 net1 GND GND) nch l=ln2 w=wn2*nf2 m=1 nf=nf2
+M10 (net1 net1 GND GND) nch l=ln2 w=wn2*nf2 m=1 nf=nf2
+M20 (net3 net3 VDD VDD) pch l=lp1 w=wp1*1 m=1 nf=1
+M8 (VOUT Pass_GATE VDD VDD) pch l=L_MPT w=W_MPT*10 m=1 nf=10
+M5 (net35 net35 VDD VDD) pch l=lp2 w=wp2*1 m=1 nf=1
+M4 (net13 net14 VDD VDD) pch l=lp2 w=wp2*1 m=1 nf=1
+M3 (net14 net14 VDD VDD) pch l=lp2 w=wp2*1 m=1 nf=1
+M2 (net10 net3 VDD VDD) pch l=lp1 w=wp1*nf5 m=1 nf=nf5
+M1 (net7 net3 VDD VDD) pch l=lp1 w=wp1*nf4 m=1 nf=nf4
+M7 (Pass_GATE net21 VDD VDD) pch l=lp4 w=wp4*1 m=1 nf=1
+M6 (net21 net21 VDD VDD) pch l=lp4 w=wp4*1 m=1 nf=1

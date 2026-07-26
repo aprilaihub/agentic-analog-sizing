@@ -1,0 +1,154 @@
+{
+  "schema_version": "1.0.0",
+  "topology": "5t_ota",
+  "objective": {
+    "metric": "power",
+    "sense": "min"
+  },
+  "design_variables": [
+    {
+      "name": "l1",
+      "min": 6e-08,
+      "max": 5e-06,
+      "is_integer": false
+    },
+    {
+      "name": "l2",
+      "min": 6e-08,
+      "max": 5e-06,
+      "is_integer": false
+    },
+    {
+      "name": "l3",
+      "min": 6e-08,
+      "max": 5e-06,
+      "is_integer": false
+    },
+    {
+      "name": "w1",
+      "min": 1.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "w2",
+      "min": 1.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "w3",
+      "min": 1.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Idc",
+      "min": 1e-06,
+      "max": 1e-05,
+      "is_integer": false
+    }
+  ],
+  "performance_specs": [
+    {
+      "name": "power",
+      "index": 0,
+      "method": "target",
+      "rule": "target",
+      "threshold": 4e-06,
+      "weight": 1.0,
+      "calc_expr": "*value",
+      "is_objective": true
+    },
+    {
+      "name": "cmrr",
+      "index": 1,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 80.0,
+      "weight": 0.00125,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "adm",
+      "index": 2,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 30.0,
+      "weight": 0.003,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "output_swing",
+      "index": 3,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 0.8,
+      "weight": 0.125,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "pm",
+      "index": 4,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 60.0,
+      "weight": 0.002,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "rms_noise_out",
+      "index": 5,
+      "method": "max",
+      "rule": "<=",
+      "threshold": 0.0003,
+      "weight": 330.0,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "lg_ugb",
+      "index": 6,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 2000000.0,
+      "weight": 5e-08,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "psrr",
+      "index": 7,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 30.0,
+      "weight": 0.003,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "slew_rate_rise",
+      "index": 8,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 2000000.0,
+      "weight": 5e-08,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "slew_rate_fall",
+      "index": 9,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 2000000.0,
+      "weight": 5e-08,
+      "calc_expr": "*value",
+      "is_objective": false
+    }
+  ]
+}

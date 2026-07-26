@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0.0",
+  "topology": "bgr",
+  "objective": {
+    "metric": "power",
+    "sense": "min"
+  },
+  "design_variables": [
+    {
+      "name": "Ln1",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln2",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln3",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln4",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln5",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln6",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln7",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln8",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln9",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Ln10",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Lp1",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Lp2",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Lp3",
+      "min": 1.8e-07,
+      "max": 2e-05,
+      "is_integer": false
+    },
+    {
+      "name": "Wn1",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn2",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn3",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn4",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn5",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn6",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn7",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn8",
+      "min": 2.2e-07,
+      "max": 1e-06,
+      "is_integer": false
+    },
+    {
+      "name": "Wn9",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wn10",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wp1",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wp2",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    },
+    {
+      "name": "Wp3",
+      "min": 2.2e-07,
+      "max": 0.0001,
+      "is_integer": false
+    }
+  ],
+  "performance_specs": [
+    {
+      "name": "power",
+      "index": 0,
+      "method": "target",
+      "rule": "target",
+      "threshold": 1e-05,
+      "weight": 1.0,
+      "calc_expr": "*value",
+      "is_objective": true
+    },
+    {
+      "name": "Vref",
+      "index": 1,
+      "method": "min",
+      "rule": ">=",
+      "threshold": 0.5,
+      "weight": 1000.0,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "Vref2",
+      "index": 2,
+      "method": "max",
+      "rule": "<=",
+      "threshold": 1.3,
+      "weight": 1000.0,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "psr",
+      "index": 3,
+      "method": "max",
+      "rule": "<=",
+      "threshold": -40.0,
+      "weight": 0.004,
+      "calc_expr": "*value",
+      "is_objective": false
+    },
+    {
+      "name": "TC",
+      "index": 4,
+      "method": "max",
+      "rule": "<=",
+      "threshold": 25.0,
+      "weight": 0.004,
+      "calc_expr": "*value",
+      "is_objective": false
+    }
+  ]
+}
