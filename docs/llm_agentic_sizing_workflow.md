@@ -22,8 +22,15 @@ Build a modular system that can:
 - Operation mode is manual (CLI-driven) and outside LangGraph runtime.
 
 ## Environment Setup
-- Reproducible environment dependency file: `environment.yml`
-- Setup guide: `docs/environment_setup.md`
+
+Install the package and development tools with pip:
+
+```bash
+python -m pip install -e '.[openai,cadence,dev]'
+```
+
+Python 3.11 and 3.12 are supported. Set `OPENAI_API_KEY` only in the shell or a
+secret manager; never commit credentials.
 
 ## 1+N Agent Architecture
 The sizing layer uses 1 planner + N role workers:
