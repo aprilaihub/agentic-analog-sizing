@@ -29,7 +29,6 @@ except ModuleNotFoundError as exc:  # pragma: no cover - environment guard
 @unittest.skipIf(interfacing is None or utils is None, "simulator dependencies are not installed")
 class TestSimulatorToolchain(unittest.TestCase):
     def test_imports(self) -> None:
-        self.assertTrue(hasattr(interfacing, "CadenceInterface"))
         self.assertTrue(hasattr(interfacing, "assembler"))
         self.assertTrue(hasattr(utils, "parse_yaml"))
 
@@ -109,10 +108,9 @@ outputs:
         with tempfile.TemporaryDirectory() as td:
             skill_path = Path(td) / "sim_skill.il"
             result_path = Path(td) / "sim_result.csv"
-            status = interfacing.update_skill(settings, values, str(skill_path), str(result_path))
+            interfacing.update_skill(settings, values, str(skill_path), str(result_path))
             content = skill_path.read_text(encoding="utf-8")
 
-        self.assertEqual(status, 0)
         self.assertIn('maeOpenSetup("lib" "cell" "view")', content)
         self.assertIn('maeSetVar("x" "1 2")', content)
         self.assertIn('maeSetVar("y" "0.1 0.25")', content)
@@ -160,10 +158,28 @@ outputs:
                 "ocn_script": {"assembler": [str(project_dir), 0, 0, 0, "lib", "cell", "view"]},
             }
 
-            workspace = Path(interfacing._prepare_simulation_workspace(settings))
+            workspace_root = Path(td) / "workspaces"
+            with patch.dict(os.environ, {"AGENTIC_SIZING_CADENCE_WORK_ROOT": str(workspace_root)}):
+                workspace = Path(interfacing._prepare_simulation_workspace(settings))
 
-        self.assertTrue((workspace / "cds.lib").exists())
-        self.assertTrue((workspace / "local_lib" / "marker.txt").exists())
+            self.assertTrue((workspace / "cds.lib").exists())
+            self.assertTrue((workspace / "local_lib" / "marker.txt").exists())
+
+    def test_prepare_simulation_workspace_requires_cds_lib(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            project_dir = Path(td) / "project"
+            project_dir.mkdir()
+            settings = {
+                "ocn_script": {"assembler": [str(project_dir), 0, 0, 0, "lib", "cell", "view"]},
+            }
+            with (
+                patch.dict(
+                    os.environ,
+                    {"AGENTIC_SIZING_CADENCE_WORK_ROOT": str(Path(td) / "workspaces")},
+                ),
+                self.assertRaisesRegex(FileNotFoundError, "missing cds.lib"),
+            ):
+                interfacing._prepare_simulation_workspace(settings)
 
     def test_assembler_runs_virtuoso_from_isolated_workspace(self) -> None:
         if np is None:
@@ -185,7 +201,7 @@ outputs:
             }
             values = np.array([[0.5]], dtype=float)
 
-            def fake_run(skill_script_path, log_path=None, cwd=None):  # type: ignore[no-untyped-def]
+            def fake_run(skill_script_path, cwd=None):  # type: ignore[no-untyped-def]
                 result_path = Path(cwd) / "simResults.csv"
                 with result_path.open("w", encoding="utf-8", newline="") as f:
                     writer = csv.DictWriter(f, fieldnames=["Parameter", "Nominal1"])
@@ -193,9 +209,14 @@ outputs:
                     writer.writerow({"Parameter": "power", "Nominal1": "1.0"})
                 return 0, 0.01
 
-            with patch.object(interfacing, "run_simulation", side_effect=fake_run) as mock_run:
+            with (
+                patch.dict(
+                    os.environ,
+                    {"AGENTIC_SIZING_CADENCE_WORK_ROOT": str(Path(td) / "workspaces")},
+                ),
+                patch.object(interfacing, "run_simulation", side_effect=fake_run) as mock_run,
+            ):
                 perf, cost = interfacing.assembler(
-                    False,
                     settings,
                     values,
                     str(requested_skill_path),

@@ -126,7 +126,6 @@ def _simulate_real_batch(
 
     simulator_dir = PROJECT_ROOT / "output" / "cadence_runtime"
     perf_matrix, cost_time_s = assembler(
-        flag_cn=False,
         settings=settings,
         values=values,
         skill_file_path=str(simulator_dir / "simulation_skill.il"),

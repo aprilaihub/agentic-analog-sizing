@@ -25,6 +25,6 @@ class CadenceSimulationAdapter:
 
         settings = parse_yaml(str(Path(self.settings_path).expanduser().resolve()))
         values = np.asarray([[float(design_vars[name]) for name in self.design_var_order]])
-        performance, _ = assembler(False, settings, values)
+        performance, _ = assembler(settings, values)
         row = performance[0] if getattr(performance, "ndim", 1) > 1 else performance
         return {name: float(row[index]) for index, name in enumerate(self.perf_order)}
