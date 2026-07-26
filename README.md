@@ -4,9 +4,6 @@
 It provides a LangGraph workflow, schema-constrained tagging and knowledge-base
 tools, deterministic mock simulation, and optional OpenAI and Cadence integrations.
 
-> Research software: validate generated designs independently. This package is
-> not a substitute for sign-off simulation or engineering review.
-
 ## Install and run
 
 ```bash
