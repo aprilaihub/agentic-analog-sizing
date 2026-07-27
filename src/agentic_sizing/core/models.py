@@ -68,7 +68,7 @@ def make_iteration_record(
 
 
 def to_jsonable(value: Any) -> Any:
-    if is_dataclass(value):
+    if is_dataclass(value) and not isinstance(value, type):
         return asdict(value)
     if isinstance(value, dict):
         return {key: to_jsonable(val) for key, val in value.items()}

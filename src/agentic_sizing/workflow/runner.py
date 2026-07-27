@@ -2,22 +2,12 @@ from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import asdict, is_dataclass
-from typing import Any, Literal
+from typing import Literal
 
+from ..core.models import to_jsonable
 from ..initialization.record_store import get_runtime_summary_path
 from .graph import compile_graph
 from .state import create_initial_state
-
-
-def _to_jsonable(value: Any) -> Any:
-    if is_dataclass(value):
-        return asdict(value)
-    if isinstance(value, dict):
-        return {k: _to_jsonable(v) for k, v in value.items()}
-    if isinstance(value, list):
-        return [_to_jsonable(item) for item in value]
-    return value
 
 
 def run_demo(
@@ -152,7 +142,7 @@ def main() -> None:
     if args.show_history:
         output["history"] = final_state.get("history", [])
 
-    print(json.dumps(_to_jsonable(output), indent=2, ensure_ascii=True))
+    print(json.dumps(to_jsonable(output), indent=2, ensure_ascii=True))
 
 
 if __name__ == "__main__":
