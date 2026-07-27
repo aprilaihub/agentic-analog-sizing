@@ -1,6 +1,7 @@
 import unittest
 
 import numpy as np
+
 from agentic_sizing.simulator import interfacing
 
 

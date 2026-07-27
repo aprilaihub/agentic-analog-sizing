@@ -63,6 +63,9 @@ exclude = ["output", "build", "dist"]
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I"]
 
+[tool.ruff.lint.isort]
+known-first-party = ["agentic_sizing"]
+
 [tool.ruff.lint.per-file-ignores]
 "tests/*.py" = ["E402"]
 
