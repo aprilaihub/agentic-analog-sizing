@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 TESTS_DIR = Path(__file__).resolve().parent
 AGENTIC_SIZING_ROOT = TESTS_DIR.parent
+PACKAGE_ROOT = AGENTIC_SIZING_ROOT / "src" / "agentic_sizing"
 from agentic_sizing.initialization.pipeline import build_functional_roles, run_initialize_pipeline
 from agentic_sizing.llm.contract import StructuredGenerationResult
 
@@ -129,8 +130,8 @@ class TestInitializePipeline(unittest.TestCase):
 
     def test_pipeline_success_and_record_append(self) -> None:
         settings_path = AGENTIC_SIZING_ROOT / "input" / "kb" / "5t_ota_settings.json"
-        tagging_path = AGENTIC_SIZING_ROOT / "output" / "tagging" / "5t_ota.tagging.json"
-        pillars_dir = AGENTIC_SIZING_ROOT / "output" / "kb" / "pillars"
+        tagging_path = PACKAGE_ROOT / "tagging" / "tagging_output.example.json"
+        kb_examples_dir = PACKAGE_ROOT / "kb"
         settings = json.loads(settings_path.read_text(encoding="utf-8"))
         expected_design_order = list(settings["des_vars"].keys())
         expected_perf_order = list(settings["responses"]["assembler"])
@@ -147,7 +148,7 @@ class TestInitializePipeline(unittest.TestCase):
             )
             for suffix in ("perf_tradeoff", "substruct_param_perf", "role_perf"):
                 shutil.copyfile(
-                    pillars_dir / f"global_kb_{suffix}.json",
+                    kb_examples_dir / f"kb_{suffix}.example.json",
                     project_root / "output" / "kb" / "pillars" / f"global_kb_{suffix}.json",
                 )
 
@@ -209,8 +210,8 @@ class TestInitializePipeline(unittest.TestCase):
 
     def test_pipeline_can_start_from_multiple_initial_samples(self) -> None:
         settings_path = AGENTIC_SIZING_ROOT / "input" / "kb" / "5t_ota_settings.json"
-        tagging_path = AGENTIC_SIZING_ROOT / "output" / "tagging" / "5t_ota.tagging.json"
-        pillars_dir = AGENTIC_SIZING_ROOT / "output" / "kb" / "pillars"
+        tagging_path = PACKAGE_ROOT / "tagging" / "tagging_output.example.json"
+        kb_examples_dir = PACKAGE_ROOT / "kb"
         settings = json.loads(settings_path.read_text(encoding="utf-8"))
         expected_design_order = list(settings["des_vars"].keys())
         expected_perf_order = list(settings["responses"]["assembler"])
@@ -227,7 +228,7 @@ class TestInitializePipeline(unittest.TestCase):
             )
             for suffix in ("perf_tradeoff", "substruct_param_perf", "role_perf"):
                 shutil.copyfile(
-                    pillars_dir / f"global_kb_{suffix}.json",
+                    kb_examples_dir / f"kb_{suffix}.example.json",
                     project_root / "output" / "kb" / "pillars" / f"global_kb_{suffix}.json",
                 )
 

@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 TESTS_DIR = Path(__file__).resolve().parent
 AGENTIC_SIZING_ROOT = TESTS_DIR.parent
+PACKAGE_ROOT = AGENTIC_SIZING_ROOT / "src" / "agentic_sizing"
 from agentic_sizing.initialization.pipeline import run_initialize_pipeline
 from agentic_sizing.llm.contract import StructuredGenerationResult
 from agentic_sizing.specs.case_settings import materialize_case_settings_json
@@ -109,8 +110,8 @@ class TestCaseSettings(unittest.TestCase):
             self.assertIn("state_outputs", payload)
 
     def test_initialize_pipeline_uses_yaml_when_settings_json_missing(self) -> None:
-        tagging_path = AGENTIC_SIZING_ROOT / "output" / "tagging" / "5t_ota.tagging.json"
-        pillars_dir = AGENTIC_SIZING_ROOT / "output" / "kb" / "pillars"
+        tagging_path = PACKAGE_ROOT / "tagging" / "tagging_output.example.json"
+        kb_examples_dir = PACKAGE_ROOT / "kb"
         source_yaml = (
             AGENTIC_SIZING_ROOT
             / "src"
@@ -138,7 +139,7 @@ class TestCaseSettings(unittest.TestCase):
             )
             for suffix in ("perf_tradeoff", "substruct_param_perf", "role_perf"):
                 shutil.copyfile(
-                    pillars_dir / f"global_kb_{suffix}.json",
+                    kb_examples_dir / f"kb_{suffix}.example.json",
                     project_root / "output" / "kb" / "pillars" / f"global_kb_{suffix}.json",
                 )
 

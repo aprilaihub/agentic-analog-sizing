@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 TESTS_DIR = Path(__file__).resolve().parent
 AGENTIC_SIZING_ROOT = TESTS_DIR.parent
+PACKAGE_ROOT = AGENTIC_SIZING_ROOT / "src" / "agentic_sizing"
 from agentic_sizing.iteration.context import extract_stage1_role_names
 from agentic_sizing.iteration.iterative_planner import run_iterative_planner
 from agentic_sizing.llm.contract import StructuredGenerationResult
@@ -48,7 +49,7 @@ def _build_simulation_record(path: Path) -> None:
 
 
 def _current_predicted_perfs_with_cmrr_unsat() -> dict[str, float]:
-    design_specs_path = AGENTIC_SIZING_ROOT / "output" / "kb" / "5t_ota_design_specs.json"
+    design_specs_path = PACKAGE_ROOT / "specs" / "5t_ota_design_specs.example.json"
     payload = json.loads(design_specs_path.read_text(encoding="utf-8"))
 
     result: dict[str, float] = {}

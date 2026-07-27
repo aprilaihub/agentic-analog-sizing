@@ -8,6 +8,7 @@ from unittest.mock import patch
 
 TESTS_DIR = Path(__file__).resolve().parent
 AGENTIC_SIZING_ROOT = TESTS_DIR.parent
+PACKAGE_ROOT = AGENTIC_SIZING_ROOT / "src" / "agentic_sizing"
 from agentic_sizing.iteration.context import build_worker_context
 from agentic_sizing.iteration.iterative_worker import run_iterative_worker
 from agentic_sizing.llm.contract import StructuredGenerationResult
@@ -47,7 +48,7 @@ def _build_simulation_record(path: Path) -> None:
 
 
 def _metric_names() -> list[str]:
-    specs_path = AGENTIC_SIZING_ROOT / "output" / "kb" / "5t_ota_design_specs.json"
+    specs_path = PACKAGE_ROOT / "specs" / "5t_ota_design_specs.example.json"
     specs = json.loads(specs_path.read_text(encoding="utf-8"))
     return [item["name"] for item in sorted(specs["performance_specs"], key=lambda x: x["index"])]
 
