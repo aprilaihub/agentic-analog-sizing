@@ -1,0 +1,44 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "TC",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 7,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.62,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "Vref",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.55,
+      "evidence_count": 2,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "TC",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.5,
+      "evidence_count": 5,
+      "topology": "bgr"
+    }
+  ]
+}

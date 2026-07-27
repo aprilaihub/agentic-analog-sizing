@@ -1,0 +1,214 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "lg_ugb",
+      "relation": "trades_off_with",
+      "object": "pm",
+      "direction": "unspecified",
+      "confidence": 0.7114285714285715,
+      "evidence_count": 7,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "output_swing",
+      "relation": "trades_off_with",
+      "object": "pm",
+      "direction": "unspecified",
+      "confidence": 0.6,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "pm",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 5,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.6483333333333333,
+      "evidence_count": 12,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.803125,
+      "evidence_count": 16,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "TC",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 7,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "TC",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.5,
+      "evidence_count": 5,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "Vref",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.55,
+      "evidence_count": 2,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.62,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "adm",
+      "relation": "trades_off_with",
+      "object": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 3,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "lg_ugb",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.7883333333333334,
+      "evidence_count": 12,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "slew_rate_fall",
+      "direction": "unspecified",
+      "confidence": 0.86,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "adm",
+      "relation": "trades_off_with",
+      "object": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "cmpm",
+      "relation": "trades_off_with",
+      "object": "pm",
+      "direction": "unspecified",
+      "confidence": 0.85,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "lg_ugb",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "line_regulation",
+      "relation": "trades_off_with",
+      "object": "load_regulation",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 2,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "line_regulation",
+      "relation": "trades_off_with",
+      "object": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.45,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "load_regulation",
+      "relation": "trades_off_with",
+      "object": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.5,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.58,
+      "evidence_count": 3,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "vout_min",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 2,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "cmrr",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 6,
+      "topology": "telescopic"
+    }
+  ]
+}

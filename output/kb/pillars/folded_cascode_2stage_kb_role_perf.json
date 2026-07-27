@@ -1,0 +1,319 @@
+{
+  "facts": [
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "pm",
+      "influence": "dominant",
+      "confidence": 0.86,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "rise_time",
+      "influence": "significant",
+      "confidence": 0.82,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "cmpm",
+      "influence": "significant",
+      "confidence": 0.78,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "lg_ugb",
+      "influence": "significant",
+      "confidence": 0.77,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "rms_noise_out",
+      "influence": "weak",
+      "confidence": 0.74,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "rms_noise_out",
+      "influence": "significant",
+      "confidence": 0.66,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "cmrr",
+      "influence": "weak",
+      "confidence": 0.6,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.61,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "pm",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Common-mode feedback (CMFB)",
+      "metric": "pm",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "pm",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "pm",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "rise_time",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Common-mode feedback (CMFB)",
+      "metric": "rise_time",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "rise_time",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "rise_time",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "cmpm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Common-mode feedback (CMFB)",
+      "metric": "cmpm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "cmpm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "cmpm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "lg_ugb",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Common-mode feedback (CMFB)",
+      "metric": "lg_ugb",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "lg_ugb",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "lg_ugb",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "rms_noise_out",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Common-mode feedback (CMFB)",
+      "metric": "rms_noise_out",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "rms_noise_out",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "cmrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Common-mode feedback (CMFB)",
+      "metric": "cmrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "cmrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "cmrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Common-mode feedback (CMFB)",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode_2stage"
+    }
+  ]
+}

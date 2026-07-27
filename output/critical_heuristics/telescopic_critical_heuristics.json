@@ -1,0 +1,71 @@
+[
+  {
+    "case_name": "telescopic",
+    "condition": {
+      "target_metrics": [
+        "slew_rate_rise",
+        "slew_rate_fall"
+      ]
+    },
+    "heuristic": "Prefer the Bias network role when targeting slew_rate_rise or slew_rate_fall because adjusting Idc is the strongest first lever.",
+    "priority": "high"
+    ,
+    "scope": "planner"
+  },
+  {
+    "case_name": "telescopic",
+    "condition": {
+      "target_metrics": [
+        "rms_noise_out"
+      ]
+    },
+    "heuristic": "Prefer the Main signal path role when noise remains limiting because input-pair/load sizing is the strongest first lever.",
+    "priority": "high",
+    "scope": "planner"
+  },
+  {
+    "case_name": "telescopic",
+    "condition": {
+      "target_metrics": [
+        "slew_rate_rise",
+        "slew_rate_fall"
+      ]
+    },
+    "heuristic": "Increasing Idc (not Idc2 or Idc3) can improve slew rates.",
+    "priority": "high",
+    "scope": "worker"
+  },
+  {
+    "case_name": "telescopic",
+    "condition": {
+      "target_metrics": [
+        "rms_noise_out"
+      ]
+    },
+    "heuristic": "Increase w of input pair and decrease w of load at constant Idc can improve noise with slew rates unchanged.",
+    "priority": "high",
+    "scope": "worker"
+  },
+  {
+    "case_name": "telescopic",
+    "condition": {
+      "target_metrics": [
+        "adm"
+      ]
+    },
+    "heuristic": "Prefer the Main signal path role when targeting adm because gain is mainly set by the telescopic core gm*ro through the input pair, cascodes, and active load.",
+    "priority": "critical",
+    "scope": "planner"
+  },
+  {
+    "case_name": "telescopic",
+    "condition": {
+      "target_metrics": [
+        "adm"
+      ]
+    },
+    "heuristic": "Increasing lengths of the cascodes and active load, and increasing input-pair gm at controlled current, can improve adm.",
+    "priority": "critical",
+    "scope": "worker"
+  }
+]

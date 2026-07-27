@@ -1,0 +1,84 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.9,
+      "evidence_count": 5,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.86,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_fall",
+      "direction": "unspecified",
+      "confidence": 0.84,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "w",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "output_swing",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "5t_ota"
+    }
+  ]
+}

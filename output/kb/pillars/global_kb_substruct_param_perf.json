@@ -1,0 +1,414 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.7777777777777778,
+      "evidence_count": 9,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.8138461538461537,
+      "evidence_count": 13,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_fall",
+      "direction": "unspecified",
+      "confidence": 0.825,
+      "evidence_count": 8,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.8366666666666666,
+      "evidence_count": 12,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.745,
+      "evidence_count": 8,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "w",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "output_swing",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Ln",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Lp",
+      "metric": "TC",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Lp",
+      "metric": "psr",
+      "direction": "unspecified",
+      "confidence": 0.76,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wn",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.82,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wp",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wp",
+      "metric": "psr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 8,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Ln",
+      "metric": "TC",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Ln",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 7,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Wn",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "adm",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "W",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Folded cascode",
+      "parameter": "L",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.6,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Folded cascode",
+      "parameter": "L",
+      "metric": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.61,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "cmpm",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.86,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "rise_time",
+      "direction": "unspecified",
+      "confidence": 0.82,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "W",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "W",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "W_MPT",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 5,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "ln",
+      "metric": "line_regulation",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "ln",
+      "metric": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "nf",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.85,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Resistor divider",
+      "parameter": "RD",
+      "metric": "vout_max",
+      "direction": "unspecified",
+      "confidence": 0.8625,
+      "evidence_count": 4,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Resistor divider",
+      "parameter": "RD",
+      "metric": "vout_min",
+      "direction": "unspecified",
+      "confidence": 0.8625,
+      "evidence_count": 4,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.67,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "l",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "l",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    }
+  ]
+}

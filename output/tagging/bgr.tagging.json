@@ -1,0 +1,412 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-05-26T10:05:51.329134+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/bgr",
+    "subckt_name": "",
+    "device_count": 25
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M20",
+          "M30",
+          "M21",
+          "M22",
+          "M23"
+        ],
+        "description": "Error-amplifier/regulator core that senses internal bandgap nodes (net033 vs net12) and drives the master control node net16, which in turn sets the sourced currents for the reference core."
+      },
+      {
+        "name": "Reference generation",
+        "devices": [
+          "M19",
+          "M31",
+          "M29",
+          "M28",
+          "M27",
+          "M12",
+          "M5",
+          "M13",
+          "M4",
+          "M0",
+          "M8",
+          "M17",
+          "M6",
+          "M18",
+          "M32"
+        ],
+        "description": "Bandgap PTAT/CTAT generation and summation network that establishes VREF. Includes the net16-controlled PMOS current sources feeding the core branches and the MOS devices that create the temperature-dependent voltages/currents used to define the regulated reference output."
+      },
+      {
+        "name": "Startup circuit",
+        "devices": [
+          "M24",
+          "M25",
+          "M26",
+          "M14",
+          "M16"
+        ],
+        "description": "Startup assist that forces the loop out of the zero-current state by pulling the bias/control node net16 low when VREF is low, then turns itself off as VREF rises (VREF-dependent control of net032 and the net16 pull-down)."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M21",
+              "M22"
+            ],
+            "evidence": "M21 and M22 are NMOS sharing a common source node net012 (M21:S=net012, M22:S=net012) with separate gates (M21:G=net033, M22:G=net12) and separate drains (M21:D=net011, M22:D=net16), forming a classic differential input pair.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "M21",
+                "design_variables": [
+                  "Ln4",
+                  "Wn4"
+                ]
+              },
+              {
+                "device": "M22",
+                "design_variables": [
+                  "Ln4",
+                  "Wn4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Tail current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "tail"
+            ],
+            "devices": [
+              "M23"
+            ],
+            "evidence": "M23 is an NMOS from net012 to GND (D=net012, S=GND) with gate net11, providing the tail/sink current for the differential pair source node net012.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "M23",
+                "design_variables": [
+                  "Ln3",
+                  "Wn3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [
+              "active_load"
+            ],
+            "devices": [
+              "M20",
+              "M30"
+            ],
+            "evidence": "M20 is a diode-connected PMOS (D=G=net011, S=VDD) setting the mirror gate voltage on net011; M30 is a PMOS with G=net011, S=VDD and D=net16. Together they form a PMOS current mirror used as an active load/pull-up for the differential pair drains (net011 and net16).",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M20",
+                "design_variables": [
+                  "Lp2",
+                  "Wp2"
+                ]
+              },
+              {
+                "device": "M30",
+                "design_variables": [
+                  "Lp2",
+                  "Wp2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reference generation",
+        "substructures": [
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M19",
+              "M31",
+              "M29",
+              "M28",
+              "M27"
+            ],
+            "evidence": "M19/M31/M29/M28/M27 are PMOS devices with sources at VDD and a common gate at net16; their drains feed net12, net24, net20, net033, and VREF respectively, so net16 controls sourced branch currents into the reference core nodes.",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M19",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "M31",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "M29",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "M28",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "M27",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M13",
+              "M4",
+              "M0"
+            ],
+            "evidence": "M13, M4, and M0 form a stacked NMOS current-sink path from net033 down to GND: net033 ->(M13)-> net44 ->(M4)-> net45 ->(M0)-> GND. This series stacking increases output resistance and behaves as a cascoded sink for the net033 branch current.",
+            "confidence": 0.6,
+            "variables": [
+              {
+                "device": "M13",
+                "design_variables": [
+                  "Ln5",
+                  "Wn5"
+                ]
+              },
+              {
+                "device": "M4",
+                "design_variables": [
+                  "Ln7",
+                  "Wn7"
+                ]
+              },
+              {
+                "device": "M0",
+                "design_variables": [
+                  "Ln8",
+                  "Wn8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M18",
+              "M6"
+            ],
+            "evidence": "M18 and M6 form a two-device stacked NMOS sink between net25 and GND via intermediate node net21: net25 ->(M18)-> net21 ->(M6)-> GND, providing a cascoded current-sink path for the net25/node net21 loop.",
+            "confidence": 0.65,
+            "variables": [
+              {
+                "device": "M18",
+                "design_variables": [
+                  "Ln10",
+                  "Wn10"
+                ]
+              },
+              {
+                "device": "M6",
+                "design_variables": [
+                  "Ln10",
+                  "Wn10"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M12",
+              "M5",
+              "M8",
+              "M17",
+              "M32"
+            ],
+            "evidence": "Each listed NMOS has its gate tied to its drain (diode-connected): M12 (D=G=net12), M5 (D=G=net11), M8 (D=G=net20), M17 (D=G=net24), and M32 (D=G=VREF). These devices generate Vgs drops and bias voltages/currents for the reference core nodes net12/net11/net20/net24/net25/VREF.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M12",
+                "design_variables": [
+                  "Ln5",
+                  "Wn5"
+                ]
+              },
+              {
+                "device": "M5",
+                "design_variables": [
+                  "Ln6",
+                  "Wn6"
+                ]
+              },
+              {
+                "device": "M8",
+                "design_variables": [
+                  "Ln9",
+                  "Wn9"
+                ]
+              },
+              {
+                "device": "M17",
+                "design_variables": [
+                  "Ln9",
+                  "Wn9"
+                ]
+              },
+              {
+                "device": "M32",
+                "design_variables": [
+                  "Ln10",
+                  "Wn10"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Startup circuit",
+        "substructures": [
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source"
+            ],
+            "devices": [
+              "M14",
+              "M26"
+            ],
+            "evidence": "M14 (NMOS) and M26 (PMOS) share a common gate input VREF (M14:G=VREF, M26:G=VREF) and a common drain/output node net032 (M14:D=net032, M26:D=net032), with M14 pulling toward GND and M26 pulling toward net05, forming an inverter-like common-source gain stage that generates net032 from VREF.",
+            "confidence": 0.75,
+            "variables": [
+              {
+                "device": "M14",
+                "design_variables": [
+                  "Ln2",
+                  "Wn2"
+                ]
+              },
+              {
+                "device": "M26",
+                "design_variables": [
+                  "Lp1",
+                  "Wp1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M16"
+            ],
+            "evidence": "M16 is an NMOS from net16 to GND (D=net16, S=GND) with gate net032; when net032 is high (startup condition), M16 sinks/pulls net16 low, injecting startup bias into the main control node.",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "M16",
+                "design_variables": [
+                  "Ln1",
+                  "Wn1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M24",
+              "M25"
+            ],
+            "evidence": "M24 and M25 are diode-connected PMOS devices (M24:D=G=net06, S=VDD; M25:D=G=net05, S=net06) forming a diode stack from VDD that establishes the startup bias node net05 (and intermediate net06) used to supply the PMOS startup pull-up M26.",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "M24",
+                "design_variables": [
+                  "Lp1",
+                  "Wp1"
+                ]
+              },
+              {
+                "device": "M25",
+                "design_variables": [
+                  "Lp1",
+                  "Wp1"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

@@ -1,0 +1,983 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-07-16T10:04:04.442560+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/ldo_full",
+    "subckt_name": "",
+    "device_count": 76
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "I6_M39",
+          "I6_M38",
+          "I6_M35",
+          "I6_M41",
+          "I6_M42",
+          "I6_M37",
+          "I6_M36",
+          "I6_M3",
+          "I6_M40",
+          "I6_M2",
+          "I6_M0",
+          "I6_M8",
+          "I6_M50",
+          "I6_prb_comp"
+        ],
+        "description": "LDO error-amplifier and gate-drive signal chain that compares VREF vs. VFB and generates the control voltage at Pass_GATE (and internal node net1) to regulate the output via the pass device."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "I1",
+          "I6_M29",
+          "I6_M11",
+          "I6_M9",
+          "I6_M26",
+          "I6_M30",
+          "I6_M31",
+          "I6_M10",
+          "I6_M28",
+          "I6_M27\\<6\\>",
+          "I6_M27\\<5\\>",
+          "I6_M27\\<4\\>",
+          "I6_M27\\<3\\>",
+          "I6_M27\\<2\\>",
+          "I6_M27\\<1\\>",
+          "I6_M27\\<0\\>"
+        ],
+        "description": "Generates and distributes internal bias voltages/currents (vbn2, vbp1, vbp2 and related cascode bias nodes) used to set operating points for the error amplifier and associated blocks."
+      },
+      {
+        "name": "Feedback network",
+        "devices": [
+          "R0",
+          "R1",
+          "C2"
+        ],
+        "description": "Output-sense divider and feed-forward/lead capacitor that create VFB from VOUT and shape the loop response."
+      },
+      {
+        "name": "Common-mode feedback (CMFB)",
+        "devices": [
+          "I6_M34",
+          "I6_M33",
+          "I6_M45",
+          "I6_M47",
+          "I6_M48",
+          "I6_M43",
+          "I6_M44",
+          "I6_R3",
+          "I6_R4",
+          "I6_IPRB1"
+        ],
+        "description": "Senses internal output common-mode (via Pass_GATE/net1 averaging) and generates vcmfb to control internal nodes (vfb_p/vfb_n) so the amplifier\u2019s internal output common-mode stays in range."
+      },
+      {
+        "name": "Compensation network",
+        "devices": [
+          "I6_C0",
+          "I6_C1",
+          "C3"
+        ],
+        "description": "Capacitive elements used for loop stabilization: internal compensation capacitors in the error amplifier plus the output capacitor that sets the dominant output pole."
+      },
+      {
+        "name": "Reference generation",
+        "devices": [
+          "I2_M13",
+          "I2_M12",
+          "I2_M8",
+          "I2_M17",
+          "I2_M6",
+          "I2_M5",
+          "I2_M4",
+          "I2_M18",
+          "I2_M32",
+          "I2_M21",
+          "I2_M22",
+          "I2_M0",
+          "I2_M16",
+          "I2_M23",
+          "I2_M14",
+          "I2_M19",
+          "I2_M31",
+          "I2_M29",
+          "I2_M28",
+          "I2_M27",
+          "I2_M24",
+          "I2_M20",
+          "I2_M30",
+          "I2_M25",
+          "I2_M26",
+          "V5"
+        ],
+        "description": "On-chip reference core generating VREF (bandgap-like reference generation). V5 provides an additional reference node VREF2 used elsewhere (e.g., CMFB biasing in this testbench)."
+      },
+      {
+        "name": "Output stage",
+        "devices": [
+          "M8"
+        ],
+        "description": "High-power pass PMOS that sources current from VDD to VOUT; its gate (Pass_GATE) is driven by the error amplifier to regulate VOUT."
+      },
+      {
+        "name": "Supply and load (testbench)",
+        "devices": [
+          "V1",
+          "V0",
+          "I4"
+        ],
+        "description": "External supply/ground sources and an output load current source used to bias and test the LDO in simulation."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "I6_M39",
+              "I6_M38"
+            ],
+            "evidence": "I6_M39 and I6_M38 are NMOS with gates at VREF and VFB respectively, and share a common source node I6__net046, forming the input differential pair.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "I6_M39",
+                "design_variables": [
+                  "L5",
+                  "W5"
+                ]
+              },
+              {
+                "device": "I6_M38",
+                "design_variables": [
+                  "L5",
+                  "W5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Tail current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "tail"
+            ],
+            "devices": [
+              "I6_M35"
+            ],
+            "evidence": "I6_M35 is an NMOS from I6__net046 (drain) to GND (source) with gate at I6__vbn2, providing the tail bias current for the input pair node I6__net046.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "I6_M35",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I6_M41",
+              "I6_M42"
+            ],
+            "evidence": "I6_M41 and I6_M42 are PMOS current-source loads from VDD to nodes I6__net016/I6__net014 with common gate I6__vbp2, setting the first-stage branch currents.",
+            "confidence": 0.85,
+            "variables": [
+              {
+                "device": "I6_M41",
+                "design_variables": [
+                  "L4",
+                  "W4",
+                  "N1",
+                  "N2"
+                ]
+              },
+              {
+                "device": "I6_M42",
+                "design_variables": [
+                  "L4",
+                  "W4",
+                  "N1",
+                  "N2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "I6_M3",
+              "I6_M40",
+              "I6_M37",
+              "I6_M36"
+            ],
+            "evidence": "High-impedance internal nodes I6__vop1/I6__von1 are formed by stacked devices: PMOS I6_M3/I6_M40 (gate I6__vbp1, sources at I6__net016/I6__net014) over NMOS I6_M37/I6_M36 (gate vbn, sources at I6__vfb_p/I6__vfb_n), implementing a cascode/folded stack to increase gain at I6__vop1/I6__von1.",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "I6_M3",
+                "design_variables": [
+                  "L3",
+                  "W3",
+                  "N2"
+                ]
+              },
+              {
+                "device": "I6_M40",
+                "design_variables": [
+                  "L3",
+                  "W3",
+                  "N2"
+                ]
+              },
+              {
+                "device": "I6_M37",
+                "design_variables": [
+                  "L2",
+                  "W2",
+                  "N2"
+                ]
+              },
+              {
+                "device": "I6_M36",
+                "design_variables": [
+                  "L2",
+                  "W2",
+                  "N2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source"
+            ],
+            "devices": [
+              "I6_M0"
+            ],
+            "evidence": "I6_M0 is a PMOS with source at VDD, drain at net1, and gate driven by I6__vop1, providing a common-source gain stage/output drive at net1.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "I6_M0",
+                "design_variables": [
+                  "L7",
+                  "W7"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source"
+            ],
+            "devices": [
+              "I6_M2"
+            ],
+            "evidence": "I6_M2 is a PMOS with source at VDD, drain at Pass_GATE, and gate driven by I6__von1, providing a common-source gate-drive pull-up stage for Pass_GATE.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "I6_M2",
+                "design_variables": [
+                  "L7",
+                  "W7"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "I6_M8",
+              "I6_M50"
+            ],
+            "evidence": "I6_M8 is diode-connected NMOS (drain=gate=net1, source=GND) setting Vgs; I6_M50 shares the same gate (net1) and source (GND) and mirrors/sinks current at drain Pass_GATE, forming a simple NMOS current mirror used for Pass_GATE pull-down.",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "I6_M8",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N9"
+                ]
+              },
+              {
+                "device": "I6_M50",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N9"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "I1"
+            ],
+            "evidence": "I1 is an ideal current source from VDD to vbn that establishes the on-chip bias reference current feeding the NMOS bias generator.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "I1",
+                "design_variables": []
+              }
+            ]
+          },
+          {
+            "type": "Cascode current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "I6_M29",
+              "I6_M11",
+              "I6_M9",
+              "I6_M26",
+              "I6_M30",
+              "I6_M31"
+            ],
+            "evidence": "NMOS bias/mirror core: I6_M11 is diode-connected (gate=drain=I6__vbn2, source=GND) setting the mirror Vgs shared by I6_M9 and I6_M26 (both gate=I6__vbn2, source=GND). I6_M30 and I6_M31 are NMOS stacked above I6_M9/I6_M26 (cascode devices with gate=vbn) to mirror/sink currents from nodes I6__vbp2 and I6__vbp1. I6_M29 is a diode-connected NMOS level-shift element between vbn and I6__vbn2 supporting the reference branch biasing.",
+            "confidence": 0.75,
+            "variables": [
+              {
+                "device": "I6_M29",
+                "design_variables": [
+                  "L2",
+                  "W2"
+                ]
+              },
+              {
+                "device": "I6_M11",
+                "design_variables": [
+                  "L1",
+                  "W1"
+                ]
+              },
+              {
+                "device": "I6_M9",
+                "design_variables": [
+                  "L1",
+                  "W1"
+                ]
+              },
+              {
+                "device": "I6_M26",
+                "design_variables": [
+                  "L1",
+                  "W1"
+                ]
+              },
+              {
+                "device": "I6_M30",
+                "design_variables": [
+                  "L2",
+                  "W2"
+                ]
+              },
+              {
+                "device": "I6_M31",
+                "design_variables": [
+                  "L2",
+                  "W2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "I6_M10",
+              "I6_M28"
+            ],
+            "evidence": "I6_M10 is diode-connected PMOS (drain=gate=I6__vbp2) to VDD, and I6_M28 is diode-connected PMOS (drain=gate=I6__vbp1) referenced to node I6__ncasc<0>, generating PMOS bias voltages vbp2 and vbp1.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "I6_M10",
+                "design_variables": [
+                  "L4",
+                  "W4"
+                ]
+              },
+              {
+                "device": "I6_M28",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "I6_M27\\<6\\>",
+              "I6_M27\\<5\\>",
+              "I6_M27\\<4\\>",
+              "I6_M27\\<3\\>",
+              "I6_M27\\<2\\>",
+              "I6_M27\\<1\\>",
+              "I6_M27\\<0\\>"
+            ],
+            "evidence": "I6_M27<6:0> are PMOS devices stacked in series from VDD down through intermediate nodes I6__ncasc<6>...I6__ncasc<0>, all with common gate I6__vbp1, forming a cascoded PMOS bias stack that generates multiple cascode-bias voltages.",
+            "confidence": 0.6,
+            "variables": [
+              {
+                "device": "I6_M27\\<6\\>",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              },
+              {
+                "device": "I6_M27\\<5\\>",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              },
+              {
+                "device": "I6_M27\\<4\\>",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              },
+              {
+                "device": "I6_M27\\<3\\>",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              },
+              {
+                "device": "I6_M27\\<2\\>",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              },
+              {
+                "device": "I6_M27\\<1\\>",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              },
+              {
+                "device": "I6_M27\\<0\\>",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Feedback network",
+        "substructures": [
+          {
+            "type": "Resistor divider",
+            "base_type": "resistor_divider",
+            "modifiers": [],
+            "devices": [
+              "R0",
+              "R1"
+            ],
+            "evidence": "R0 connects VOUT to VFB and R1 connects VFB to GND, forming the feedback divider that generates VFB from VOUT.",
+            "confidence": 0.98,
+            "variables": [
+              {
+                "device": "R0",
+                "design_variables": [
+                  "RD2"
+                ]
+              },
+              {
+                "device": "R1",
+                "design_variables": [
+                  "RD"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Capacitive feedback network",
+            "base_type": "capacitive_feedback_network",
+            "modifiers": [
+              "testbench"
+            ],
+            "devices": [
+              "C2"
+            ],
+            "evidence": "C2 is connected between VOUT and VFB (in parallel with R0), providing capacitive feed-forward/lead compensation around the divider.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "C2",
+                "design_variables": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Common-mode feedback (CMFB)",
+        "substructures": [
+          {
+            "type": "Resistor divider",
+            "base_type": "resistor_divider",
+            "modifiers": [],
+            "devices": [
+              "I6_R3",
+              "I6_R4"
+            ],
+            "evidence": "I6_R3 connects Pass_GATE to I6__vcmo and I6_R4 connects I6__vcmo to net1, creating an averaging divider that senses internal output common-mode (I6__vcmo).",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "I6_R3",
+                "design_variables": []
+              },
+              {
+                "device": "I6_R4",
+                "design_variables": []
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I6_M48"
+            ],
+            "evidence": "I6_M48 is a PMOS from VDD to I6__net54 with gate at I6__vbp2, supplying the CMFB amplifier bias current into node I6__net54.",
+            "confidence": 0.87,
+            "variables": [
+              {
+                "device": "I6_M48",
+                "design_variables": [
+                  "L4",
+                  "W4",
+                  "N8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "I6_M45",
+              "I6_M47",
+              "I6_M44",
+              "I6_M43",
+              "I6_IPRB1"
+            ],
+            "evidence": "CMFB sensing pair: PMOS I6_M45 (gate=I6__vcmo) and I6_M47 (gate=VREF2) share source node I6__net54 and have drains at I6__net041/I6__net044. NMOS I6_M44 and I6_M43 are diode-connected loads from I6__net041/I6__net044 to GND. I6_IPRB1 indicates I6__net041 is probed/connected to vcmfb as the CMFB output.",
+            "confidence": 0.83,
+            "variables": [
+              {
+                "device": "I6_M45",
+                "design_variables": [
+                  "L6",
+                  "W6"
+                ]
+              },
+              {
+                "device": "I6_M47",
+                "design_variables": [
+                  "L6",
+                  "W6"
+                ]
+              },
+              {
+                "device": "I6_M44",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N8"
+                ]
+              },
+              {
+                "device": "I6_M43",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N8"
+                ]
+              },
+              {
+                "device": "I6_IPRB1",
+                "design_variables": []
+              }
+            ]
+          },
+          {
+            "type": "Current source",
+            "base_type": "current_source",
+            "modifiers": [],
+            "devices": [
+              "I6_M34",
+              "I6_M33"
+            ],
+            "evidence": "I6_M34 and I6_M33 are NMOS sinks from I6__vfb_p/I6__vfb_n to GND with common gate vcmfb; they modulate the folded nodes\u2019 currents to regulate internal common-mode.",
+            "confidence": 0.72,
+            "variables": [
+              {
+                "device": "I6_M34",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N2"
+                ]
+              },
+              {
+                "device": "I6_M33",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Compensation network",
+        "substructures": [
+          {
+            "type": "Miller compensation",
+            "base_type": "miller_compensation",
+            "modifiers": [],
+            "devices": [
+              "I6_C0",
+              "I6_C1"
+            ],
+            "evidence": "I6_C0 and I6_C1 are internal compensation capacitors connected from internal amplifier feedback/output-probe nodes (I6__vop_fb/I6__von_fb) back to folded nodes (I6__vfb_n/I6__vfb_p), providing dominant-pole/compensation within the error amplifier.",
+            "confidence": 0.65,
+            "variables": [
+              {
+                "device": "I6_C0",
+                "design_variables": [
+                  "MCAP"
+                ]
+              },
+              {
+                "device": "I6_C1",
+                "design_variables": [
+                  "MCAP"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Capacitive feedback network",
+            "base_type": "capacitive_feedback_network",
+            "modifiers": [
+              "testbench"
+            ],
+            "devices": [
+              "C3"
+            ],
+            "evidence": "C3 is the output capacitor from VOUT to GND, creating the dominant output pole and shaping loop dynamics.",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "C3",
+                "design_variables": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reference generation",
+        "substructures": [
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "I2_M19",
+              "I2_M31",
+              "I2_M29",
+              "I2_M28",
+              "I2_M27"
+            ],
+            "evidence": "PMOS multi-output mirror: I2_M19/I2_M31/I2_M29/I2_M28/I2_M27 share common gate node I2__net4 and common source VDD, and distribute mirrored currents into nodes I2__net5, I2__net2, I2__net10, I2__net7, and VREF.",
+            "confidence": 0.7,
+            "variables": [
+              {
+                "device": "I2_M19",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "I2_M31",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "I2_M29",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "I2_M28",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              },
+              {
+                "device": "I2_M27",
+                "design_variables": [
+                  "Lp3",
+                  "Wp3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I2_M30"
+            ],
+            "evidence": "I2_M30 is a PMOS from VDD to I2__net4 with gate at I2__net14, sourcing bias current into the PMOS mirror gate node I2__net4.",
+            "confidence": 0.72,
+            "variables": [
+              {
+                "device": "I2_M30",
+                "design_variables": [
+                  "Lp2",
+                  "Wp2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "I2_M5",
+              "I2_M23"
+            ],
+            "evidence": "NMOS current mirror: I2_M5 is diode-connected (drain=gate=I2__net6, source=GND), and I2_M23 shares gate I2__net6 and source GND with drain at I2__net15, mirroring the reference current into node I2__net15.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "I2_M5",
+                "design_variables": [
+                  "Ln6",
+                  "Wn6"
+                ]
+              },
+              {
+                "device": "I2_M23",
+                "design_variables": [
+                  "Ln3",
+                  "Wn3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "I2_M12",
+              "I2_M17",
+              "I2_M8",
+              "I2_M32",
+              "I2_M24",
+              "I2_M20",
+              "I2_M25"
+            ],
+            "evidence": "Multiple diode-connected devices used in the reference core: NMOS I2_M12 (I2__net5=gate=drain), I2_M17 (I2__net2=gate=drain), I2_M8 (I2__net10=gate=drain), I2_M32 (VREF=gate=drain), and PMOS I2_M24 (I2__net12=gate=drain), I2_M20 (I2__net14=gate=drain), I2_M25 (I2__net13=gate=drain).",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "I2_M12",
+                "design_variables": [
+                  "Ln5",
+                  "Wn5"
+                ]
+              },
+              {
+                "device": "I2_M17",
+                "design_variables": [
+                  "Ln9",
+                  "Wn9"
+                ]
+              },
+              {
+                "device": "I2_M8",
+                "design_variables": [
+                  "Ln9",
+                  "Wn9"
+                ]
+              },
+              {
+                "device": "I2_M32",
+                "design_variables": [
+                  "Ln10",
+                  "Wn10"
+                ]
+              },
+              {
+                "device": "I2_M24",
+                "design_variables": [
+                  "Lp1",
+                  "Wp1"
+                ]
+              },
+              {
+                "device": "I2_M20",
+                "design_variables": [
+                  "Lp2",
+                  "Wp2"
+                ]
+              },
+              {
+                "device": "I2_M25",
+                "design_variables": [
+                  "Lp1",
+                  "Wp1"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Output stage",
+        "substructures": [
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source"
+            ],
+            "devices": [
+              "M8"
+            ],
+            "evidence": "M8 is the PMOS pass device with source at VDD, drain at VOUT, and gate at Pass_GATE; it operates as a common-source power stage controlling VOUT.",
+            "confidence": 0.96,
+            "variables": [
+              {
+                "device": "M8",
+                "design_variables": [
+                  "L_MPT",
+                  "W_MPT",
+                  "NF_MPT"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Supply and load (testbench)",
+        "substructures": [
+          {
+            "type": "Current source",
+            "base_type": "current_source",
+            "modifiers": [],
+            "devices": [
+              "I4"
+            ],
+            "evidence": "I4 is an ideal current source from VOUT to GND representing the load current in the testbench.",
+            "confidence": 0.98,
+            "variables": [
+              {
+                "device": "I4",
+                "design_variables": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

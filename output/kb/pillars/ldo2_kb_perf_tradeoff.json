@@ -1,0 +1,54 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "load_regulation",
+      "relation": "trades_off_with",
+      "object": "line_regulation",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 2,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.58,
+      "evidence_count": 3,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "vout_min",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 2,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "psrr",
+      "relation": "trades_off_with",
+      "object": "line_regulation",
+      "direction": "unspecified",
+      "confidence": 0.45,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "psrr",
+      "relation": "trades_off_with",
+      "object": "load_regulation",
+      "direction": "unspecified",
+      "confidence": 0.5,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    }
+  ]
+}

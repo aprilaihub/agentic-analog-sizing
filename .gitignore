@@ -12,7 +12,23 @@ __pycache__/
 htmlcov/
 build/
 dist/
-output/
+# Runtime output is private by default. The three directories below contain
+# curated, redistributable JSON artifacts used as public research examples.
+output/*
+!output/critical_heuristics/
+!output/tagging/
+!output/kb/
+output/critical_heuristics/*
+!output/critical_heuristics/*.json
+output/tagging/*
+!output/tagging/*.json
+output/kb/*
+!output/kb/*.json
+!output/kb/pillars/
+output/kb/pillars/*
+!output/kb/pillars/*.json
+# Mock-run scratch artifacts are not public research outputs.
+output/kb/mock_netlist*
 logs/
 trainLogs/
 essab_sim/

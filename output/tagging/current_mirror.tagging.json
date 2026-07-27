@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-03-26T15:39:07.619910+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/current_mirror",
+    "subckt_name": "current_mirror",
+    "device_count": 11
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "KM3",
+          "KM4",
+          "M6",
+          "M7"
+        ],
+        "description": "Signal-processing core: NMOS input pair (M1, M2) steers tail current into PMOS diode-connected loads (M3, M4) that bias PMOS mirror devices (KM3, KM4). The mirrored current into net6 is converted to a gate bias via NMOS diode device M6, which drives NMOS mirror/output device M7 to generate the single-ended output at vo."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "I1",
+          "M5",
+          "M5b"
+        ],
+        "description": "Reference/tail-bias generation: I1 forces a reference current into node net2, setting VGS of diode-connected NMOS M5. NMOS M5b mirrors this to create the tail/source bias current at net1 feeding the input pair."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M1",
+              "M2"
+            ],
+            "evidence": "M1 and M2 are NMOS with sources tied together at net1 (M1: net5 vin net1 0, M2: net3 vip net1 0) and independent gates (vin, vip), forming a source-coupled differential input pair with drains at net5/net3.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M1",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M2",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M3",
+              "KM3"
+            ],
+            "evidence": "PMOS M3 is diode-connected (net5 net5 vdd vdd), establishing a VSG reference on gate/drain net5; PMOS KM3 has gate at net5 and sources at vdd with drain at net6 (net6 net5 vdd vdd), mirroring the current sensed at net5 into node net6.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              },
+              {
+                "device": "KM3",
+                "design_variables": [
+                  "l3",
+                  "w3",
+                  "N3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M4",
+              "KM4"
+            ],
+            "evidence": "PMOS M4 is diode-connected (net3 net3 vdd vdd), establishing a VSG reference on gate/drain net3; PMOS KM4 has gate at net3 and sources at vdd with drain at vo (vo net3 vdd vdd), mirroring the current sensed at net3 into the output node vo.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M4",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              },
+              {
+                "device": "KM4",
+                "design_variables": [
+                  "l3",
+                  "w3",
+                  "N3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M6",
+              "M7"
+            ],
+            "evidence": "NMOS M6 is diode-connected (net6 net6 0 0), creating a VGS reference at net6; NMOS M7 shares the same gate net6 (vo net6 0 0) and mirrors the reference current into/out of node vo as a low-side NMOS mirror device.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "M6",
+                "design_variables": [
+                  "l4",
+                  "w4"
+                ]
+              },
+              {
+                "device": "M7",
+                "design_variables": [
+                  "l4",
+                  "w4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "I1"
+            ],
+            "evidence": "Ideal current source I1 forces a DC current from vdd into node net2 (I1 (vdd net2) isource dc=Idc), establishing the reference bias current for the NMOS mirror gate node net2.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "I1",
+                "design_variables": [
+                  "Idc"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M5",
+              "M5b"
+            ],
+            "evidence": "NMOS M5 is diode-connected (net2 net2 0 0), setting VGS at net2 from the reference current; NMOS M5b shares gate net2 and produces a mirrored sink current at node net1 (net1 net2 0 0), which biases the tail node of the input pair.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M5",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              },
+              {
+                "device": "M5b",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.86,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "rise_time",
+      "direction": "unspecified",
+      "confidence": 0.82,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "cmpm",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "MCAP",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "W",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Miller compensation",
+      "parameter": "W",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Folded cascode",
+      "parameter": "L",
+      "metric": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.61,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Folded cascode",
+      "parameter": "L",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.6,
+      "evidence_count": 2,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "W",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    }
+  ]
+}

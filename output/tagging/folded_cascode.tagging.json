@@ -1,0 +1,342 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-03-26T16:15:52.096638+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/folded_cascode",
+    "subckt_name": "folded_cascode",
+    "device_count": 18
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M8",
+          "M9",
+          "M10",
+          "M11",
+          "M6",
+          "M7"
+        ],
+        "description": "Folded-cascode amplification core converting the differential inputs (vip/vin) to a single-ended output (vo). Includes the NMOS input pair (M1/M2), PMOS biased loads/folding devices (M3/M4, M8/M9), and NMOS gain/cascode/sink devices around the internal node net4 and output node vo (M10/M11 with M6/M7)."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "M5",
+          "M5b",
+          "I3",
+          "M89",
+          "I1",
+          "M1011",
+          "I2",
+          "M34"
+        ],
+        "description": "On-chip bias generation and distribution. I3 with M5/M5b generates the tail/sink bias (net8 -> net1). I2 with M34 generates the PMOS bias vb2 for M3/M4. I1 with M89 and M1011 generates the auxiliary bias voltages net5 (for M8/M9 gates) and net3 (for M10/M11 gates)."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M1",
+              "M2"
+            ],
+            "evidence": "M1 and M2 are NMOS with gates driven by vip/vin, drains at net2/net11, and a shared source node net1 (common-source node), forming the input differential pair.",
+            "confidence": 0.96,
+            "variables": [
+              {
+                "device": "M1",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N1"
+                ]
+              },
+              {
+                "device": "M2",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M3",
+              "M4"
+            ],
+            "evidence": "M3 and M4 are PMOS devices with sources at vdd, gates tied to vb2, and drains connected to net2 and net11 (the drains of the input pair), acting as biased PMOS current-source loads for the differential pair nodes.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "l4",
+                  "w4",
+                  "N3"
+                ]
+              },
+              {
+                "device": "M4",
+                "design_variables": [
+                  "l4",
+                  "w4",
+                  "N3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Folded cascode",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "folded",
+              "cascode"
+            ],
+            "devices": [
+              "M8",
+              "M9",
+              "M10",
+              "M11",
+              "M6",
+              "M7"
+            ],
+            "evidence": "PMOS M8/M9 have gates at net5 and connect from the input-side nodes net2/net11 (their sources) into the high-impedance/output-side nodes net4/vo (their drains), providing the folded common-gate paths. NMOS M10/M11 (gates at net3) stack above NMOS M6/M7 (sources at 0) to form cascoded sink branches at net4 and vo, respectively (net4/vo at the top drains), consistent with a folded-cascode core around nodes net4 and vo.",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "M8",
+                "design_variables": [
+                  "l3",
+                  "w3",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M9",
+                "design_variables": [
+                  "l3",
+                  "w3",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M10",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M11",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M6",
+                "design_variables": [
+                  "l1",
+                  "w1",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M7",
+                "design_variables": [
+                  "l1",
+                  "w1",
+                  "N2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "I3"
+            ],
+            "evidence": "I3 forces a reference DC current from vdd into node net8 (I3 between vdd and net8), used to establish the NMOS mirror bias at net8.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "I3",
+                "design_variables": [
+                  "Idc"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M5",
+              "M5b"
+            ],
+            "evidence": "M5 is NMOS diode-connected (drain=gate=net8, source=0), setting VGS at net8 from the reference current. M5b shares gate net8 and source 0, with drain at net1, mirroring the reference branch to provide the tail/sink current into node net1.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M5",
+                "design_variables": [
+                  "l6",
+                  "w6"
+                ]
+              },
+              {
+                "device": "M5b",
+                "design_variables": [
+                  "l6",
+                  "w6"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "I2"
+            ],
+            "evidence": "I2 sinks a DC current from node vb2 to 0 (I2 between vb2 and 0), establishing a reference bias current used to generate vb2 via the diode-connected PMOS M34.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "I2",
+                "design_variables": [
+                  "Idc2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M34"
+            ],
+            "evidence": "M34 is PMOS with drain=gate=vb2 and source=vdd (bulk=vdd), i.e., diode-connected; together with I2 it generates the vb2 bias voltage for PMOS devices M3/M4.",
+            "confidence": 0.96,
+            "variables": [
+              {
+                "device": "M34",
+                "design_variables": [
+                  "l4",
+                  "w4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I1"
+            ],
+            "evidence": "I1 forces a DC current between nodes net5 and net3 (I1 between net5 and net3), providing the bias current that develops the corresponding bias voltages using diode-connected devices tied to net5 (PMOS) and net3 (NMOS).",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "I1",
+                "design_variables": [
+                  "Idc3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M89"
+            ],
+            "evidence": "M89 is PMOS diode-connected (drain=gate=net5, source=vdd, bulk=vdd), generating the PMOS gate-bias node net5 (used by M8/M9).",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M89",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M1011"
+            ],
+            "evidence": "M1011 is NMOS diode-connected (drain=gate=net3, source=0), generating the NMOS cascode gate-bias node net3 (used by M10/M11).",
+            "confidence": 0.96,
+            "variables": [
+              {
+                "device": "M1011",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

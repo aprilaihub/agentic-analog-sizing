@@ -1,0 +1,1349 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-05-21T12:57:48.058553+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/gba",
+    "subckt_name": "Main_opa",
+    "device_count": 77
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M0",
+          "M1",
+          "M2",
+          "M3",
+          "M4",
+          "M5",
+          "M6",
+          "M7",
+          "M8",
+          "M9",
+          "M10",
+          "M15",
+          "M16",
+          "M17",
+          "M18",
+          "M20",
+          "M23",
+          "M28",
+          "M152",
+          "M153",
+          "M158",
+          "M159",
+          "M165",
+          "M166",
+          "M172",
+          "M173",
+          "M186",
+          "M187",
+          "M189",
+          "M190",
+          "M191",
+          "M200",
+          "M201"
+        ],
+        "description": "Core fully-differential amplification path from inputs (Vip/Vin) through internal gain nodes (Vi2\u00b1, Vo2\u00b1, Vo1\u00b1, Vi1\u00b1) to the differential outputs (Vop/Von), including the transconductance devices, active loads, and bias-current devices that directly set the operating point of the amplifying stages."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M21",
+          "M22",
+          "M26",
+          "M27",
+          "M37",
+          "M39",
+          "M40",
+          "M41",
+          "M46",
+          "M47",
+          "M50",
+          "M51",
+          "M52"
+        ],
+        "description": "On-chip generation of internal bias voltages/currents (e.g., Vb2/Vb3/Vb4 and associated bias nodes like net013/net018/net022/net067/net068/net069) from the external bias input Vb1 and supplies, to bias the core signal-path transistors."
+      },
+      {
+        "name": "Feedback network",
+        "devices": [
+          "M44",
+          "M45",
+          "M58",
+          "M61",
+          "M62",
+          "M63",
+          "M64",
+          "M72",
+          "M73",
+          "M74",
+          "M75",
+          "M76",
+          "M77",
+          "M78"
+        ],
+        "description": "Local gain-boosting/cascode-regulation feedback loops that sense internal amplifier nodes (notably Vo1\u00b1 and Vo2\u00b1) and regulate cascode/bias nodes (e.g., net21 and net14) to increase output resistance and overall gain of the signal-path stages."
+      },
+      {
+        "name": "Common-mode feedback (CMFB)",
+        "devices": [
+          "M48",
+          "M49",
+          "M53",
+          "M54",
+          "M55",
+          "M56",
+          "M57",
+          "M59",
+          "M60"
+        ],
+        "description": "Common-mode sensing of the outputs (Vop/Von) against the common-mode reference (Vcm) to generate a control voltage (net039) that adjusts internal common-mode operating points (via Vi2\u00b1 control devices) and stabilizes the output common-mode level."
+      },
+      {
+        "name": "Compensation network",
+        "devices": [
+          "C0",
+          "C1",
+          "C2",
+          "C3"
+        ],
+        "description": "Compensation capacitors from internal high-impedance gain nodes (Vo1\u00b1, Vo2\u00b1) to Vss to shape loop dynamics and improve stability/phase margin."
+      },
+      {
+        "name": "Closed-loop testbench measurement network",
+        "devices": [
+          "C4",
+          "C6",
+          "C7",
+          "C8"
+        ],
+        "description": "External testbench-only coupling and feedback capacitors used to measure closed-loop performance. Design variable Cf sets C6 from Vip to vir_p, C8 from Vin to vir_n, C4 from vir_p to Von, and C7 from vir_n to Vop. These capacitors are outside Main_opa and are not internal compensation devices."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M200",
+              "M201"
+            ],
+            "evidence": "M200 and M201 are pMOS devices with gates at Vip/Vin and a shared source node net9; their drains form the differential internal nodes Vi2+ and Vi2-.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "M200",
+                "design_variables": [
+                  "l6",
+                  "w6"
+                ]
+              },
+              {
+                "device": "M201",
+                "design_variables": [
+                  "l6",
+                  "w6"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M2"
+            ],
+            "evidence": "M2 is a pMOS biased by Vb2 with drain at net9 (feeding the M200/M201 common-source node) and source at net1 (fed from the bias network), acting as a cascode element in the current source that biases the input pair.",
+            "confidence": 0.72,
+            "variables": [
+              {
+                "device": "M2",
+                "design_variables": [
+                  "l13",
+                  "w11",
+                  "N1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M9",
+              "M10"
+            ],
+            "evidence": "M9 and M10 are pMOS current-source devices from Vdd into Vi1+ and Vi1- (sources at Vdd, gates at Vb1), establishing DC bias for the Vi1\u00b1 nodes used by the output PMOS devices.",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "M9",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M10",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M0",
+              "M1"
+            ],
+            "evidence": "M0 and M1 are NMOS devices sharing the source node net8, with gates at Vi1+ and Vi1-; their drains (net0143/net0146) form the differential outputs of this gm stage.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M0",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              },
+              {
+                "device": "M1",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M3",
+              "M28"
+            ],
+            "evidence": "M28 is an NMOS current sink (gate Vb4, source Vss) pulling node net3; M3 (gate Vb3) sits between net8 and net3, forming a cascoded tail current sink for the M0/M1 differential pair.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "l1",
+                  "w1",
+                  "N4"
+                ]
+              },
+              {
+                "device": "M28",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N6",
+                  "N4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [
+              "active_load",
+              "cascode"
+            ],
+            "devices": [
+              "M172",
+              "M173",
+              "M165",
+              "M166"
+            ],
+            "evidence": "M172 and M173 are pMOS devices with sources at Vdd and a shared gate net21, providing mirrored pull-up currents into net0146/net0143; M165/M166 (gate Vb2) are series cascode devices from net0146/net0143 up to the high-impedance nodes Vo1-/Vo1+, forming a cascode current-mirror active load for the Vo1\u00b1 gain nodes.",
+            "confidence": 0.85,
+            "variables": [
+              {
+                "device": "M172",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N4",
+                  "N5"
+                ]
+              },
+              {
+                "device": "M173",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N4",
+                  "N5"
+                ]
+              },
+              {
+                "device": "M165",
+                "design_variables": [
+                  "l13",
+                  "w11",
+                  "N5"
+                ]
+              },
+              {
+                "device": "M166",
+                "design_variables": [
+                  "l13",
+                  "w11",
+                  "N5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M4",
+              "M15",
+              "M20",
+              "M23"
+            ],
+            "evidence": "For each Vo1 branch, NMOS M23/M20 (gate Vb4, source Vss) provide current sinks at net10/net6, and NMOS M4/M15 (gate Vb3) cascode between Vo1+/Vo1- and net10/net6, forming cascoded current sinks that load the Vo1\u00b1 nodes.",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M4",
+                "design_variables": [
+                  "l1",
+                  "w1",
+                  "N5"
+                ]
+              },
+              {
+                "device": "M15",
+                "design_variables": [
+                  "l1",
+                  "w1",
+                  "N5"
+                ]
+              },
+              {
+                "device": "M20",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N5"
+                ]
+              },
+              {
+                "device": "M23",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M186",
+              "M187"
+            ],
+            "evidence": "M186 and M187 are pMOS devices with a shared source net13 and gates at Vi2- and Vi2+; their drains (net0148/net0145) form the differential outputs of this second gm stage.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M186",
+                "design_variables": [
+                  "l4",
+                  "w4"
+                ]
+              },
+              {
+                "device": "M187",
+                "design_variables": [
+                  "l4",
+                  "w4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M18",
+              "M189"
+            ],
+            "evidence": "M189 (gate Vb1, source Vdd) feeds node net089; M18 (gate Vb2) cascades from net089 to net13, providing a cascoded current source that biases the common-source node net13 of the M186/M187 differential pair.",
+            "confidence": 0.84,
+            "variables": [
+              {
+                "device": "M18",
+                "design_variables": [
+                  "l13",
+                  "w11",
+                  "N7"
+                ]
+              },
+              {
+                "device": "M189",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N7"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [
+              "active_load"
+            ],
+            "devices": [
+              "M152",
+              "M153"
+            ],
+            "evidence": "M152 and M153 are NMOS devices with sources at Vss and a shared gate net14, sinking current from net0148/net0145; they act as matched current-sink loads for the M186/M187 drains (with net14 set by the feedback network reference).",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "M152",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N7",
+                  "N8"
+                ]
+              },
+              {
+                "device": "M153",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N7",
+                  "N8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-gate stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_gate"
+            ],
+            "devices": [
+              "M158",
+              "M159"
+            ],
+            "evidence": "M158/M159 are NMOS with gates fixed at Vb3, sources at net0148/net0145, and drains at Vo2+/Vo2-; this forms a common-gate (cascode-like) gain/level-transfer stage from net0148/net0145 to the Vo2\u00b1 nodes.",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "M158",
+                "design_variables": [
+                  "l1",
+                  "w1",
+                  "N8"
+                ]
+              },
+              {
+                "device": "M159",
+                "design_variables": [
+                  "l1",
+                  "w1",
+                  "N8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M16",
+              "M17",
+              "M190",
+              "M191"
+            ],
+            "evidence": "M190/M191 (pMOS, gate Vb1, source Vdd) feed net2/net7, and M16/M17 (pMOS, gate Vb2) cascade from net2/net7 to Vo2-/Vo2+, forming cascoded pull-up current sources that load the Vo2\u00b1 nodes.",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M16",
+                "design_variables": [
+                  "l13",
+                  "w11",
+                  "N8"
+                ]
+              },
+              {
+                "device": "M17",
+                "design_variables": [
+                  "l13",
+                  "w11",
+                  "N8"
+                ]
+              },
+              {
+                "device": "M190",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N8"
+                ]
+              },
+              {
+                "device": "M191",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-gate stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_gate"
+            ],
+            "devices": [
+              "M5",
+              "M6"
+            ],
+            "evidence": "M5/M6 are NMOS with drains at outputs Vop/Von, sources at Vi2-/Vi2+, and gates at Vo2+/Vo2-; signal/current enters at the source and is delivered to the drain, consistent with an output common-gate/cascode function controlled by Vo2\u00b1.",
+            "confidence": 0.74,
+            "variables": [
+              {
+                "device": "M5",
+                "design_variables": [
+                  "l11",
+                  "w9",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M6",
+                "design_variables": [
+                  "l11",
+                  "w9",
+                  "N2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-gate stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_gate"
+            ],
+            "devices": [
+              "M7",
+              "M8"
+            ],
+            "evidence": "M7/M8 are pMOS with drains at outputs Von/Vop, sources at Vi1+/Vi1-, and gates at Vo1-/Vo1+; this is a pMOS output common-gate/cascode function controlled by Vo1\u00b1 to increase output resistance and gain.",
+            "confidence": 0.74,
+            "variables": [
+              {
+                "device": "M7",
+                "design_variables": [
+                  "l12",
+                  "w10",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M8",
+                "design_variables": [
+                  "l12",
+                  "w10",
+                  "N2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M47"
+            ],
+            "evidence": "M47 is a pMOS with gate and drain tied to Vb2 (Vb2=Vg=Vd) and source at Vdd, providing a diode-connected reference device for the Vb2 bias node.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M47",
+                "design_variables": [
+                  "l7",
+                  "w11"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M52"
+            ],
+            "evidence": "M52 is an NMOS with gate and drain tied to Vb3 and source at Vss, acting as a diode-connected device to define/hold the Vb3 bias voltage via a bias current.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M52",
+                "design_variables": [
+                  "l9",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M46"
+            ],
+            "evidence": "M46 is a pMOS current source from Vdd into net1 (gate Vb1), providing a bias current node that feeds the main-path cascode device M2 (net1 -> net9).",
+            "confidence": 0.84,
+            "variables": [
+              {
+                "device": "M46",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M22",
+              "M21"
+            ],
+            "evidence": "M22 (pMOS, gate Vb1, source Vdd) sources current into net018; M21 (pMOS, gate Vb2) cascades from net018 to net067, forming a cascoded bias current source that generates the net067 bias/current node.",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "M22",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M21",
+                "design_variables": [
+                  "l13",
+                  "w11"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M27",
+              "M26"
+            ],
+            "evidence": "M27 (pMOS, gate Vb1, source Vdd) sources current into net022; M26 (pMOS, gate Vb2) cascades from net022 to Vb3, providing a cascoded current that biases the diode-connected NMOS M52 and thus establishes Vb3.",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "M27",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M26",
+                "design_variables": [
+                  "l13",
+                  "w11"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M14",
+              "M12"
+            ],
+            "evidence": "M14 (pMOS, gate Vb1, source Vdd) biases node net013; M12 (pMOS, gate Vb2) cascades from net013 to Vb4, forming a cascoded current path that participates in establishing the Vb4 bias node.",
+            "confidence": 0.76,
+            "variables": [
+              {
+                "device": "M14",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M12",
+                "design_variables": [
+                  "l13",
+                  "w11"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M13",
+              "M11"
+            ],
+            "evidence": "M13 (pMOS, gate Vb1, source Vdd) biases node net041; M11 (pMOS, gate Vb2) connects net041 to the Vb1 pin node, forming a cascoded bias branch that loads/conditions the Vb1 node relative to internally generated Vb2.",
+            "confidence": 0.7,
+            "variables": [
+              {
+                "device": "M13",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M11",
+                "design_variables": [
+                  "l13",
+                  "w11"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M50",
+              "M51"
+            ],
+            "evidence": "M51 is an NMOS current-sink device (gate Vb4, source Vss) at node net066, and M50 (gate Vb3) sits above it between Vb2 and net066, forming a cascoded sink that draws current from Vb2 to set/trim the Vb2 operating point.",
+            "confidence": 0.83,
+            "variables": [
+              {
+                "device": "M50",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              },
+              {
+                "device": "M51",
+                "design_variables": [
+                  "l5",
+                  "w5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M41",
+              "M39"
+            ],
+            "evidence": "M39 is an NMOS current sink (gate Vb4) from net068 to Vss, and M41 (gate Vb3) is stacked above from net067 to net068, creating a cascoded sink that loads/sets the net067 bias node.",
+            "confidence": 0.84,
+            "variables": [
+              {
+                "device": "M41",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              },
+              {
+                "device": "M39",
+                "design_variables": [
+                  "l5",
+                  "w5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M40",
+              "M37"
+            ],
+            "evidence": "M37 is an NMOS current sink (gate Vb4) from net069 to Vss, and M40 (gate Vb3) is stacked above from Vb4 to net069, forming a cascoded sink that biases/regulates the Vb4 node.",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "M40",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              },
+              {
+                "device": "M37",
+                "design_variables": [
+                  "l5",
+                  "w5"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Feedback network",
+        "substructures": [
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M64"
+            ],
+            "evidence": "M64 is a pMOS with gate and drain tied to net21 and source at Vdd, forming a diode-connected reference that defines the net21 bias used by the main-path pMOS mirror/load devices.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M64",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N6"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Source follower",
+            "base_type": "source_follower",
+            "modifiers": [],
+            "devices": [
+              "M61",
+              "M44"
+            ],
+            "evidence": "M61 and M44 are NMOS with drains at Vdd, gates sensing Vo1+ and Vo1-, and sources at net15 and net17; this is a source-follower level-shift/sensing stage for the Vo1\u00b1 nodes used in the net21 gain-boost loop.",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M61",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              },
+              {
+                "device": "M44",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M63",
+              "M62"
+            ],
+            "evidence": "M63 and M62 are NMOS current sinks (gates at Vb4, sources at Vss) pulling net15 and net17, providing bias currents for the NMOS source followers that sense Vo1\u00b1.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M63",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N6"
+                ]
+              },
+              {
+                "device": "M62",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N6"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-gate stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_gate"
+            ],
+            "devices": [
+              "M45",
+              "M58"
+            ],
+            "evidence": "M45 and M58 are NMOS with drains tied to net21, gates fixed at Vb2, and sources at net15/net17; they form common-gate transconductance elements that translate the Vo1\u00b1-derived source-follower signals into current/voltage modulation at net21 (gain-boost regulation).",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "M45",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              },
+              {
+                "device": "M58",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M78"
+            ],
+            "evidence": "M78 is an NMOS with gate and drain tied to net14 and source at Vss, serving as the diode-connected reference device that defines the net14 bias for the main-path NMOS current-sink loads (M152/M153).",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M78",
+                "design_variables": [
+                  "l5",
+                  "w5",
+                  "N9"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Source follower",
+            "base_type": "source_follower",
+            "modifiers": [],
+            "devices": [
+              "M73",
+              "M74"
+            ],
+            "evidence": "M73 and M74 are pMOS with drains at Vss, gates sensing Vo2+ and Vo2-, and sources at net18 and net19; this implements pMOS source followers that sense Vo2\u00b1 for the net14 regulation loop.",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M73",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              },
+              {
+                "device": "M74",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M77",
+              "M76"
+            ],
+            "evidence": "M77 and M76 are pMOS current sources from Vdd into net18 and net19 (gates at Vb1), providing bias current for the Vo2\u00b1 sensing source followers.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M77",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N9"
+                ]
+              },
+              {
+                "device": "M76",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N9"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-gate stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_gate"
+            ],
+            "devices": [
+              "M72",
+              "M75"
+            ],
+            "evidence": "M72 and M75 are pMOS with drains tied to net14, gates fixed at Vb3, and sources at net18/net19; they act as common-gate elements that convert the Vo2\u00b1-derived source-follower signals into regulation current at net14 (gain boosting for the NMOS sink bias).",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "M72",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              },
+              {
+                "device": "M75",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Common-mode feedback (CMFB)",
+        "substructures": [
+          {
+            "type": "Source follower",
+            "base_type": "source_follower",
+            "modifiers": [],
+            "devices": [
+              "M56",
+              "M59"
+            ],
+            "evidence": "M56 and M59 are pMOS with drains at Vss and gates at Vop/Von; their sources net087/net049 provide level-shifted replicas of the outputs for the CMFB sensing path.",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M56",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              },
+              {
+                "device": "M59",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M53",
+              "M54"
+            ],
+            "evidence": "M53 and M54 are pMOS current sources from Vdd into net087/net049 (gates at Vb1), biasing the CMFB output-sensing source followers M56/M59.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M53",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N3"
+                ]
+              },
+              {
+                "device": "M54",
+                "design_variables": [
+                  "l2",
+                  "w2",
+                  "N3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-gate stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_gate"
+            ],
+            "devices": [
+              "M55",
+              "M60"
+            ],
+            "evidence": "M55 and M60 are pMOS with a shared gate at Vcm, drains tied together at net039, and sources at net087/net049; with Vcm fixed, they operate as common-gate sensing elements that translate output common-mode variations (at their sources) into current at net039.",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "M55",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              },
+              {
+                "device": "M60",
+                "design_variables": [
+                  "l10",
+                  "w8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M57"
+            ],
+            "evidence": "M57 is an NMOS with gate and drain tied to net039 and source at Vss, providing a diode-connected load that converts the CMFB sensing current into the CMFB control voltage net039.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M57",
+                "design_variables": [
+                  "l8",
+                  "w7",
+                  "N3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M48",
+              "M49"
+            ],
+            "evidence": "M48 and M49 are NMOS devices from Vi2+/Vi2- to Vss with gates driven by net039; they act as CMFB-controlled current sinks that adjust the Vi2\u00b1 operating points to stabilize the output common-mode.",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "M48",
+                "design_variables": [
+                  "l8",
+                  "w7",
+                  "N1",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M49",
+                "design_variables": [
+                  "l8",
+                  "w7",
+                  "N1",
+                  "N2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Compensation network",
+        "substructures": [
+          {
+            "type": "Capacitive feedback network",
+            "base_type": "capacitive_feedback_network",
+            "modifiers": [
+              "testbench"
+            ],
+            "devices": [
+              "C0",
+              "C1",
+              "C2",
+              "C3"
+            ],
+            "evidence": "C0\u2013C3 are capacitors from internal high-impedance gain nodes (Vo1-, Vo1+, Vo2+, Vo2-) to Vss with value Cc, providing frequency compensation via shunt capacitance at these nodes.",
+            "confidence": 0.96,
+            "variables": [
+              {
+                "device": "C0",
+                "design_variables": [
+                  "Cc"
+                ]
+              },
+              {
+                "device": "C1",
+                "design_variables": [
+                  "Cc"
+                ]
+              },
+              {
+                "device": "C2",
+                "design_variables": [
+                  "Cc"
+                ]
+              },
+              {
+                "device": "C3",
+                "design_variables": [
+                  "Cc"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Closed-loop testbench measurement network",
+        "substructures": [
+          {
+            "type": "Capacitive feedback network",
+            "base_type": "capacitive_feedback_network",
+            "modifiers": [
+              "testbench"
+            ],
+            "devices": [
+              "C4",
+              "C6",
+              "C7",
+              "C8"
+            ],
+            "evidence": "Testbench-only capacitive network used for closed-loop performance measurement: C6 couples Vip to vir_p, C8 couples Vin to vir_n, C4 feeds Von back to vir_p, and C7 feeds Vop back to vir_n. The shared sizing variable is Cf. These capacitors are external to Main_opa and should not be interpreted as internal compensation capacitors.",
+            "confidence": 1.0,
+            "variables": [
+              {
+                "device": "C4",
+                "design_variables": [
+                  "Cf"
+                ]
+              },
+              {
+                "device": "C6",
+                "design_variables": [
+                  "Cf"
+                ]
+              },
+              {
+                "device": "C7",
+                "design_variables": [
+                  "Cf"
+                ]
+              },
+              {
+                "device": "C8",
+                "design_variables": [
+                  "Cf"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

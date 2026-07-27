@@ -1,0 +1,604 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "lg_ugb",
+      "relation": "trades_off_with",
+      "object": "pm",
+      "direction": "unspecified",
+      "confidence": 0.7066666666666667,
+      "evidence_count": 12,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "output_swing",
+      "relation": "trades_off_with",
+      "object": "pm",
+      "direction": "unspecified",
+      "confidence": 0.6,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "pm",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 5,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.608,
+      "evidence_count": 10,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "lg_ugb",
+      "influence": "significant",
+      "confidence": 0.75,
+      "evidence_count": 16,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "output_swing",
+      "influence": "significant",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "output_swing",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "power",
+      "influence": "dominant",
+      "confidence": 0.828888888888889,
+      "evidence_count": 18,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "power",
+      "influence": "significant",
+      "confidence": 0.73,
+      "evidence_count": 8,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "rms_noise_out",
+      "influence": "weak",
+      "confidence": 0.5,
+      "evidence_count": 2,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "slew_rate_rise",
+      "influence": "dominant",
+      "confidence": 0.8144444444444443,
+      "evidence_count": 18,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "slew_rate_rise",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.7583333333333333,
+      "evidence_count": 12,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.8262499999999999,
+      "evidence_count": 16,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_fall",
+      "direction": "unspecified",
+      "confidence": 0.8033333333333333,
+      "evidence_count": 12,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.8124999999999999,
+      "evidence_count": 16,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.745,
+      "evidence_count": 8,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "w",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "output_swing",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "TC",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 7,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "TC",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.5,
+      "evidence_count": 5,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "Vref",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.55,
+      "evidence_count": 2,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "psr",
+      "direction": "unspecified",
+      "confidence": 0.62,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "TC",
+      "influence": "significant",
+      "confidence": 0.78,
+      "evidence_count": 8,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Reference generation",
+      "metric": "TC",
+      "influence": "significant",
+      "confidence": 0.75,
+      "evidence_count": 8,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Startup circuit",
+      "metric": "TC",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Reference generation",
+      "metric": "power",
+      "influence": "dominant",
+      "confidence": 0.82,
+      "evidence_count": 12,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Startup circuit",
+      "metric": "power",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "psr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Reference generation",
+      "metric": "psr",
+      "influence": "significant",
+      "confidence": 0.72,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Startup circuit",
+      "metric": "psr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Ln",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Lp",
+      "metric": "TC",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Lp",
+      "metric": "psr",
+      "direction": "unspecified",
+      "confidence": 0.76,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wn",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.82,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wp",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wp",
+      "metric": "psr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 8,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Ln",
+      "metric": "TC",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Ln",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 7,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Wn",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "adm",
+      "relation": "trades_off_with",
+      "object": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 3,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "slew_rate_fall",
+      "direction": "unspecified",
+      "confidence": 0.86,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "adm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "adm",
+      "influence": "significant",
+      "confidence": 0.725,
+      "evidence_count": 8,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "adm",
+      "direction": "unspecified",
+      "confidence": 0.725,
+      "evidence_count": 8,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "pm",
+      "relation": "trades_off_with",
+      "object": "slew_rate_fall",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 4,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.65,
+      "evidence_count": 3,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "psrr",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.5472,
+      "evidence_count": 3,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "psrr",
+      "influence": "significant",
+      "confidence": 0.7,
+      "evidence_count": 8,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 4,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "l",
+      "metric": "pm",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 4,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 8,
+      "topology": "folded_cascode"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "cmrr",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 6,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "l",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "l",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "facts": [
+    {
+      "type": "role_perf",
+      "functional_role": "Feedback network",
+      "metric": "vout_min",
+      "influence": "dominant",
+      "confidence": 0.88,
+      "evidence_count": 4,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Feedback network",
+      "metric": "vout_max",
+      "influence": "dominant",
+      "confidence": 0.88,
+      "evidence_count": 4,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "power",
+      "influence": "significant",
+      "confidence": 0.68,
+      "evidence_count": 5,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "line_regulation",
+      "influence": "significant",
+      "confidence": 0.7,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.66,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "vout_min",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "vout_min",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "vout_min",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "vout_min",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "vout_max",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "vout_max",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "vout_max",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "vout_max",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "power",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "power",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Feedback network",
+      "metric": "power",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "power",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "line_regulation",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "line_regulation",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Feedback network",
+      "metric": "line_regulation",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "line_regulation",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Compensation network",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Feedback network",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Output stage",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "ldo2"
+    }
+  ]
+}

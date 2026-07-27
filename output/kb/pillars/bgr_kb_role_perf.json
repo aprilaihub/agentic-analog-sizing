@@ -1,0 +1,85 @@
+{
+  "facts": [
+    {
+      "type": "role_perf",
+      "functional_role": "Reference generation",
+      "metric": "power",
+      "influence": "dominant",
+      "confidence": 0.82,
+      "evidence_count": 12,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "power",
+      "influence": "significant",
+      "confidence": 0.73,
+      "evidence_count": 8,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "TC",
+      "influence": "significant",
+      "confidence": 0.78,
+      "evidence_count": 8,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Reference generation",
+      "metric": "psr",
+      "influence": "significant",
+      "confidence": 0.72,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Reference generation",
+      "metric": "TC",
+      "influence": "significant",
+      "confidence": 0.75,
+      "evidence_count": 8,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Startup circuit",
+      "metric": "power",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Startup circuit",
+      "metric": "TC",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "psr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Startup circuit",
+      "metric": "psr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "bgr"
+    }
+  ]
+}

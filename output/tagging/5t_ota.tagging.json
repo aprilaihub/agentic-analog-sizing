@@ -1,0 +1,173 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-03-26T15:31:07.736294+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/5t_ota",
+    "subckt_name": "ada_5T_ota_schematic",
+    "device_count": 7
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M1",
+          "M2",
+          "M3",
+          "M4"
+        ],
+        "description": "Core 5-transistor OTA gain path: NMOS differential input pair (M1, M2) converting vip/vin to currents, with PMOS active-load/current-mirror elements (M3, M4) forming the high-gain node and producing the single-ended output at vo."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "I1",
+          "M0",
+          "M0b"
+        ],
+        "description": "Bias/current reference and tail-current generation: I1 forces a reference current into the diode-connected NMOS M0 to set Vgs at net2; M0b mirrors this to create the tail current sink from net1, establishing the operating point of the input pair."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M1",
+              "M2"
+            ],
+            "evidence": "M1 and M2 are NMOS with gates at vip/vin respectively; both sources connect to the common node net1 (tail node). Their drains go to net5 (M1) and vo (M2), implementing an input differential pair that steers current between the two drain nodes.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "M1",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M2",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M3",
+              "M4"
+            ],
+            "evidence": "M3 is a PMOS with gate tied to drain at net5 and source at vdd (diode-connected reference leg). M4 is a PMOS with gate at net5 and drain at vo, source at vdd, mirroring M3 current into the output node vo as an active load.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              },
+              {
+                "device": "M4",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "I1"
+            ],
+            "evidence": "I1 is an independent current source from vbn to net2 with dc=Idc, establishing a reference current into the bias node net2.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "I1",
+                "design_variables": [
+                  "Idc"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M0"
+            ],
+            "evidence": "M0 has gate and drain shorted at net2 with source at 0, forming a diode-connected NMOS that converts the reference current at net2 into a bias Vgs on net2.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M0",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Tail current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "tail"
+            ],
+            "devices": [
+              "M0b"
+            ],
+            "evidence": "M0b is an NMOS current-sink device with drain at net1 (the differential pair tail node), gate at net2 (set by diode-connected M0), and source at 0, providing the tail bias current for the input pair.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M0b",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

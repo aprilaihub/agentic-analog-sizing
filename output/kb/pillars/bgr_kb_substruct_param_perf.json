@@ -1,0 +1,94 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wn",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.82,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Ln",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Wn",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 6,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Ln",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 7,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "Ln",
+      "metric": "TC",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Lp",
+      "metric": "psr",
+      "direction": "unspecified",
+      "confidence": 0.76,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Lp",
+      "metric": "TC",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wp",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 9,
+      "topology": "bgr"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Wp",
+      "metric": "psr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 8,
+      "topology": "bgr"
+    }
+  ]
+}

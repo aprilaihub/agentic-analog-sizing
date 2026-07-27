@@ -1,0 +1,112 @@
+[
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "TC",
+        "Vref",
+        "Vref2"
+      ]
+    },
+    "heuristic": "When TC or the reference level drifts, tune the reference-generation block first (bias distribution and temperature-dependent element operating points), and only then touch the regulation/amplifier loop, because the reference core typically dominates both TC and the achieved Vref window.",
+    "priority": "critical",
+    "scope": "both"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "psr",
+        "Vref"
+      ]
+    },
+    "heuristic": "If PSR is the limiting metric, first reduce supply-to-bias feedthrough inside the reference-generation biasing/mirroring (e.g., by increasing bias-source stiffness and local isolation), then re-center Vref afterward to avoid solving PSR by inadvertently shifting the reference operating point.",
+    "priority": "high",
+    "scope": "both"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "psr",
+        "power"
+      ]
+    },
+    "heuristic": "When improving PSR, treat loop-gain investment as a power tradeoff: strengthen the main signal-path small-signal authority over the control/bias node before increasing overall biasing, and after each change verify the power objective still improves under the same PSR check.",
+    "priority": "high",
+    "scope": "both"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "TC",
+        "power"
+      ]
+    },
+    "heuristic": "To reduce TC without excessive power, adjust the biasing of the temperature-sensing/diode-connected elements to move their operating region (and therefore their temperature coefficients) rather than simply increasing overall current levels; then re-validate power since the same bias knobs commonly move both metrics.",
+    "priority": "high",
+    "scope": "both"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "power",
+        "psr",
+        "TC"
+      ]
+    },
+    "heuristic": "Once constraints are met, minimize power by backing off global bias currents in coordinated steps while watching PSR and TC simultaneously, because power shows repeated coupling to both PSR and TC and single-metric reductions can silently degrade either.",
+    "priority": "critical",
+    "scope": "planner"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "psr",
+        "TC"
+      ]
+    },
+    "heuristic": "Because PSR and TC show recurring tradeoff behavior, lock an acceptable TC margin before pursuing aggressive PSR improvements, and reject PSR changes that require compensatory TC fixes in a different block unless the net system margin increases.",
+    "priority": "high",
+    "scope": "planner"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "power"
+      ]
+    },
+    "heuristic": "If power is unexpectedly high after Vref regulation is correct, audit the startup-assist path to ensure it fully self-disables in steady state and does not continue to load the main bias/control node; only after leakage is controlled should you tune core biases for further power savings.",
+    "priority": "high",
+    "scope": "both"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "psr"
+      ]
+    },
+    "heuristic": "For PSR tuning, split effort between the reference-generation bias network and the main signal path (rather than pushing one block to extremes), and iterate with small cross-checks, since both roles repeatedly show significant influence on PSR.",
+    "priority": "medium",
+    "scope": "planner"
+  },
+  {
+    "case_name": "bgr",
+    "condition": {
+      "target_metrics": [
+        "Vref",
+        "Vref2",
+        "psr",
+        "TC"
+      ]
+    },
+    "heuristic": "When Vref (or any secondary reference node) is within limits but PSR/TC are not, avoid \u201cfixes\u201d that move the reference level first; instead improve rejection and temperature behavior at the existing operating point, then re-check that Vref and Vref2 remain inside bounds as a guardrail.",
+    "priority": "medium",
+    "scope": "both"
+  }
+]

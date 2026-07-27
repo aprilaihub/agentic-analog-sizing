@@ -1,0 +1,115 @@
+[
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "pm",
+        "rise_time",
+        "lg_ugb",
+        "cmpm"
+      ]
+    },
+    "heuristic": "Establish loop stability first by shaping the dominant compensation dynamics (dominant pole/zero placement and effective compensation strength), and only then tune speed (lg_ugb, rise_time) and secondary margins (cmpm), because the compensation function consistently exerts the strongest leverage on these metrics.",
+    "priority": "critical",
+    "scope": "both"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "pm",
+        "cmpm"
+      ]
+    },
+    "heuristic": "When both differential-mode stability (pm) and common-mode stability (cmpm) are constrained, co-design the compensation and common-mode control dynamics as a coupled problem (adjust them in small alternating steps and re-verify both margins together), since repeated evidence shows a tradeoff between pm and cmpm rather than independent improvement.",
+    "priority": "high",
+    "scope": "planner"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "power",
+        "rms_noise_out"
+      ]
+    },
+    "heuristic": "If rms_noise_out is limiting while minimizing power, prioritize reducing noise at the dominant signal-path contributors (where input-referred noise is set) and treat any bias/current re-allocation as a deliberate power\u2013noise exchange, since repeated results show power and rms_noise_out trade off.",
+    "priority": "critical",
+    "scope": "both"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "lg_ugb",
+        "rms_noise_out"
+      ]
+    },
+    "heuristic": "When pushing bandwidth (lg_ugb) under a tight noise ceiling (rms_noise_out), plan for an explicit bandwidth\u2013noise trade space: adjust the speed-setting mechanisms (including compensation-related dynamics) while continually re-checking noise, because repeated evidence shows lg_ugb and rms_noise_out trade off.",
+    "priority": "high",
+    "scope": "planner"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "rms_noise_out",
+        "pm",
+        "rise_time"
+      ]
+    },
+    "heuristic": "Do not rely on compensation adjustments as the primary lever for rms_noise_out; instead, first meet pm/rise_time with compensation, then attack rms_noise_out through the main signal path, because compensation shows strong influence on stability/speed but only weak influence on output noise in this case.",
+    "priority": "high",
+    "scope": "both"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "adm",
+        "cmrr"
+      ]
+    },
+    "heuristic": "When simultaneously targeting high adm and high cmrr, avoid optimizing either in isolation; enforce balanced symmetry/matching and consistent impedance levels across the differential paths, and iterate with both metrics measured each step, since repeated evidence indicates an adm\u2013cmrr tradeoff.",
+    "priority": "high",
+    "scope": "both"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "psrr",
+        "cmrr"
+      ]
+    },
+    "heuristic": "If psrr and/or cmrr are weak, focus on increasing isolation from supply/common-mode disturbances at the main gain-generating nodes (e.g., by raising effective impedances and reducing disturbance coupling paths) while re-checking stability and speed, since the main signal path shows measurable (though weaker) coupling into psrr/cmrr.",
+    "priority": "medium",
+    "scope": "both"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "rise_time",
+        "pm"
+      ]
+    },
+    "heuristic": "Treat rise_time as a stability-linked speed metric: once pm is safely met, adjust compensation to recover rise_time without eroding pm, and re-verify after each change because the same compensation mechanisms significantly affect both rise_time and pm.",
+    "priority": "high",
+    "scope": "worker"
+  },
+  {
+    "case_name": "folded_cascode_2stage",
+    "condition": {
+      "target_metrics": [
+        "pm",
+        "lg_ugb",
+        "cmpm",
+        "rise_time"
+      ]
+    },
+    "heuristic": "For late-stage closure when most DC specs are already satisfied, use compensation-centric fine-tuning to trim pm/lg_ugb/cmpm/rise_time margins (with frequent re-simulation), because these metrics respond strongly to compensation changes while DC gain/rejection metrics tend to be less directly sensitive.",
+    "priority": "medium",
+    "scope": "planner"
+  }
+]

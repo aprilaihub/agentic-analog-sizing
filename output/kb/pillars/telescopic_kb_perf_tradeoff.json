@@ -1,0 +1,44 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "lg_ugb",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 7,
+      "topology": "telescopic"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "slew_rate_rise",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 7,
+      "topology": "telescopic"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "cmrr",
+      "relation": "trades_off_with",
+      "object": "power",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 6,
+      "topology": "telescopic"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.6,
+      "evidence_count": 5,
+      "topology": "telescopic"
+    }
+  ]
+}

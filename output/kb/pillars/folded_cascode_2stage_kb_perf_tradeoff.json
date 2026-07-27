@@ -1,0 +1,44 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "pm",
+      "relation": "trades_off_with",
+      "object": "cmpm",
+      "direction": "unspecified",
+      "confidence": 0.85,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "lg_ugb",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "adm",
+      "relation": "trades_off_with",
+      "object": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 4,
+      "topology": "folded_cascode_2stage"
+    }
+  ]
+}

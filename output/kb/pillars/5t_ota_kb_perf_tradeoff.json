@@ -1,0 +1,54 @@
+{
+  "facts": [
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "pm",
+      "relation": "trades_off_with",
+      "object": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.78,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "pm",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 5,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 5,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "power",
+      "relation": "trades_off_with",
+      "object": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 3,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "perf_perf_tradeoff",
+      "subject": "output_swing",
+      "relation": "trades_off_with",
+      "object": "pm",
+      "direction": "unspecified",
+      "confidence": 0.6,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    }
+  ]
+}

@@ -1,0 +1,616 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-04-02T12:39:56.399551+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/folded_cascode_2stage",
+    "subckt_name": "Folded_cascode_two_stage",
+    "device_count": 33
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M39",
+          "M38",
+          "M41",
+          "M42",
+          "M3",
+          "M40"
+        ],
+        "description": "Primary differential amplification path: NMOS input pair (M38, M39) with PMOS folded/cascode and active-load devices (M3, M40, M41, M42) producing first-stage internal nodes (vop1/von1) that drive the next stage."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "M35",
+          "M29",
+          "M11",
+          "M9",
+          "M26",
+          "M30",
+          "M31",
+          "M10",
+          "M28",
+          "M27"
+        ],
+        "description": "Generates internal bias voltages/currents (e.g., vbn2, vbp1, vbp2, ncasc) and provides DC tail current for the input stage (M35). Includes diode-connected/level-shift elements and bias-sinking transistors that set PMOS/NMOS operating points."
+      },
+      {
+        "name": "Compensation network",
+        "devices": [
+          "M37",
+          "M36",
+          "C0",
+          "C1"
+        ],
+        "description": "Frequency compensation between the second-stage outputs (vop/von) and internal first-stage nodes using capacitors (C0, C1) and their associated biased NMOS devices (M36, M37) that couple the compensation nodes (vfb_n/vfb_p) into the amplifier core."
+      },
+      {
+        "name": "Common-mode feedback (CMFB)",
+        "devices": [
+          "M34",
+          "M33",
+          "M44",
+          "M45",
+          "M43",
+          "M47",
+          "M48",
+          "R3",
+          "R4"
+        ],
+        "description": "Controls output common-mode: R3/R4 sense and average the output voltages to create vcmo; M45/M44 form the CMFB error amplifier generating vcmfb; M33/M34 act as CMFB-controlled current sinks on vfb_n/vfb_p; M47/M43/M48 provide the CMFB bias/reference current path using vref and internal biasing (net54/net044)."
+      },
+      {
+        "name": "Output stage",
+        "devices": [
+          "M2",
+          "M0",
+          "M50",
+          "M8"
+        ],
+        "description": "Second gain/output stage that drives the external outputs (vop/von): PMOS amplifying devices (M2, M0) controlled by first-stage nodes (von1/vop1), with NMOS current-sink loads (M50, M8) setting class-A output bias current."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M38",
+              "M39"
+            ],
+            "evidence": "M38 and M39 are NMOS with sources tied together at net046 (M38 source=net046, M39 source=net046) and gates driven by vip/vin; their drains go to net014/net016, forming an input differential pair.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M38",
+                "design_variables": [
+                  "L5",
+                  "W5"
+                ]
+              },
+              {
+                "device": "M39",
+                "design_variables": [
+                  "L5",
+                  "W5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Folded cascode",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "folded",
+              "cascode",
+              "active_load"
+            ],
+            "devices": [
+              "M3",
+              "M40",
+              "M41",
+              "M42"
+            ],
+            "evidence": "PMOS M3/M40 have gates tied to fixed bias vbp1 and sources connected to the NMOS-pair drain nodes net016/net014, with drains at vop1/von1: this is a common-gate (cascode) folded path translating input-pair currents to vop1/von1. PMOS M41/M42 are biased by vbp2 and source from vdd into net016/net014, acting as active-load/current-source devices for the folded nodes.",
+            "confidence": 0.85,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "L3",
+                  "W3",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M40",
+                "design_variables": [
+                  "L3",
+                  "W3",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M41",
+                "design_variables": [
+                  "L4",
+                  "W4",
+                  "N1",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M42",
+                "design_variables": [
+                  "L4",
+                  "W4",
+                  "N1",
+                  "N2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Tail current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "tail",
+              "bias"
+            ],
+            "devices": [
+              "M35"
+            ],
+            "evidence": "NMOS M35 sinks current from net046 to ground with gate=vbn2 (M35: drain=net046, gate=vbn2, source=0), providing the tail current for the input differential pair whose sources connect to net046.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M35",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias",
+              "cascode"
+            ],
+            "devices": [
+              "M30",
+              "M9"
+            ],
+            "evidence": "NMOS M9 is a bias-controlled sink from net057 to ground (gate=vbn2). NMOS M30 sits above it with source=net057, drain=vbp2, and gate=vbn, forming a cascoded current-sink path that draws (and thus biases) node vbp2.",
+            "confidence": 0.75,
+            "variables": [
+              {
+                "device": "M9",
+                "design_variables": [
+                  "L1",
+                  "W1"
+                ]
+              },
+              {
+                "device": "M30",
+                "design_variables": [
+                  "L2",
+                  "W2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias",
+              "cascode"
+            ],
+            "devices": [
+              "M31",
+              "M26"
+            ],
+            "evidence": "NMOS M26 is a bias-controlled sink from net055 to ground (gate=vbn2). NMOS M31 is stacked above with source=net055, drain=vbp1, gate=vbn, forming a cascoded current-sink that draws (and thus biases) node vbp1.",
+            "confidence": 0.75,
+            "variables": [
+              {
+                "device": "M26",
+                "design_variables": [
+                  "L1",
+                  "W1"
+                ]
+              },
+              {
+                "device": "M31",
+                "design_variables": [
+                  "L2",
+                  "W2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M27"
+            ],
+            "evidence": "PMOS M27 sources current from vdd into node ncasc with gate=vbp1 (M27: drain=ncasc, gate=vbp1, source=vdd), providing a bias current/voltage generation path for the PMOS cascode bias node ncasc/vbp1 network.",
+            "confidence": 0.7,
+            "variables": [
+              {
+                "device": "M27",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M11"
+            ],
+            "evidence": "M11 has gate and drain tied at vbn2 (M11: drain=vbn2, gate=vbn2), creating a diode-connected NMOS used to establish the vbn2 bias level.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M11",
+                "design_variables": [
+                  "L1",
+                  "W1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M29"
+            ],
+            "evidence": "M29 has gate and drain tied at vbn (M29: drain=vbn, gate=vbn) with source at vbn2, forming a diode-connected NMOS/level-shift element between vbn and vbn2.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M29",
+                "design_variables": [
+                  "L2",
+                  "W2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M10"
+            ],
+            "evidence": "M10 is PMOS with gate and drain tied at vbp2 (M10: drain=vbp2, gate=vbp2, source=vdd), providing a diode-connected PMOS reference for the vbp2 bias.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M10",
+                "design_variables": [
+                  "L4",
+                  "W4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M28"
+            ],
+            "evidence": "M28 is PMOS with gate and drain tied at vbp1 (M28: drain=vbp1, gate=vbp1) and source at ncasc, acting as a diode-connected PMOS element for generating/setting the vbp1-related bias with a level shift to ncasc.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M28",
+                "design_variables": [
+                  "L3",
+                  "W3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Compensation network",
+        "substructures": [
+          {
+            "type": "Miller compensation",
+            "base_type": "miller_compensation",
+            "modifiers": [],
+            "devices": [
+              "C0",
+              "C1",
+              "M36",
+              "M37"
+            ],
+            "evidence": "C0 connects from vop to vfb_n and C1 from von to vfb_p, forming Miller/feedback capacitors from outputs to internal compensation nodes. NMOS M36/M37 connect these vfb_* nodes (as sources) to the first-stage internal nodes von1/vop1 (as drains) with gate biased by vbn, providing a gm path that couples the capacitors into the amplifier core for frequency compensation.",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "C0",
+                "design_variables": [
+                  "MCAP"
+                ]
+              },
+              {
+                "device": "C1",
+                "design_variables": [
+                  "MCAP"
+                ]
+              },
+              {
+                "device": "M36",
+                "design_variables": [
+                  "L2",
+                  "W2",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M37",
+                "design_variables": [
+                  "L2",
+                  "W2",
+                  "N2"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Common-mode feedback (CMFB)",
+        "substructures": [
+          {
+            "type": "Resistor divider",
+            "base_type": "resistor_divider",
+            "modifiers": [],
+            "devices": [
+              "R3",
+              "R4"
+            ],
+            "evidence": "R3 connects vop to vcmo and R4 connects vcmo to von, creating a resistive averaging/divider that generates the sensed output common-mode node vcmo.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "R3",
+                "design_variables": []
+              },
+              {
+                "device": "R4",
+                "design_variables": []
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source",
+              "active_load"
+            ],
+            "devices": [
+              "M45",
+              "M44"
+            ],
+            "evidence": "PMOS M45 (drain=vcmfb, gate=vcmo, source=net54) converts the sensed common-mode (vcmo) into an error/control voltage at vcmfb as a common-source stage. NMOS M44 is diode-connected at vcmfb to ground (gate=drain=vcmfb), acting as the active load for this CMFB amplifier.",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "M45",
+                "design_variables": [
+                  "L6",
+                  "W6"
+                ]
+              },
+              {
+                "device": "M44",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N8"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M33",
+              "M34"
+            ],
+            "evidence": "NMOS M33 and M34 sink current from vfb_n and vfb_p to ground with their gates driven by vcmfb, implementing CMFB-controlled current sinks that adjust internal nodes to regulate output common-mode.",
+            "confidence": 0.85,
+            "variables": [
+              {
+                "device": "M33",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N2"
+                ]
+              },
+              {
+                "device": "M34",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "M47",
+              "M43"
+            ],
+            "evidence": "PMOS M47 sources current into node net044 from net54 with gate=vref (setting a reference-dependent current/voltage). NMOS M43 is diode-connected at net044 to ground (gate=drain=net044), converting that current into a defined net044 bias point used within the CMFB bias/reference path.",
+            "confidence": 0.7,
+            "variables": [
+              {
+                "device": "M47",
+                "design_variables": [
+                  "L6",
+                  "W6"
+                ]
+              },
+              {
+                "device": "M43",
+                "design_variables": [
+                  "L1",
+                  "W1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M48"
+            ],
+            "evidence": "PMOS M48 provides a bias current from vdd into net54 with gate=vbp2 (M48: drain=net54, gate=vbp2, source=vdd), supplying the CMFB amplifier/source node net54 and its reference branch.",
+            "confidence": 0.75,
+            "variables": [
+              {
+                "device": "M48",
+                "design_variables": [
+                  "L4",
+                  "W4",
+                  "N8"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Output stage",
+        "substructures": [
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source",
+              "output"
+            ],
+            "devices": [
+              "M2",
+              "M0"
+            ],
+            "evidence": "PMOS M2 and M0 have sources at vdd, drains at vop/von, and gates driven by the first-stage internal nodes (M2 gate=von1, M0 gate=vop1), forming the second-stage/output common-source amplification that drives the external outputs.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M2",
+                "design_variables": [
+                  "L7",
+                  "W7"
+                ]
+              },
+              {
+                "device": "M0",
+                "design_variables": [
+                  "L7",
+                  "W7"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M50",
+              "M8"
+            ],
+            "evidence": "NMOS M50 and M8 sink current from outputs vop/von to ground with gate=vbn2 (drain=vop/von, source=0), setting the class-A output bias current as current-source loads for the PMOS output devices.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M50",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N9"
+                ]
+              },
+              {
+                "device": "M8",
+                "design_variables": [
+                  "L1",
+                  "W1",
+                  "N9"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

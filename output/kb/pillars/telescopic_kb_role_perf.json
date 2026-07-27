@@ -1,0 +1,130 @@
+{
+  "facts": [
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "slew_rate_rise",
+      "influence": "dominant",
+      "confidence": 0.82,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "slew_rate_fall",
+      "influence": "dominant",
+      "confidence": 0.81,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "power",
+      "influence": "dominant",
+      "confidence": 0.7,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "cmrr",
+      "influence": "significant",
+      "confidence": 0.73,
+      "evidence_count": 7,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "lg_ugb",
+      "influence": "significant",
+      "confidence": 0.74,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "rms_noise_out",
+      "influence": "significant",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "psrr",
+      "influence": "significant",
+      "confidence": 0.67,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "slew_rate_rise",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "slew_rate_fall",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "power",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "cmrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "lg_ugb",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "rms_noise_out",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "telescopic"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "psrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "telescopic"
+    }
+  ]
+}

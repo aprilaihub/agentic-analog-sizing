@@ -1,0 +1,84 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.82,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.84,
+      "evidence_count": 5,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.83,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.8,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "adm",
+      "direction": "unspecified",
+      "confidence": 0.72,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "current_mirror"
+    }
+  ]
+}

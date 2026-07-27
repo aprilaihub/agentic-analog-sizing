@@ -1,0 +1,561 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-07-12T12:40:12.420947+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/ldo",
+    "subckt_name": "",
+    "device_count": 29
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M0",
+          "M9",
+          "M10",
+          "M11",
+          "M1",
+          "M2",
+          "M12",
+          "M13",
+          "M14",
+          "M3",
+          "M4",
+          "M18",
+          "M6",
+          "M7",
+          "M19"
+        ],
+        "description": "Error amplification and control path that compares VFB vs VREF, generates internal control nodes (net2/net10/net13), and drives the pass-device gate (Pass_GATE) via pull-up/pull-down gate-driver elements to regulate VOUT."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "I0",
+          "I1",
+          "M20",
+          "M21",
+          "M17",
+          "M16",
+          "M15",
+          "M5"
+        ],
+        "description": "Generates/sets internal bias currents and bias nodes (e.g., net3, net4, net18) used to establish operating points for the amplifier/driver circuitry, leveraging external bias inputs (VB2, VB4) where present."
+      },
+      {
+        "name": "Feedback network",
+        "devices": [
+          "R0",
+          "R1",
+          "C2"
+        ],
+        "description": "Senses the regulated output (VOUT) and produces the feedback voltage (VFB) through a resistive divider with capacitive feedforward to shape loop response."
+      },
+      {
+        "name": "Compensation network",
+        "devices": [
+          "C1",
+          "C0"
+        ],
+        "description": "Provides frequency compensation/loop shaping by coupling internal high-impedance control nodes to VOUT and between amplifier stages to ensure stability across load/line conditions."
+      },
+      {
+        "name": "Output stage",
+        "devices": [
+          "M8"
+        ],
+        "description": "High-power pass element that sources current from VDD to VOUT; its gate (Pass_GATE) is driven by the control loop to maintain regulation."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M1"
+            ],
+            "evidence": "M1 is a PMOS with source=VDD, drain=net7, and gate tied to bias node net3, so it sources (approximately) constant bias current into net7 set by V(net3).",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "M1",
+                "design_variables": [
+                  "lp1",
+                  "wp1",
+                  "nf4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Source follower",
+            "base_type": "source_follower",
+            "modifiers": [],
+            "devices": [
+              "M0"
+            ],
+            "evidence": "M0 has gate=VREF, source=net1 (used as a bias/control node), and drain connected to bias node net7 (fed by PMOS current source M1), consistent with an NMOS source-follower level shift from VREF to net1.",
+            "confidence": 0.58,
+            "variables": [
+              {
+                "device": "M0",
+                "design_variables": [
+                  "ln1",
+                  "wn1",
+                  "nf1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Source follower",
+            "base_type": "source_follower",
+            "modifiers": [],
+            "devices": [
+              "M9"
+            ],
+            "evidence": "M9 has gate=VFB, source=net2 (high-impedance control node), and drain connected to bias node net7 (fed by M1), consistent with an NMOS source-follower translating VFB onto net2 under bias current.",
+            "confidence": 0.58,
+            "variables": [
+              {
+                "device": "M9",
+                "design_variables": [
+                  "ln1",
+                  "wn1",
+                  "nf1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M10",
+              "M11"
+            ],
+            "evidence": "M10 is diode-connected (gate=drain=net1, source=GND) setting Vgs at net1; M11 shares gate=net1 with source=GND and drains at net2, forming an NMOS current mirror that sinks current from net2 referenced to the diode device M10.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M10",
+                "design_variables": [
+                  "ln2",
+                  "wn2",
+                  "nf2"
+                ]
+              },
+              {
+                "device": "M11",
+                "design_variables": [
+                  "ln2",
+                  "wn2",
+                  "nf2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source",
+              "active_load"
+            ],
+            "devices": [
+              "M12",
+              "M2"
+            ],
+            "evidence": "M12 is an NMOS with source=GND, gate=net2, drain=net10 (output). M2 is a PMOS from VDD to net10 with gate biased by net3, providing an active (current-source) load at net10; together they form a common-source gain stage net2 \u2192 net10.",
+            "confidence": 0.82,
+            "variables": [
+              {
+                "device": "M12",
+                "design_variables": [
+                  "ln3",
+                  "wn3",
+                  "nf3"
+                ]
+              },
+              {
+                "device": "M2",
+                "design_variables": [
+                  "lp1",
+                  "wp1",
+                  "nf5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M13"
+            ],
+            "evidence": "M13 has gate=drain=net10 and source=GND, so it is diode-connected and clamps/loads node net10.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "M13",
+                "design_variables": [
+                  "ln3",
+                  "wn3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M3",
+              "M4"
+            ],
+            "evidence": "M3 is diode-connected PMOS (gate=drain=net14, source=VDD), setting Vsg at net14; M4 shares gate=net14 with source=VDD and drains at net13, forming a PMOS current mirror that sources current into net13.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "lp2",
+                  "wp2"
+                ]
+              },
+              {
+                "device": "M4",
+                "design_variables": [
+                  "lp2",
+                  "wp2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source"
+            ],
+            "devices": [
+              "M14"
+            ],
+            "evidence": "M14 is an NMOS with source=GND, gate=net2, and drain=net13; with net13 pulled up by the PMOS mirror (M4), M14 provides common-source amplification/control from net2 to net13.",
+            "confidence": 0.72,
+            "variables": [
+              {
+                "device": "M14",
+                "design_variables": [
+                  "ln4",
+                  "wn4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M6",
+              "M7"
+            ],
+            "evidence": "M6 is diode-connected PMOS (gate=drain=net21, source=VDD) and M7 is a PMOS with gate=net21, source=VDD, drain=Pass_GATE, forming a PMOS current mirror that can source pull-up current into Pass_GATE referenced by the net21 bias.",
+            "confidence": 0.88,
+            "variables": [
+              {
+                "device": "M6",
+                "design_variables": [
+                  "lp4",
+                  "wp4"
+                ]
+              },
+              {
+                "device": "M7",
+                "design_variables": [
+                  "lp4",
+                  "wp4"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source"
+            ],
+            "devices": [
+              "M18"
+            ],
+            "evidence": "M18 is an NMOS with source=GND, gate=net2, drain=net21, providing a common-source pull-down of net21 (which in turn controls the PMOS pull-up mirror M6/M7).",
+            "confidence": 0.8,
+            "variables": [
+              {
+                "device": "M18",
+                "design_variables": [
+                  "ln3",
+                  "wn3",
+                  "nf3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source",
+              "output"
+            ],
+            "devices": [
+              "M19"
+            ],
+            "evidence": "M19 is an NMOS with source=GND, gate=net10, drain=Pass_GATE, acting as an output pull-down (common-source) driver for the pass-device gate node Pass_GATE.",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M19",
+                "design_variables": [
+                  "ln3",
+                  "wn3",
+                  "nf3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "I0",
+              "M20"
+            ],
+            "evidence": "I0 forces 2uA from net3 to GND; M20 is diode-connected PMOS (gate=drain=net3, source=VDD), so the forced current through M20 establishes the reference bias voltage at net3.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M20",
+                "design_variables": [
+                  "lp1",
+                  "wp1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I1",
+              "M21"
+            ],
+            "evidence": "I1 sources a fixed 2uA into node net4 from VDD; M21 is an NMOS from net4 to GND with gate=VB2, so net4 is driven to a VB2-dependent bias point while sinking the injected current.",
+            "confidence": 0.78,
+            "variables": [
+              {
+                "device": "M21",
+                "design_variables": [
+                  "ln5",
+                  "wn5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias",
+              "cascode"
+            ],
+            "devices": [
+              "M16",
+              "M17"
+            ],
+            "evidence": "M17 is an NMOS current-setting device from net18 to GND with gate=VB2; M16 is stacked above it from net14 to net18 with gate=VB4, forming a cascoded NMOS bias current sink seen at node net14.",
+            "confidence": 0.84,
+            "variables": [
+              {
+                "device": "M16",
+                "design_variables": [
+                  "ln6",
+                  "wn6"
+                ]
+              },
+              {
+                "device": "M17",
+                "design_variables": [
+                  "ln5",
+                  "wn5"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "M5",
+              "M15"
+            ],
+            "evidence": "M5 is a diode-connected PMOS from VDD to net35 (gate=drain=net35), while M15 is an NMOS from net35 to net18 with gate=net13; together they form a bias-controlled current path that establishes net35/net18 operating points (with control from net13).",
+            "confidence": 0.63,
+            "variables": [
+              {
+                "device": "M5",
+                "design_variables": [
+                  "lp2",
+                  "wp2"
+                ]
+              },
+              {
+                "device": "M15",
+                "design_variables": [
+                  "ln6",
+                  "wn6"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Feedback network",
+        "substructures": [
+          {
+            "type": "Resistor divider",
+            "base_type": "resistor_divider",
+            "modifiers": [],
+            "devices": [
+              "R0",
+              "R1"
+            ],
+            "evidence": "R0 connects VOUT to VFB and R1 connects VFB to GND, forming the feedback divider that sets VFB as a scaled version of VOUT.",
+            "confidence": 0.97,
+            "variables": [
+              {
+                "device": "R0",
+                "design_variables": [
+                  "RD2"
+                ]
+              },
+              {
+                "device": "R1",
+                "design_variables": [
+                  "RD"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Capacitive feedback network",
+            "base_type": "capacitive_feedback_network",
+            "modifiers": [
+              "testbench"
+            ],
+            "devices": [
+              "C2"
+            ],
+            "evidence": "C2 is connected between VOUT and VFB (in parallel with the upper divider resistor R0), providing feedforward/AC feedback shaping around the divider.",
+            "confidence": 0.9,
+            "variables": []
+          }
+        ]
+      },
+      {
+        "name": "Compensation network",
+        "substructures": [
+          {
+            "type": "Miller compensation",
+            "base_type": "miller_compensation",
+            "modifiers": [],
+            "devices": [
+              "C1"
+            ],
+            "evidence": "C1 connects internal control node net2 to VOUT, providing dominant-pole/loop compensation via capacitive coupling from output back to a high-impedance internal node.",
+            "confidence": 0.74,
+            "variables": []
+          },
+          {
+            "type": "Miller compensation",
+            "base_type": "miller_compensation",
+            "modifiers": [],
+            "devices": [
+              "C0"
+            ],
+            "evidence": "C0 connects internal nodes net2 and net13, providing inter-node compensation (capacitive feedback between amplifier/control nodes) to shape loop dynamics.",
+            "confidence": 0.7,
+            "variables": []
+          }
+        ]
+      },
+      {
+        "name": "Output stage",
+        "substructures": [
+          {
+            "type": "Common-source stage",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "common_source",
+              "output"
+            ],
+            "devices": [
+              "M8"
+            ],
+            "evidence": "M8 is a PMOS pass device with source=VDD, drain=VOUT, and gate=Pass_GATE; with the source at the supply and output taken at the drain, it operates as the output (power) common-source element controlled by Pass_GATE.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M8",
+                "design_variables": [
+                  "L_MPT",
+                  "W_MPT"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

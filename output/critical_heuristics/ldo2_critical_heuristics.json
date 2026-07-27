@@ -1,0 +1,78 @@
+[
+  {
+    "case_name": "ldo",
+    "condition": {
+      "target_metrics": [
+        "vout_min",
+        "vout_max"
+      ]
+    },
+    "heuristic": "If the output level is outside its allowed window, first correct the DC feedback scaling in the feedback network (setpoint path) and re-validate vout_min/vout_max before changing biasing, output drive, or compensation; this isolates setpoint errors from loop-dynamics tuning and avoids chasing the wrong knob.",
+    "priority": "critical",
+    "scope": "both"
+  },
+  {
+    "case_name": "ldo",
+    "condition": {
+      "target_metrics": [
+        "power"
+      ]
+    },
+    "heuristic": "When minimizing power, treat PSRR as a co-equal guardrail: reduce static drive and bias only after PSRR is comfortably above the minimum, and after each power-saving change re-check PSRR (and not just DC regulation), since the history shows power and PSRR can move in opposition.",
+    "priority": "critical",
+    "scope": "both"
+  },
+  {
+    "case_name": "ldo",
+    "condition": {
+      "target_metrics": [
+        "line_regulation",
+        "psrr"
+      ]
+    },
+    "heuristic": "When line_regulation is poor or PSRR is marginal, prioritize reducing supply sensitivity in the main signal path and biasing (improving intrinsic rejection and loop gain against supply variation) before tuning the output stage for power; verify line_regulation and psrr together because they can trade off and improvements in one can conceal degradation in the other.",
+    "priority": "high",
+    "scope": "worker"
+  },
+  {
+    "case_name": "ldo",
+    "condition": {
+      "target_metrics": [
+        "load_regulation",
+        "psrr"
+      ]
+    },
+    "heuristic": "If improving PSRR worsens load_regulation (or vice versa), add or preserve control authority where the loop moves the output actuator (driver strength and ability to move the control node quickly) while keeping high-frequency supply feedthrough limited; sequence as: secure DC setpoint, then balance load_regulation vs psrr, then revisit power.",
+    "priority": "medium",
+    "scope": "both"
+  },
+  {
+    "case_name": "ldo",
+    "condition": {
+      "target_metrics": [
+        "power",
+        "load_regulation",
+        "line_regulation"
+      ]
+    },
+    "heuristic": "To reduce power without breaking regulation, preserve sufficient small-signal gain in the error/control path (the part that senses the feedback error) before trimming the output stage; cut power in places that do not directly reduce error-path gain, then confirm both load_regulation and line_regulation remain bounded.",
+    "priority": "medium",
+    "scope": "worker"
+  },
+  {
+    "case_name": "ldo",
+    "condition": {
+      "target_metrics": [
+        "power",
+        "vout_min",
+        "vout_max",
+        "load_regulation",
+        "line_regulation",
+        "psrr"
+      ]
+    },
+    "heuristic": "Use a staged optimization order that matches observed dominance: (1) lock vout_min/vout_max via the feedback network, (2) tune psrr, line_regulation and load_regulation via error-path gain and control authority while watching their tradeoff, (3) finally push power down while continuously guarding other metrics.",
+    "priority": "high",
+    "scope": "planner"
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_rise",
+      "direction": "unspecified",
+      "confidence": 0.82,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "slew_rate_fall",
+      "direction": "unspecified",
+      "confidence": 0.81,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Bias current source",
+      "parameter": "Idc",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "l",
+      "metric": "lg_ugb",
+      "direction": "unspecified",
+      "confidence": 0.74,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Differential pair",
+      "parameter": "l",
+      "metric": "rms_noise_out",
+      "direction": "unspecified",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "l",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.77,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Tail current source",
+      "parameter": "w",
+      "metric": "cmrr",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Current mirror",
+      "parameter": "l",
+      "metric": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.67,
+      "evidence_count": 4,
+      "topology": "telescopic"
+    }
+  ]
+}

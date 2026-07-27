@@ -1,0 +1,130 @@
+{
+  "facts": [
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "power",
+      "influence": "dominant",
+      "confidence": 0.9,
+      "evidence_count": 5,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "slew_rate_rise",
+      "influence": "dominant",
+      "confidence": 0.86,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "slew_rate_fall",
+      "influence": "dominant",
+      "confidence": 0.84,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "pm",
+      "influence": "significant",
+      "confidence": 0.72,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "lg_ugb",
+      "influence": "significant",
+      "confidence": 0.7,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "output_swing",
+      "influence": "significant",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "lg_ugb",
+      "influence": "significant",
+      "confidence": 0.74,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "rms_noise_out",
+      "influence": "significant",
+      "confidence": 0.71,
+      "evidence_count": 4,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "power",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "slew_rate_rise",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "slew_rate_fall",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "pm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "output_swing",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "rms_noise_out",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "5t_ota"
+    }
+  ]
+}

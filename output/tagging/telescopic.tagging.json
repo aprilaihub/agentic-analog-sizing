@@ -1,0 +1,350 @@
+{
+  "schema_version": "1.1.0",
+  "tool": {
+    "name": "two_stage_tagger",
+    "provider": "openai",
+    "model": "gpt-5.2",
+    "generated_at_utc": "2026-03-26T15:13:33.542751+00:00"
+  },
+  "input": {
+    "netlist_path": "input/tagging/telescopic",
+    "subckt_name": "telescopic",
+    "device_count": 15
+  },
+  "stage1": {
+    "functional_roles": [
+      {
+        "name": "Main signal path",
+        "devices": [
+          "M1",
+          "M2",
+          "M6",
+          "M7",
+          "M3",
+          "M4",
+          "M8",
+          "M9"
+        ],
+        "description": "Telescopic amplifier core: NMOS differential input pair (M1, M2) with NMOS cascodes (M6, M7) driving a PMOS cascoded current-mirror/active load (M3, M4, M8, M9) and producing the single-ended output at vo."
+      },
+      {
+        "name": "Bias network",
+        "devices": [
+          "M5",
+          "M5b",
+          "M67",
+          "M89",
+          "I1",
+          "I2",
+          "I3"
+        ],
+        "description": "Generates and supplies DC bias currents/voltages: tail current mirror/reference (I1, M5, M5b) setting the input pair bias at net6; NMOS cascode bias vb2 generation (I3, M67); PMOS cascode bias vb3 generation (I2, M89)."
+      }
+    ]
+  },
+  "stage2": {
+    "roles": [
+      {
+        "name": "Main signal path",
+        "substructures": [
+          {
+            "type": "Differential pair",
+            "base_type": "differential_pair",
+            "modifiers": [],
+            "devices": [
+              "M1",
+              "M2"
+            ],
+            "evidence": "M1 and M2 are NMOS with sources tied together at net6 (common tail node), gates driven by vip/vin, and separate drains net2/net1 forming the differential currents.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "M1",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              },
+              {
+                "device": "M2",
+                "design_variables": [
+                  "l2",
+                  "w2"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode",
+            "base_type": "gain_stage",
+            "modifiers": [
+              "cascode"
+            ],
+            "devices": [
+              "M6",
+              "M7"
+            ],
+            "evidence": "M6 and M7 are NMOS stacked above the input pair: sources at net2/net1 (drains of M1/M2), gates tied to fixed bias vb2 (common-gate bias), and drains at net5/vo, providing cascode isolation and gain boosting.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "M6",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              },
+              {
+                "device": "M7",
+                "design_variables": [
+                  "l3",
+                  "w3"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Cascode current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [
+              "cascode",
+              "active_load"
+            ],
+            "devices": [
+              "M3",
+              "M4",
+              "M8",
+              "M9"
+            ],
+            "evidence": "PMOS load network: M3 and M4 share gate net5 (mirror gate node) with sources at vdd; M8 and M9 are PMOS cascode devices with gates tied to vb3 and stacked with M3/M4 (M3->M8 to net5, M4->M9 to vo), forming a cascoded active-load/mirroring structure that converts differential current to single-ended vo.",
+            "confidence": 0.74,
+            "variables": [
+              {
+                "device": "M3",
+                "design_variables": [
+                  "l5",
+                  "w5"
+                ]
+              },
+              {
+                "device": "M4",
+                "design_variables": [
+                  "l5",
+                  "w5"
+                ]
+              },
+              {
+                "device": "M8",
+                "design_variables": [
+                  "l4",
+                  "w4"
+                ]
+              },
+              {
+                "device": "M9",
+                "design_variables": [
+                  "l4",
+                  "w4"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Bias network",
+        "substructures": [
+          {
+            "type": "Reference current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "reference"
+            ],
+            "devices": [
+              "I1"
+            ],
+            "evidence": "I1 forces DC current Idc from vdd into node net3, establishing the reference current for the NMOS mirror that biases the tail node net6.",
+            "confidence": 0.9,
+            "variables": [
+              {
+                "device": "I1",
+                "design_variables": [
+                  "Idc"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M5"
+            ],
+            "evidence": "M5 has drain and gate tied at net3 with source at 0, i.e., diode-connected NMOS that converts the reference current at net3 into a Vgs bias.",
+            "confidence": 0.97,
+            "variables": [
+              {
+                "device": "M5",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Current mirror",
+            "base_type": "current_mirror",
+            "modifiers": [],
+            "devices": [
+              "M5",
+              "M5b"
+            ],
+            "evidence": "M5 (diode-connected at net3) and M5b share gate net3; M5b drains net6 to 0, mirroring the reference current into the tail node net6.",
+            "confidence": 0.95,
+            "variables": [
+              {
+                "device": "M5",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              },
+              {
+                "device": "M5b",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Tail current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "tail"
+            ],
+            "devices": [
+              "M5b"
+            ],
+            "evidence": "M5b sinks current from net6 to ground with gate biased by net3, acting as the tail current source for the differential pair (net6 is the shared source node of M1/M2).",
+            "confidence": 0.86,
+            "variables": [
+              {
+                "device": "M5b",
+                "design_variables": [
+                  "l1",
+                  "w1"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I3",
+              "M67"
+            ],
+            "evidence": "I3 supplies DC current Idc2 from vdd into vb2; M67 is diode-connected (gate=drain=vb2) to net6, generating the NMOS cascode bias voltage vb2.",
+            "confidence": 0.92,
+            "variables": [
+              {
+                "device": "I3",
+                "design_variables": [
+                  "Idc2"
+                ]
+              },
+              {
+                "device": "M67",
+                "design_variables": [
+                  "l6",
+                  "w6"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M67"
+            ],
+            "evidence": "M67 has gate and drain tied at vb2 with source at net6 (NMOS diode connection used to set vb2).",
+            "confidence": 0.96,
+            "variables": [
+              {
+                "device": "M67",
+                "design_variables": [
+                  "l6",
+                  "w6"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Bias current source",
+            "base_type": "current_source",
+            "modifiers": [
+              "bias"
+            ],
+            "devices": [
+              "I2",
+              "M89"
+            ],
+            "evidence": "I2 draws DC current Idc3 from vb3 to ground; M89 is diode-connected PMOS (gate=drain=vb3, source=vdd) supplying that current and setting the PMOS cascode bias vb3.",
+            "confidence": 0.93,
+            "variables": [
+              {
+                "device": "I2",
+                "design_variables": [
+                  "Idc3"
+                ]
+              },
+              {
+                "device": "M89",
+                "design_variables": [
+                  "l7",
+                  "w7"
+                ]
+              }
+            ]
+          },
+          {
+            "type": "Diode-connected device",
+            "base_type": "diode_connected_device",
+            "modifiers": [],
+            "devices": [
+              "M89"
+            ],
+            "evidence": "M89 has gate and drain tied at vb3 with source at vdd (PMOS diode connection used to set vb3).",
+            "confidence": 0.97,
+            "variables": [
+              {
+                "device": "M89",
+                "design_variables": [
+                  "l7",
+                  "w7"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "stage1_unique_assignment_ok": true,
+    "stage2_role_membership_ok": true,
+    "all_devices_known": true,
+    "duplicate_devices": [],
+    "unknown_devices": [],
+    "unassigned_devices": []
+  }
+}

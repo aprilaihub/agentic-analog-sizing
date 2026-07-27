@@ -1,0 +1,130 @@
+{
+  "facts": [
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "power",
+      "influence": "dominant",
+      "confidence": 0.83,
+      "evidence_count": 6,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "lg_ugb",
+      "influence": "dominant",
+      "confidence": 0.84,
+      "evidence_count": 5,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "slew_rate_rise",
+      "influence": "dominant",
+      "confidence": 0.83,
+      "evidence_count": 6,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "slew_rate_fall",
+      "influence": "significant",
+      "confidence": 0.62,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "adm",
+      "influence": "significant",
+      "confidence": 0.72,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "cmrr",
+      "influence": "significant",
+      "confidence": 0.68,
+      "evidence_count": 3,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "lg_ugb",
+      "influence": "significant",
+      "confidence": 0.75,
+      "evidence_count": 4,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "pm",
+      "influence": "weak",
+      "confidence": 0.62,
+      "evidence_count": 3,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "power",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "slew_rate_rise",
+      "influence": "significant",
+      "confidence": 0.45,
+      "evidence_count": 0,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Main signal path",
+      "metric": "slew_rate_fall",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "adm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "cmrr",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "current_mirror"
+    },
+    {
+      "type": "role_perf",
+      "functional_role": "Bias network",
+      "metric": "pm",
+      "influence": "weak",
+      "confidence": 0.35,
+      "evidence_count": 0,
+      "topology": "current_mirror"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "facts": [
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Resistor divider",
+      "parameter": "RD",
+      "metric": "vout_min",
+      "direction": "unspecified",
+      "confidence": 0.9,
+      "evidence_count": 3,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Resistor divider",
+      "parameter": "RD",
+      "metric": "vout_max",
+      "direction": "unspecified",
+      "confidence": 0.9,
+      "evidence_count": 3,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Resistor divider",
+      "parameter": "RD",
+      "metric": "vout_min",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Resistor divider",
+      "parameter": "RD",
+      "metric": "vout_max",
+      "direction": "unspecified",
+      "confidence": 0.75,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "W_MPT",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.68,
+      "evidence_count": 5,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "nf",
+      "metric": "power",
+      "direction": "unspecified",
+      "confidence": 0.85,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "ln",
+      "metric": "psrr",
+      "direction": "unspecified",
+      "confidence": 0.66,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    },
+    {
+      "type": "substruct_param_perf",
+      "substructure": "Common-source stage",
+      "parameter": "ln",
+      "metric": "line_regulation",
+      "direction": "unspecified",
+      "confidence": 0.7,
+      "evidence_count": 1,
+      "topology": "ldo2"
+    }
+  ]
+}
