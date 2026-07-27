@@ -1,7 +1,7 @@
 import unittest
 
 import numpy as np
-from agentic_sizing.simulator.interfacing import calc_outputs
+from agentic_sizing.simulator import interfacing
 
 
 class ConstraintFirstRankingTest(unittest.TestCase):
@@ -18,7 +18,7 @@ class ConstraintFirstRankingTest(unittest.TestCase):
             "gain": [50.0, 100.0],
         }
 
-        selected = calc_outputs(value_nums=1, responses=responses, settings=settings)
+        selected = interfacing.calc_outputs(value_nums=1, responses=responses, settings=settings)
 
         np.testing.assert_allclose(selected, [[1e-6, 50.0]])
 
