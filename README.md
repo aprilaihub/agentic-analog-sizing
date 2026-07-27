@@ -29,6 +29,34 @@ agentic-sizing run \
   --max-iter 0
 ```
 
+## Python API
+
+The same workflow can be called directly from Python or a notebook:
+
+```python
+from agentic_sizing import RunConfig, run_sizing
+
+config = RunConfig(
+    netlist_path="input/tagging/5t_ota",
+    kb_root="output/kb",
+    output_dir="output",
+    mode="mock",
+    max_iter=0,  # Credential-free initialization smoke test.
+)
+
+result = run_sizing(config)
+print(result.termination_reason)
+print(result.best_known_design_vars)
+print(result.best_known_perfs)
+print(result.simulation_record_path)
+```
+
+`RunConfig`, `RunResult`, and `run_sizing` are defined in
+[`src/agentic_sizing/api.py`](src/agentic_sizing/api.py) and re-exported from
+`agentic_sizing`, so users should import them as shown above. `run_sizing` also
+accepts optional `simulator=` and `llm_client=` implementations for custom
+research backends. See [`docs/api.md`](docs/api.md) for the supported API surface.
+
 For real Cadence simulation, install the optional dependencies and set the
 required paths before running:
 
