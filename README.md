@@ -90,6 +90,10 @@ The `cadence` extra does not install Cadence itself; a licensed Virtuoso/Maestro
 installation must already be available. Run `agentic-sizing run --help` for all
 options. The Python API exposes `RunConfig` and `run_sizing`; see `docs/api.md`.
 
+The Cadence integration has been verified with Cadence Virtuoso
+`IC23.1-64b.ISR7.27`. Support for additional simulator backends is planned for
+future releases.
+
 ### Run defaults
 
 Only `--netlist` and `--kb-root` are required. Unspecified options use:
