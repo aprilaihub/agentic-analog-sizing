@@ -260,4 +260,4 @@ deterministic seeds.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), [docs/architecture.md](docs/architecture.md),
 [docs/api.md](docs/api.md), and [docs/migration.md](docs/migration.md). Licensed
-under the MIT License.
+under the Apache License 2.0.
